@@ -63,11 +63,25 @@ tests/domain.test.ts        Domain/store integration assertions
 | `/classify`  | Classify       | Photo upload/camera, lazy MobileNet, top-three predictions, confidence notice, category confirmation/override, catalog search, item route ticket.                                                                                                                                          |
 | `/centers`   | Find Centers   | Category chips and URL preselection, type and Open now filters, distance sorting, geolocation fallback, synchronized list/map, colored Lucide markers, selected lime ring, Google Maps directions, collected drop-off logging. Mobile puts the map above the list with a show/hide toggle. |
 | `/activity`  | My Activity    | Items logged/diverted kg/pending counts, status chips, route filter, weekly timeline, center attribution, status progression, validated manual logging, empty-state CTA.                                                                                                                   |
-| `/exchange`  | Reuse Exchange | Existing local demo listings, creation, requests, handovers, and completed reuse activity generation.                                                                                                                                                                                      |
-| `/dashboard` | Impact         | Existing logged-weight and indicative CO₂e totals, eight-week chart, route/category breakdowns, material-flow Sankey.                                                                                                                                                                      |
+| `/exchange`  | Reuse Exchange | Live journey counts, category/condition/availability/search filters, synthetic names, relative times, validated URL-prefilled listing and display-name request dialogs, handover confirmation and weight toast, completed-card ribbon.                                                     |
+| `/dashboard` | Impact         | Four animated lime-highlighted metrics, full-width colored and labeled category-to-route Sankey, eight-week stacked bars, category share donut, 70% diversion goal, reuse count/link, five recent completed wins, and demo reset.                                                          |
 | `/about`     | AI & Ethics    | Existing privacy/AI limitations explanation, local evaluation summary, demo-reset confirmation.                                                                                                                                                                                            |
 
-The last three pages and seeded demo/reset behavior existed before this continuation. They are implemented local prototypes, rather than missing pages; this handover does not falsely mark them as unbuilt.
+Impact and Reuse Exchange have now been extended from their existing prototypes. All pages remain browser-local demos; `/about` and seeded demo/reset behavior were already present.
+
+## Impact and Reuse Exchange continuation — 24 October 2026
+
+- Preserved Srijan naming, forest/mint/lime theme, Fraunces/Inter typography, shared UI primitives, modal focus handling, Zustand store, selectors, and the fixed domain types. `src/data/types.ts`, store actions, and selector implementations are unchanged.
+- Impact's four `StatNumber` cards show diversion rate, landfill avoided, indicative CO₂e saved, and items rerouted in that order. Lime-highlighted numbers count up over 650 ms, cancel animation on unmount, and respect reduced motion. Screen readers receive final numbers. The CO₂e info tooltip reads **estimated using approximate factors** and works on keyboard focus.
+- The signature “Where our waste goes” Recharts Sankey consumes `sankeyData`. Node and flow colors come from category/route constants. Inline labels and native weight tooltips are supplemented by an expandable text list of every flow. The page compacts only disconnected presentation nodes and remaps links so sparse data renders correctly; the selector contract is unchanged.
+- Supporting Impact cards use `weeklySeries` for the last eight weeks of stacked route kg and `categoryBreakdown` for a category share donut, alongside a mint/emerald 70% goal, `handoverCount` and Exchange link, and the five most recent completed activities. Handover-generated activities appear once in Recent wins. Footer ghost reset calls `resetDemo()` and shows a toast.
+- Exchange's Journey strip counts listings currently available (Listed), requested, and handed over. Counts are global and do not change when board filters change. Category chips, condition, Available only, and case-insensitive item/area/note/category search combine; no-match results offer Clear filters.
+- Listing cards show category and condition badges (mint, amber, grey), quantity, area, synthetic poster name, relative posting time, and `StatusPill`. Available cards open a display-name-only request dialog. Requested cards name the requester and offer Confirm handover. Completed cards are muted with a lime “Given a second life” ribbon.
+- Listing dialogs open from the header or `?new=1&title=...&category=...`, including query changes while Exchange is mounted. Invalid categories fall back to Textile; long titles are capped at 100 characters. Closing consumes only the creation query parameters. Normal header opening starts a fresh form.
+- Listing forms collect title, category, condition, integer quantity 1–999, neighbourhood, and optional note. Required text is trimmed and whitespace-only submissions are rejected. Poster identity is the synthetic **Asha (demo)**, so the listing form needs no identity fields. Requests also reject whitespace-only display names. Neither form collects photos, phone numbers, or email addresses. Both show: “Coordinate handover through the platform; never share personal contact details here.” There is still no messaging backend; requests/handovers stay local.
+- Handover confirmations use the existing `markHandedOver` action. The toast reports the weight of its newly created completed activity (up to three decimals), keeping dashboard and toast estimates consistent without a second weight calculation.
+- Seed poster/requester names are explicitly synthetic. Existing persisted listings keep their prior names until Reset demo data is used.
+- Fixed the existing Windows test-runner ESM import by converting the temporary bundle path with `pathToFileURL`.
 
 ## Data contract summary
 
@@ -146,6 +160,11 @@ Theme remains forest/mint/lime with Fraunces headings and Inter body text. Deskt
 8. Test Use my location with permission allowed and denied. Check distances and fallback message. Opening status follows IST, regardless of browser timezone.
 9. Test Directions link destinations without needing to navigate to fictional facilities.
 10. At 390px width verify map above list, show/hide map, correct map repaint when reopened, timeline legibility, and bottom tabs. Use Tab/Shift+Tab and Escape in forms; check visible focus.
+11. Open `/exchange?new=1&title=Cotton%20blankets&category=textile`: verify the listing dialog opens with title/category prefilled. Reject whitespace-only title/area and a zero/fractional quantity; publish with a valid neighbourhood and quantity. Verify the synthetic poster name and relative time.
+12. Combine Textile, Good, Available only, and a title/area search. Request an available item with a nickname (reject spaces). Uncheck Available only to see its requested state and requester. Confirm handover: verify weight toast, journey count changes, muted card, and lime ribbon.
+13. Compare Impact before and after the handover: avoided kg, CO₂e, items rerouted, category/weekly charts, reuse count, Recent wins, and category → Reuse Sankey weight must update. Refresh to verify persistence. The rounded diversion percentage may stay the same for a small handover.
+14. At 390px and 320px, check both pages for horizontal overflow, readable flow labels, wrapped filters, single-column listing cards, and usable dialogs. Keyboard-focus the CO₂e tooltip; test Shift+Tab containment and Escape/focus restoration in both dialogs.
+15. Use Impact's Reset demo data: verify the seeded totals and journey counts (5 listed, 2 requested, 1 handed over) return. Classification logs should remain.
 
 Automated tests cover distance/opening-hour boundaries (including overnight), IST conversion, directions URL generation, weekly grouping/order, collected center-linked persistence, and status changes, plus the existing catalog/store/classification tests.
 
@@ -175,7 +194,16 @@ The requested `/dashboard`, `/exchange`, demo mode, and `/about` are **already p
 | `/about`       | Independently labeled evaluation dataset, audited accuracy/bias reporting, centralized evaluation telemetry. Local confirmation statistics already exist.         |
 | Across the app | Backend/API/database, authentication, real pickup scheduling, real facility directory, deployment/production hosting configuration, automated browser E2E runner. |
 
-## Verification for this continuation
+## Verification for Impact / Exchange continuation
+
+- `npm test`: passed on Windows, including new store-to-selector handover integration assertions for kg, CO₂e, diversion, rerouted items, reuse count, Sankey link weight, category weight, and current-week reuse weight; existing duplicate protection and persistence checks still pass.
+- `npm run build`: passed strict TypeScript and production bundling. Existing large lazy TensorFlow chunks still trigger Vite's bundle-size advisory.
+- Browser-tested URL-prefilled creation, whitespace validation in both dialogs, combined category/condition/availability/search filters, no-match state, request → handover transitions, requester attribution, weight toast, ribbon, and journey updates.
+- Browser end-to-end example: a two-item textile handover created one 0.4 kg completed reuse activity. Landfill avoided changed 28.0 → 28.4 kg, indicative CO₂e 54.8 → 56.3 kg, items rerouted 32 → 33, reuse count 2 → 3, and Textile → Reuse flow 2.44 → 2.84 kg. Recent wins showed the handover; refresh retained it.
+- Browser-tested empty activities/listings and a single Glass → Reuse flow using temporary local fixtures. Zero metrics, chart empty states, zero journey counts, sparse Sankey labels, and reset all worked. Fixtures were removed and the browser was restored to seeded demo data.
+- Visual checks at desktop, 390px, and 320px passed. Both pages had no horizontal overflow. Verified keyboard-focus tooltip, dialog Shift+Tab containment, Escape dismissal, and trigger focus restoration. Viewport overrides were cleared after testing.
+
+## Verification for earlier Centers / Activity continuation
 
 - `npm test`: passed, including new center/time/week/drop-off assertions.
 - `npm run build`: passed; only the existing lazy TensorFlow bundle-size advisory remains.

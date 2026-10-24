@@ -44,13 +44,15 @@ export function seedListings(): Listing[] {
     condition: i === 3 ? "needs-repair" : i % 2 ? "fair" : "good",
     qty: i === 0 ? 4 : i === 1 ? 6 : 1,
     area: ["Indiranagar", "Koramangala", "Jayanagar", "Whitefield"][i % 4],
-    postedBy: `Demo neighbour ${i + 1}`,
+    postedBy:
+      ["Maya", "Arjun", "Leela", "Kabir", "Nila", "Ravi", "Tara", "Dev"][i] +
+      " (demo)",
     note: [
       "Clean and ready for a new home.",
       "A little less waste, a little more possibility.",
     ][i % 2],
     status: i < 5 ? "available" : i < 7 ? "requested" : "handed_over",
-    requestedBy: i >= 5 ? "Demo neighbour" : undefined,
+    requestedBy: i >= 5 ? "Asha (demo)" : undefined,
     createdAt: new Date(Date.now() - i * 86400000).toISOString(),
   }));
 }

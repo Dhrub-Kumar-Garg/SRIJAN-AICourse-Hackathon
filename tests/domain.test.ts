@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { catalog } from "../src/data/catalog";
 import { centers } from "../src/data/centers";
 import { seedActivities, seedListings } from "../src/data/seed";
+import { CATEGORY_META, ROUTE_META, CO2E_PER_KG } from "../src/data/constants";
 import { mapImageNetLabel, IMAGENET_RULES } from "../src/lib/imagenetMap";
 import * as selectors from "../src/store/selectors";
 import type { Activity } from "../src/data/types";
@@ -106,10 +107,62 @@ assert.equal(
 );
 useStore.getState().requestListing(id, "Demo requester");
 assert.equal(useStore.getState().listings[0].status, "requested");
+const beforeHandover = useStore.getState().activities;
+const expectedHandoverKg =
+  catalog.find((c) => c.category === "textile")!.avgWeightKg * 2;
 useStore.getState().markHandedOver(id);
 assert.equal(useStore.getState().listings[0].status, "handed_over");
 assert.equal(useStore.getState().activities.length, 2);
 assert.equal(useStore.getState().activities[0].route, "reuse");
+// Every Impact view consumes the same activity created by the exchange action.
+const afterHandover = useStore.getState().activities;
+assert.equal(afterHandover[0].status, "completed");
+assert.equal(afterHandover[0].weightKg, expectedHandoverKg);
+assert.equal(
+  selectors.itemsRerouted(afterHandover),
+  selectors.itemsRerouted(beforeHandover) + 1,
+);
+assert.equal(
+  selectors.handoverCount(afterHandover),
+  selectors.handoverCount(beforeHandover) + 1,
+);
+assert.ok(
+  Math.abs(
+    selectors.landfillAvoidedKg(afterHandover) -
+      selectors.landfillAvoidedKg(beforeHandover) -
+      expectedHandoverKg,
+  ) < 1e-9,
+);
+assert.ok(
+  Math.abs(
+    selectors.co2eSavedKg(afterHandover) -
+      selectors.co2eSavedKg(beforeHandover) -
+      expectedHandoverKg * CO2E_PER_KG.textile,
+  ) < 1e-9,
+);
+assert.equal(selectors.diversionRate(afterHandover), 1);
+const textileNode = Object.keys(CATEGORY_META).indexOf("textile");
+const reuseNode =
+  Object.keys(CATEGORY_META).length + Object.keys(ROUTE_META).indexOf("reuse");
+assert.equal(
+  selectors
+    .sankeyData(afterHandover)
+    .links.find((l) => l.source === textileNode && l.target === reuseNode)
+    ?.value,
+  expectedHandoverKg,
+);
+assert.equal(
+  selectors.categoryBreakdown(afterHandover).find((c) => c.name === "Textile")
+    ?.value,
+  expectedHandoverKg,
+);
+assert.ok(
+  Math.abs(
+    Number(selectors.weeklySeries(afterHandover).at(-1)!.reuse) -
+      Number(selectors.weeklySeries(beforeHandover).at(-1)!.reuse) -
+      expectedHandoverKg,
+  ) < 1e-9,
+);
 useStore.getState().markHandedOver(id);
 assert.equal(
   useStore.getState().activities.length,
@@ -165,16 +218,14 @@ assert.deepEqual(
 assert.deepEqual(groupActivitiesByWeek([]), []);
 // The drop-off payload uses the unchanged contract and persists its center link.
 const destination = centers.find((c) => c.accepts.includes("plastic"))!;
-useStore
-  .getState()
-  .addActivity({
-    itemName: "PET bottle drop-off",
-    category: "plastic",
-    route: "recycle",
-    weightKg: 0.25,
-    status: "collected",
-    centerId: destination.id,
-  });
+useStore.getState().addActivity({
+  itemName: "PET bottle drop-off",
+  category: "plastic",
+  route: "recycle",
+  weightKg: 0.25,
+  status: "collected",
+  centerId: destination.id,
+});
 const dropOff = useStore.getState().activities[0];
 assert.equal(dropOff.centerId, destination.id);
 assert.equal(dropOff.status, "collected");
