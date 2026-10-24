@@ -23,6 +23,8 @@ import {
 } from "lucide-react";
 import Home from "./pages/Home";
 import { Toast } from "./components/ui";
+import { GuidedDemoBanner, GuidedDemoProvider } from "./components/GuidedDemo";
+import PageBoundary from "./components/PageBoundary";
 const Classify = lazy(() => import("./pages/Classify")),
   Centers = lazy(() => import("./pages/Centers")),
   Activity = lazy(() => import("./pages/Activity")),
@@ -42,6 +44,8 @@ function Layout() {
   const location = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.title = `${nav.find((n) => n.to === location.pathname)?.label ?? "Page not found"} | Srijan`;
+    document.getElementById("main")?.focus({ preventScroll: true });
   }, [location.pathname]);
   return (
     <>
@@ -102,40 +106,44 @@ function Layout() {
           </Link>
           <span>Every item gets a second route.</span>
         </header>
+        <GuidedDemoBanner />
         <main
           id="main"
+          tabIndex={-1}
           key={location.pathname}
           className={location.pathname === "/" ? "main home-main" : "main"}
         >
-          <Suspense
-            fallback={
-              <div className="page-loading">
-                <LoaderCircle className="spin" />
-                Finding your next route…
-              </div>
-            }
-          >
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/classify" element={<Classify />} />
-              <Route path="/centers" element={<Centers />} />
-              <Route path="/activity" element={<Activity />} />
-              <Route path="/exchange" element={<Exchange />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/about" element={<About />} />
-              <Route
-                path="*"
-                element={
-                  <div className="empty-state">
-                    <h1>This route is still waiting.</h1>
-                    <Link className="button button-primary" to="/">
-                      Go home
-                    </Link>
-                  </div>
-                }
-              />
-            </Routes>
-          </Suspense>
+          <PageBoundary key={location.pathname}>
+            <Suspense
+              fallback={
+                <div className="page-loading" role="status" aria-live="polite">
+                  <LoaderCircle className="spin" />
+                  Finding your next route…
+                </div>
+              }
+            >
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/classify" element={<Classify />} />
+                <Route path="/centers" element={<Centers />} />
+                <Route path="/activity" element={<Activity />} />
+                <Route path="/exchange" element={<Exchange />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/about" element={<About />} />
+                <Route
+                  path="*"
+                  element={
+                    <div className="empty-state">
+                      <h1>This route is still waiting.</h1>
+                      <Link className="button button-primary" to="/">
+                        Go home
+                      </Link>
+                    </div>
+                  }
+                />
+              </Routes>
+            </Suspense>
+          </PageBoundary>
         </main>
         <footer>
           <span className="footer-brand">
@@ -155,7 +163,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Toast>
-        <Layout />
+        <GuidedDemoProvider>
+          <Layout />
+        </GuidedDemoProvider>
       </Toast>
     </BrowserRouter>
   );

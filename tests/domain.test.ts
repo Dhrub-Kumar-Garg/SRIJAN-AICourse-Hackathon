@@ -6,6 +6,18 @@ import { CATEGORY_META, ROUTE_META, CO2E_PER_KG } from "../src/data/constants";
 import { mapImageNetLabel, IMAGENET_RULES } from "../src/lib/imagenetMap";
 import * as selectors from "../src/store/selectors";
 import type { Activity } from "../src/data/types";
+import { evalResults } from "../src/data/evalResults";
+import { evaluationSummary, overrideSummary } from "../src/lib/evaluation";
+import {
+  demoCenter,
+  demoDestination,
+  demoPhone,
+  demoReady,
+  demoRecords,
+  impactSnapshot,
+  parseDemoSession,
+  type DemoSession,
+} from "../src/lib/demo";
 import {
   haversineDistance,
   isOpenAt,
@@ -239,6 +251,128 @@ useStore.getState().resetDemo();
 assert.equal(useStore.getState().activities.length, 35);
 assert.equal(useStore.getState().listings.length, 8);
 assert.equal(readClassificationLog().length, 1);
+// Fixture scores are calculated from rows, with explicit zero-sample behavior.
+assert.equal(evalResults.length, 20);
+assert.equal(new Set(evalResults.map((r) => r.expectedCategory)).size, 9);
+const evaluation = evaluationSummary(evalResults);
+assert.equal(evaluation.accuracy, 14 / 20);
+assert.equal(evaluation.lowConfidenceShare, 7 / 20);
+assert.equal(evaluation.failures.length, 6);
+assert.ok(evaluation.failures.every((r) => r.failureReason));
+assert.equal(
+  evaluation.perCategory.find((c) => c.category === "glass")?.accuracy,
+  0.5,
+);
+assert.equal(evaluationSummary([]).accuracy, null);
+assert.ok(evaluationSummary([]).perCategory.every((c) => c.accuracy === null));
+assert.equal(overrideSummary([]).rate, null);
+assert.equal(overrideSummary(readClassificationLog()).rate, 1);
+// Guided steps carry real catalog/center params and cannot skip saved actions.
+const demo: DemoSession = {
+  phase: "phone",
+  step: 0,
+  startedAt: Date.now(),
+  baseline: impactSnapshot([]),
+};
+assert.equal(
+  new URL(demoDestination(demo), "http://localhost").searchParams.get("q"),
+  "old phone",
+);
+assert.equal(demoPhone.category, "ewaste");
+assert.equal(demoPhone.route, "special");
+assert.ok(demoCenter.accepts.includes("ewaste"));
+const dropoffParams = new URL(
+  demoDestination({ ...demo, step: 3 }),
+  "http://localhost",
+).searchParams;
+assert.equal(dropoffParams.get("itemId"), demoPhone.id);
+assert.equal(dropoffParams.get("centerId"), demoCenter.id);
+assert.equal(dropoffParams.get("dropoff"), "1");
+assert.equal(demoReady({ ...demo, step: 3 }, demoRecords(demo, [], [])), false);
+useStore.getState().addActivity({
+  itemName: demoPhone.name,
+  category: "ewaste",
+  route: "special",
+  weightKg: demoPhone.avgWeightKg,
+  status: "collected",
+  centerId: demoCenter.id,
+});
+const tourRecords = demoRecords(demo, useStore.getState().activities, []);
+assert.ok(tourRecords.dropoff);
+assert.equal(demoReady({ ...demo, step: 3 }, tourRecords), true);
+assert.equal(
+  demoRecords(
+    { ...demo, startedAt: Date.now() + 10000 },
+    useStore.getState().activities,
+    [],
+  ).dropoff,
+  undefined,
+);
+const reuseDemo: DemoSession = { ...demo, phase: "reuse", step: 0 };
+assert.equal(
+  new URL(demoDestination(reuseDemo), "http://localhost").searchParams.get(
+    "title",
+  ),
+  "working study lamp",
+);
+assert.equal(demoReady(reuseDemo, demoRecords(reuseDemo, [], [])), false);
+useStore.getState().addListing({
+  title: "working study lamp",
+  category: "ewaste",
+  condition: "good",
+  qty: 1,
+  area: "Demo area",
+  postedBy: "Demo neighbour",
+});
+const tourListing = useStore.getState().listings[0];
+const readTour = () =>
+  demoRecords(
+    reuseDemo,
+    useStore.getState().activities,
+    useStore.getState().listings,
+  );
+assert.equal(demoReady(reuseDemo, readTour()), true);
+assert.equal(demoReady({ ...reuseDemo, step: 1 }, readTour()), false);
+useStore.getState().requestListing(tourListing.id, "Demo requester");
+assert.equal(demoReady({ ...reuseDemo, step: 1 }, readTour()), true);
+assert.equal(demoReady({ ...reuseDemo, step: 2 }, readTour()), false);
+useStore.getState().markHandedOver(tourListing.id);
+assert.equal(demoReady({ ...reuseDemo, step: 2 }, readTour()), true);
+assert.ok(
+  demoDestination({
+    ...reuseDemo,
+    step: 1,
+    listingId: tourListing.id,
+  }).includes(`focus=${tourListing.id}`),
+);
+assert.deepEqual(parseDemoSession(JSON.stringify(demo)), demo);
+for (const invalid of [
+  null,
+  "{",
+  "[]",
+  JSON.stringify({ ...demo, step: 99 }),
+  JSON.stringify({ ...demo, phase: "invalid" }),
+  JSON.stringify({ ...demo, baseline: {} }),
+])
+  assert.equal(parseDemoSession(invalid), null);
+// Corrupt or structurally invalid browser logs cannot crash the Ethics page.
+memory.set("srijan-classification-log", "{}");
+assert.deepEqual(readClassificationLog(), []);
+memory.set(
+  "srijan-classification-log",
+  JSON.stringify([
+    { confidence: 0.5 },
+    {
+      predictedCategory: "constructor",
+      confirmedCategory: "glass",
+      confidence: 0.9,
+      timestamp: new Date().toISOString(),
+    },
+  ]),
+);
+assert.deepEqual(readClassificationLog(), []);
+memory.set("srijan-classification-log", "invalid JSON");
+assert.deepEqual(readClassificationLog(), []);
 console.log(
-  "Passed: seed diversity, 42 catalog items, label mapping, impact calculations, persistence, activity updates, exchange transitions, duplicate handover protection, classification logs, demo reset, center distances/opening times, weekly grouping, and persisted drop-offs.",
+  "Passed: seed diversity, catalog and label mapping, impact calculations, persistence, activity and exchange transitions, duplicate handover protection, classification logs, demo reset, centers, weekly grouping, persisted drop-offs, evaluation metrics, guided-demo routes/action gates, session validation, and corrupt-log recovery.",
 );

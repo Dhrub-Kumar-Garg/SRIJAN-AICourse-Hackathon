@@ -63,6 +63,17 @@ export default function Exchange() {
   const [requestName, setRequestName] = useState("");
   const [requestError, setRequestError] = useState("");
   const [now, setNow] = useState(Date.now());
+  const focusedId = params.get("focus");
+  useEffect(() => {
+    if (!focusedId) return;
+    setCategoryFilter("all");
+    setConditionFilter("all");
+    setAvailableOnly(false);
+    setSearch("");
+    document
+      .getElementById(`listing-${focusedId}`)
+      ?.scrollIntoView({ block: "center" });
+  }, [focusedId]);
   const { listings, addListing, requestListing, markHandedOver } = useStore();
   const toast = useToast();
   const resetForm = () => {
@@ -249,9 +260,10 @@ export default function Exchange() {
           const artIndex = Object.keys(CATEGORY_META).indexOf(l.category) % 4;
           return (
             <Card
-              className={`listing-card ${l.status === "handed_over" ? "listing-complete" : ""}`}
+              className={`listing-card ${focusedId === l.id ? "demo-listing-focus" : ""} ${l.status === "handed_over" ? "listing-complete" : ""}`}
               key={l.id}
             >
+              <span id={`listing-${l.id}`} className="listing-anchor" />
               <div className={`listing-art listing-art-${artIndex}`}>
                 <Icon size={76} strokeWidth={1} aria-hidden="true" />
                 <span className={`listing-condition condition-${l.condition}`}>

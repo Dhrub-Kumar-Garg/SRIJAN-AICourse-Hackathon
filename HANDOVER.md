@@ -34,18 +34,24 @@ src/
     RouteCard.tsx            Item routing ticket and handoff into Centers
     CenterMap.tsx            OSM map, custom markers, popup and pan synchronization
     ActivityModal.tsx        Shared validated activity/drop-off form
+    GuidedDemo.tsx           Tab-persisted guided phone and lamp journeys
+    PageBoundary.tsx         Route loading/render error recovery
   data/
     types.ts                 Fixed domain contract (unchanged by this continuation)
     constants.ts             Category/route metadata, indicative CO₂e factors, city
     catalog.ts               42 synthetic catalog entries
     centers.ts               14 fictional Bengaluru-area facilities
     seed.ts                  35 activities and 8 exchange listings
+    evalResults.ts           20 explicitly invented evaluation fixtures
   lib/
     centers.ts               Type metadata, haversine distance, opening hours, directions
     activity.ts              Monday-based weekly activity grouping
     imagenetMap.ts           ImageNet keyword-to-category mapping
     classificationLog.ts     Local classification runs and confirmations
     useModal.ts              Dialog focus containment, Escape, and focus restoration
+    demo.ts                  Tour destinations, record matching, action gates
+    evaluation.ts            Accuracy, low-confidence, and override calculations
+    useClassificationLog.ts  Live confirmation-log subscription
   pages/                     Seven route pages
   store/
     useStore.ts              Persisted Zustand state and actions
@@ -59,15 +65,37 @@ tests/domain.test.ts        Domain/store integration assertions
 
 | Route        | Page           | Implemented behavior                                                                                                                                                                                                                                                                       |
 | ------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `/`          | Home           | Responsive hero, live counters, three-step introduction, CTAs.                                                                                                                                                                                                                             |
+| `/`          | Home           | Responsive hero, live counters, three-step introduction, CTAs, and Start demo entry.                                                                                                                                                                                                       |
 | `/classify`  | Classify       | Photo upload/camera, lazy MobileNet, top-three predictions, confidence notice, category confirmation/override, catalog search, item route ticket.                                                                                                                                          |
 | `/centers`   | Find Centers   | Category chips and URL preselection, type and Open now filters, distance sorting, geolocation fallback, synchronized list/map, colored Lucide markers, selected lime ring, Google Maps directions, collected drop-off logging. Mobile puts the map above the list with a show/hide toggle. |
 | `/activity`  | My Activity    | Items logged/diverted kg/pending counts, status chips, route filter, weekly timeline, center attribution, status progression, validated manual logging, empty-state CTA.                                                                                                                   |
 | `/exchange`  | Reuse Exchange | Live journey counts, category/condition/availability/search filters, synthetic names, relative times, validated URL-prefilled listing and display-name request dialogs, handover confirmation and weight toast, completed-card ribbon.                                                     |
 | `/dashboard` | Impact         | Four animated lime-highlighted metrics, full-width colored and labeled category-to-route Sankey, eight-week stacked bars, category share donut, 70% diversion goal, reuse count/link, five recent completed wins, and demo reset.                                                          |
-| `/about`     | AI & Ethics    | Existing privacy/AI limitations explanation, local evaluation summary, demo-reset confirmation.                                                                                                                                                                                            |
+| `/about`     | AI & Ethics    | Styled workflow diagram, method/data and no-training disclosure, placeholder evaluation metrics/category bars/failures, live override rate, six responsible-AI cards, SDG alignment, implemented/planned roadmap, and demo-reset confirmation.                                             |
 
 Impact and Reuse Exchange have now been extended from their existing prototypes. All pages remain browser-local demos; `/about` and seeded demo/reset behavior were already present.
+
+## Guided demo, AI & Ethics, and polish — 24 October 2026
+
+- The five-step tour starts from Home: manual catalog search prefilled with **old phone** → its **E-waste / Special care** Route Card → selected accepting fictional center → prefilled **0.18 kg** drop-off form → live Impact. No photo classification is simulated, and the tour does not add data until a form is actually submitted.
+- The slim sticky top banner shows step numbers, instructions, Next, and Exit demo. Saving the real drop-off unlocks Next. Impact compares the actual diversion rate with the tour baseline, displays two decimals during the tour, and pulses only changed metric cards/numbers in lime. The ordinary selectors and Sankey consume the newly saved collected activity.
+- The optional three-step branch prefills **working study lamp**, E-waste, good condition, and quantity 1 in Exchange. The user supplies the neighbourhood, publishes, requests the highlighted listing with a nickname, and confirms handover. Each stage is gated on the actual listing status. See impact returns to the dashboard; its completed reuse activity follows the existing category-based weight estimate (0.18 kg for this lamp).
+- Tour state is separate from domain data, in sessionStorage under `srijan-guided-demo-v1`. It records start time, baseline metrics, and generated activity/listing IDs; malformed sessions are ignored. Refresh resumes the tour, navigation away offers Return to step, canceled forms offer Open drop-off/Open listing, and missing records offer Restart demo. Exit retains saved actions. Restart does not reset activities/listings; repeated runs can create further actions.
+- Classify accepts `?q=` and `?item=` for catalog prefilling. Centers now accepts validated `itemId`, positive `weightKg`, accepting `centerId`, and `dropoff=1` query parameters while preserving the existing navigation-state handoff. Exchange accepts `?focus=<listingId>` to highlight and scroll to a listing. The `demo` query parameter identifies the active tour step.
+- AI & Ethics now contains all six requested sections. Its architecture diagram uses styled, numbered boxes and arrows; manual input is explicitly described as bypassing the model/mapping stages. Method/data copy identifies pretrained MobileNet v2/ImageNet, our keyword rules, the 42-item catalog, synthetic records, and the fact that no custom model or fine-tuning was performed.
+- `src/data/evalResults.ts` contains **20 invented fixtures**, not real photos or inference outputs. `EVALUATION_IS_PLACEHOLDER` remains true. Replace every row with independently labelled results before changing that flag. Current fixture-only metrics are 14/20 correct (70%), 7/20 below 45% confidence (35%), and six amber mismatch cards with reasons. Category bars group by expected category and show sample counts. Empty sample metrics use null/em dashes.
+- Low-confidence share is labelled manual review, not successful intervention. Below 45% confidence and unmapped labels require category review; every photo prediction requires confirmation. The dataset has no confirmed-category field or override outcomes. Live override rate is calculated separately from confirmed photo logs: changed/unmapped prediction divided by total confirmed photo runs. User confirmation is not independently verified accuracy.
+- Classification log reads now validate shape, categories, confidence, and timestamps. Corrupt/non-array storage is safe. Writes notify subscribers and return failure safely; Classify reports unavailable storage through a toast. The About view responds to same-tab confirmation events, cross-tab storage events, and window focus. Catalog/manual-without-inference choices and guided actions do not create new photo-log entries.
+- Added route titles (`Page | Srijan`), a local SVG favicon, short page-entry transitions, labelled route-loading state, a route error boundary with reload/home recovery, stronger secondary-text contrast, keyboard arrow/Home/End navigation for classification tabs, and associated tab panels. Motion still respects reduced-motion settings. Existing empty/error/form states remain available throughout the app.
+- Rewrote README with setup, features, guided-demo instructions, architecture, evaluation replacement guidance, implemented/planned scope, and privacy/estimate limitations. The fixed `src/data/types.ts`, domain store, and selectors remain unchanged.
+
+### Verification for this continuation
+
+- `npm test`: passed, including fixture accuracy/category/low-confidence calculations, zero-sample behavior, override rates, corrupt-log handling, tour query parameters, action gates, valid-center matching, session validation, and the existing domain/store tests.
+- `npm run build`: passed strict TypeScript and production bundling; only the existing large lazy TensorFlow bundle advisory remains.
+- Browser-tested the full five-step phone tour and three-step lamp branch with real local form submissions. Phone diversion changed 98.59% → 98.60%, all four changed metrics acquired pulse classes, and the new drop-off appeared in Impact. The lamp handover created one 0.18 kg completed reuse activity, updated the dashboard, and appeared in Recent wins. Refresh during the branch retained its step and target listing; Exit removed the banner.
+- Browser-tested live override updates using a temporary local fixture: two changed/unmapped predictions among three synthetic confirmation rows produced 67% live override rate. Malformed storage safely returned the empty-log state. The original classification log was restored and the fixture removed.
+- All seven routes were checked at **375px and 1280px** with no horizontal overflow and correct page titles. Visual checks covered the desktop workflow diagram, mobile About/stepper, and mobile prefilled drop-off form. Classification keyboard tabs, dialog Shift+Tab containment/Escape, form reopening, and Exit passed. Browser logs contained no errors or warnings during these checks.
 
 ## Impact and Reuse Exchange continuation — 24 October 2026
 
@@ -190,7 +218,7 @@ The requested `/dashboard`, `/exchange`, demo mode, and `/about` are **already p
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/dashboard`   | Verified lifecycle/carbon accounting, server analytics, downloadable reports, historical account data.                                                            |
 | `/exchange`    | Real shared marketplace, accounts, ownership enforcement, messages, notifications, moderation, server-backed requests/handovers.                                  |
-| Demo mode      | Explicit demo/live mode switch, separate production dataset, isolated server-side demo accounts. Synthetic defaults and Reset demo already exist.                 |
+| Demo mode      | Isolated production/demo datasets and server-side demo accounts. A guided browser-local phone/lamp tour, synthetic defaults, and Reset demo are now implemented.  |
 | `/about`       | Independently labeled evaluation dataset, audited accuracy/bias reporting, centralized evaluation telemetry. Local confirmation statistics already exist.         |
 | Across the app | Backend/API/database, authentication, real pickup scheduling, real facility directory, deployment/production hosting configuration, automated browser E2E runner. |
 

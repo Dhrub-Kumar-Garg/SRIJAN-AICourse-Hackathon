@@ -25,6 +25,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { useStore } from "../store/useStore";
+import { useGuidedDemo } from "../components/GuidedDemo";
 import { CATEGORY_META, ROUTE_META } from "../data/constants";
 import {
   weeklySeries,
@@ -166,6 +167,7 @@ function FlowLink({
 }
 
 export default function Dashboard() {
+  const { session } = useGuidedDemo();
   const activities = useStore((s) => s.activities);
   const resetDemo = useStore((s) => s.resetDemo);
   const toast = useToast();
@@ -185,6 +187,17 @@ export default function Dashboard() {
     })),
   };
   const percent = diversionRate(activities) * 100;
+  const showingDemoImpact =
+    !!session &&
+    (session.phase === "complete" ||
+      (session.phase === "phone" && session.step === 4));
+  const pulse = (
+    key: keyof NonNullable<typeof session>["baseline"],
+    value: number,
+  ) =>
+    showingDemoImpact && value !== session!.baseline[key]
+      ? "demo-impact-pulse"
+      : "";
   const wins = activities
     .filter((a) => a.status === "completed")
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -202,15 +215,17 @@ export default function Dashboard() {
         description="A little perspective on your circular journey, one logged item at a time."
       />
       <div className="dashboard-stats">
-        <Card>
+        <Card className={pulse("diversion", percent)}>
           <StatNumber
-            value={<CountUp value={percent} />}
+            value={
+              <CountUp value={percent} decimals={showingDemoImpact ? 2 : 0} />
+            }
             unit="%"
             label="Diversion rate"
             icon={<TrendingUp size={20} />}
           />
         </Card>
-        <Card>
+        <Card className={pulse("landfill", landfillAvoidedKg(activities))}>
           <StatNumber
             value={
               <CountUp value={landfillAvoidedKg(activities)} decimals={1} />
@@ -220,7 +235,7 @@ export default function Dashboard() {
             icon={<Package size={20} />}
           />
         </Card>
-        <Card>
+        <Card className={pulse("co2e", co2eSavedKg(activities))}>
           <StatNumber
             value={<CountUp value={co2eSavedKg(activities)} decimals={1} />}
             unit="kg"
@@ -236,7 +251,7 @@ export default function Dashboard() {
             <span role="tooltip">estimated using approximate factors</span>
           </span>
         </Card>
-        <Card>
+        <Card className={pulse("items", itemsRerouted(activities))}>
           <StatNumber
             value={<CountUp value={itemsRerouted(activities)} />}
             label="Items rerouted"

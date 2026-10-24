@@ -15,6 +15,7 @@ import {
   Heart,
   Package,
   Shirt,
+  Play,
 } from "lucide-react";
 import { useStore } from "../store/useStore";
 import {
@@ -23,8 +24,10 @@ import {
   itemsRerouted,
   diversionRate,
 } from "../store/selectors";
-import { Highlight, StatNumber } from "../components/ui";
+import { Button, Highlight, StatNumber } from "../components/ui";
+import { useGuidedDemo } from "../components/GuidedDemo";
 export default function Home() {
+  const { start } = useGuidedDemo();
   const activities = useStore((s) => s.activities);
   return (
     <>
@@ -82,6 +85,17 @@ export default function Home() {
             <span className="proof-divider" />
             <Check size={13} />
             <span>Free & thoughtfully built</span>
+          </div>
+          <div className="home-demo-invite">
+            <Button variant="accent" onClick={start}>
+              <Play size={15} />
+              Start demo
+            </Button>
+            <span>
+              A phone drop-off, a lamp handover.
+              <br />
+              Follow the journey in a few steps.
+            </span>
           </div>
         </div>
         <div

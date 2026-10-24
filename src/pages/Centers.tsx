@@ -32,8 +32,10 @@ import {
 import ActivityModal from "../components/ActivityModal";
 import CenterMap from "../components/CenterMap";
 import type { Category, Center } from "../data/types";
+import { useGuidedDemo } from "../components/GuidedDemo";
 
 export default function Centers() {
+  const { records } = useGuidedDemo();
   const [params, setParams] = useSearchParams();
   const location = useLocation();
   const rawCategory = params.get("category");
@@ -58,13 +60,18 @@ export default function Centers() {
     itemId?: string;
     weightKg?: number;
   } | null;
-  const initialItem = catalog.find((i) => i.id === navigationState?.itemId);
+  const initialItem = catalog.find(
+    (i) => i.id === (params.get("itemId") ?? navigationState?.itemId),
+  );
+  const queryWeight = Number(params.get("weightKg"));
   const initialWeight =
-    typeof navigationState?.weightKg === "number" &&
-    Number.isFinite(navigationState.weightKg) &&
-    navigationState.weightKg > 0
-      ? navigationState.weightKg
-      : undefined;
+    params.has("weightKg") && Number.isFinite(queryWeight) && queryWeight > 0
+      ? queryWeight
+      : typeof navigationState?.weightKg === "number" &&
+          Number.isFinite(navigationState.weightKg) &&
+          navigationState.weightKg > 0
+        ? navigationState.weightKg
+        : undefined;
   const hour = centerLocalHour(now);
   const filtered = centers
     .filter(
@@ -82,6 +89,17 @@ export default function Centers() {
   useEffect(() => {
     setSelectedId(null);
   }, [category, type, openOnly]);
+  useEffect(() => {
+    const center = centers.find(
+      (c) =>
+        c.id === params.get("centerId") &&
+        (!category || c.accepts.includes(category)),
+    );
+    if (!center) return;
+    setSelectedId(center.id);
+    setSelectionVersion((v) => v + 1);
+    if (params.get("dropoff") === "1" && !records.dropoff) setDropOff(center);
+  }, [params, category, records.dropoff]);
   const visibleSelected = filtered.some((c) => c.id === selectedId)
     ? selectedId
     : null;
@@ -363,7 +381,18 @@ export default function Centers() {
           initialCategory={category ?? undefined}
           initialItem={initialItem}
           initialWeight={initialWeight}
-          onClose={() => setDropOff(null)}
+          onClose={() => {
+            setDropOff(null);
+            if (params.has("dropoff"))
+              setParams(
+                (previous) => {
+                  const next = new URLSearchParams(previous);
+                  next.delete("dropoff");
+                  return next;
+                },
+                { replace: true },
+              );
+          }}
         />
       )}
     </>
