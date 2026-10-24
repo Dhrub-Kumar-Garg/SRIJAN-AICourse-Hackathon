@@ -71,6 +71,13 @@ export default function RouteCard({ item }: { item: CatalogItem }) {
           <Link
             className="button button-secondary"
             to={`/centers?category=${item.category}`}
+            state={{
+              itemId: item.id,
+              weightKg:
+                Number(weight) > 0 && Number.isFinite(Number(weight))
+                  ? Number(weight)
+                  : item.avgWeightKg,
+            }}
           >
             <MapPin size={17} />
             Find nearest center

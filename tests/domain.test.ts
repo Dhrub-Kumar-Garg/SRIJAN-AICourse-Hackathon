@@ -5,6 +5,13 @@ import { seedActivities, seedListings } from "../src/data/seed";
 import { mapImageNetLabel, IMAGENET_RULES } from "../src/lib/imagenetMap";
 import * as selectors from "../src/store/selectors";
 import type { Activity } from "../src/data/types";
+import {
+  haversineDistance,
+  isOpenAt,
+  centerLocalHour,
+  directionsUrl,
+} from "../src/lib/centers";
+import { groupActivitiesByWeek } from "../src/lib/activity";
 const memory = new Map<string, string>();
 Object.defineProperty(globalThis, "localStorage", {
   value: {
@@ -117,10 +124,70 @@ logClassification({
   timestamp: new Date().toISOString(),
 });
 assert.equal(readClassificationLog()[0].confirmedCategory, "glass");
+// Center scheduling uses venue-local time and handles overnight intervals.
+assert.equal(haversineDistance([12.9716, 77.5946], [12.9716, 77.5946]), 0);
+assert.ok(Math.abs(haversineDistance([0, 0], [0, 1]) - 111.195) < 0.01);
+assert.equal(isOpenAt({ start: 9, end: 19 }, 9), true);
+assert.equal(isOpenAt({ start: 9, end: 19 }, 19), false);
+assert.equal(isOpenAt({ start: 22, end: 6 }, 23), true);
+assert.equal(isOpenAt({ start: 22, end: 6 }, 5.5), true);
+assert.equal(isOpenAt({ start: 22, end: 6 }, 12), false);
+assert.equal(isOpenAt({ start: 0, end: 0 }, 12), true);
+assert.equal(centerLocalHour(new Date("2026-10-24T03:30:00Z")), 9);
+assert.equal(
+  directionsUrl({ lat: 12.5, lng: 77.5 }),
+  "https://www.google.com/maps/dir/?api=1&destination=12.5,77.5",
+);
+// Monday boundaries and descending date order remain stable across calendar weeks.
+const weekly = groupActivitiesByWeek(
+  [
+    {
+      ...sample[0],
+      id: "sun",
+      date: new Date(2026, 9, 18, 23, 59).toISOString(),
+    },
+    {
+      ...sample[0],
+      id: "mon",
+      date: new Date(2026, 9, 19, 0, 1).toISOString(),
+    },
+    { ...sample[0], id: "sat", date: new Date(2026, 9, 24, 8).toISOString() },
+  ],
+  new Date(2026, 9, 24, 12),
+);
+assert.equal(weekly.length, 2);
+assert.equal(weekly[0].label, "This week");
+assert.equal(weekly[1].label, "Last week");
+assert.deepEqual(
+  weekly[0].items.map((a) => a.id),
+  ["sat", "mon"],
+);
+assert.deepEqual(groupActivitiesByWeek([]), []);
+// The drop-off payload uses the unchanged contract and persists its center link.
+const destination = centers.find((c) => c.accepts.includes("plastic"))!;
+useStore
+  .getState()
+  .addActivity({
+    itemName: "PET bottle drop-off",
+    category: "plastic",
+    route: "recycle",
+    weightKg: 0.25,
+    status: "collected",
+    centerId: destination.id,
+  });
+const dropOff = useStore.getState().activities[0];
+assert.equal(dropOff.centerId, destination.id);
+assert.equal(dropOff.status, "collected");
+assert.equal(
+  JSON.parse(memory.get("srijan-store-v1")!).state.activities[0].centerId,
+  destination.id,
+);
+useStore.getState().updateActivityStatus(dropOff.id, "completed");
+assert.equal(useStore.getState().activities[0].status, "completed");
 useStore.getState().resetDemo();
 assert.equal(useStore.getState().activities.length, 35);
 assert.equal(useStore.getState().listings.length, 8);
 assert.equal(readClassificationLog().length, 1);
 console.log(
-  "Passed: seed diversity, 42 catalog items, label mapping, impact calculations, persistence, activity updates, exchange transitions, duplicate handover protection, classification logs, and demo reset.",
+  "Passed: seed diversity, 42 catalog items, label mapping, impact calculations, persistence, activity updates, exchange transitions, duplicate handover protection, classification logs, demo reset, center distances/opening times, weekly grouping, and persisted drop-offs.",
 );

@@ -1,0 +1,184 @@
+# Srijan — developer handover
+
+Srijan is the current name. Earlier prompts used “ReRoute”; keep **Srijan** in product copy, metadata, package naming, and future changes.
+
+## Run locally
+
+Requires Node.js 22 (tested with 22.20.0) and npm.
+
+```sh
+npm ci
+npm run dev
+```
+
+Open the Local URL printed by Vite. The default is `http://localhost:5173`; Vite chooses the next port if it is occupied.
+
+```sh
+npm test          # Domain and store integration checks
+npm run build    # Strict TypeScript check and production bundle
+npm run preview  # Serve the production build for a smoke test
+npm run format   # Format tracked source/configuration with Prettier
+```
+
+Fonts, OpenStreetMap tiles, and the first MobileNet model download require a network connection. Geolocation and camera access require permission and a secure context (localhost works). Route navigation uses browser history; production hosting must serve `index.html` for application routes.
+
+## Folder structure
+
+```text
+src/
+  App.tsx                    Application shell, navigation, routes, lazy loading
+  main.tsx                   React entry point, global and Leaflet CSS
+  styles.css                 Theme and responsive page/component styles
+  components/
+    ui/index.tsx             Shared UI primitives and toast context
+    RouteCard.tsx            Item routing ticket and handoff into Centers
+    CenterMap.tsx            OSM map, custom markers, popup and pan synchronization
+    ActivityModal.tsx        Shared validated activity/drop-off form
+  data/
+    types.ts                 Fixed domain contract (unchanged by this continuation)
+    constants.ts             Category/route metadata, indicative CO₂e factors, city
+    catalog.ts               42 synthetic catalog entries
+    centers.ts               14 fictional Bengaluru-area facilities
+    seed.ts                  35 activities and 8 exchange listings
+  lib/
+    centers.ts               Type metadata, haversine distance, opening hours, directions
+    activity.ts              Monday-based weekly activity grouping
+    imagenetMap.ts           ImageNet keyword-to-category mapping
+    classificationLog.ts     Local classification runs and confirmations
+    useModal.ts              Dialog focus containment, Escape, and focus restoration
+  pages/                     Seven route pages
+  store/
+    useStore.ts              Persisted Zustand state and actions
+    selectors.ts             Pure activity metrics and chart transforms
+  vite-env.d.ts              Vite asset import declarations
+scripts/test.mjs             Bundles and executes the TypeScript domain test suite
+tests/domain.test.ts        Domain/store integration assertions
+```
+
+## Finished pages and routes
+
+| Route        | Page           | Implemented behavior                                                                                                                                                                                                                                                                       |
+| ------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `/`          | Home           | Responsive hero, live counters, three-step introduction, CTAs.                                                                                                                                                                                                                             |
+| `/classify`  | Classify       | Photo upload/camera, lazy MobileNet, top-three predictions, confidence notice, category confirmation/override, catalog search, item route ticket.                                                                                                                                          |
+| `/centers`   | Find Centers   | Category chips and URL preselection, type and Open now filters, distance sorting, geolocation fallback, synchronized list/map, colored Lucide markers, selected lime ring, Google Maps directions, collected drop-off logging. Mobile puts the map above the list with a show/hide toggle. |
+| `/activity`  | My Activity    | Items logged/diverted kg/pending counts, status chips, route filter, weekly timeline, center attribution, status progression, validated manual logging, empty-state CTA.                                                                                                                   |
+| `/exchange`  | Reuse Exchange | Existing local demo listings, creation, requests, handovers, and completed reuse activity generation.                                                                                                                                                                                      |
+| `/dashboard` | Impact         | Existing logged-weight and indicative CO₂e totals, eight-week chart, route/category breakdowns, material-flow Sankey.                                                                                                                                                                      |
+| `/about`     | AI & Ethics    | Existing privacy/AI limitations explanation, local evaluation summary, demo-reset confirmation.                                                                                                                                                                                            |
+
+The last three pages and seeded demo/reset behavior existed before this continuation. They are implemented local prototypes, rather than missing pages; this handover does not falsely mark them as unbuilt.
+
+## Data contract summary
+
+`src/data/types.ts` is the authoritative contract. Do not change it for later feature work.
+
+- `Category`: plastic, paper, glass, metal, organic, ewaste, textile, hazardous, residual.
+- `Route`: recycle, reuse, repair, compost, special, dispose.
+- `CatalogItem`: id/name, category/route, why/tip, average weight in kg, keyword list.
+- `Center`: id/name, coordinates/address, hours text, numeric opening interval, facility type, accepted categories.
+- `Activity`: id/ISO date, item name, category/route, kg weight, pending/collected/completed status, optional centerId.
+- `Listing`: id/title/category, condition, quantity, area, display name, optional note/requester, availability status, creation date.
+
+No new domain fields were added. Route-card navigation carries `itemId` and `weightKg` in React Router navigation state; `?category=` remains the shareable category filter. A direct visit can log an item manually. A center drop-off records `status: 'collected'` and the selected center's ID. Generic activity logging starts pending.
+
+## Store and persistence
+
+`useStore` persists `{ activities, listings }` in localStorage under `srijan-store-v1`.
+
+| Action                             | Description                                                                                               |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `addActivity(activity)`            | Adds an activity with generated ID and current ISO timestamp.                                             |
+| `updateActivityStatus(id, status)` | Changes the matching activity's status; UI advances pending → collected → completed.                      |
+| `addListing(listing)`              | Creates a locally available exchange listing with generated ID/date.                                      |
+| `requestListing(id, name)`         | Requests an available listing and records a display name.                                                 |
+| `markHandedOver(id)`               | Completes a requested handover and adds one completed reuse activity; repeated calls cannot duplicate it. |
+| `resetDemo()`                      | Restores seeded activities/listings; retains classification logs.                                         |
+
+Forms trim names, reject empty item names and nonpositive/nonfinite weights, and restrict optional centers to ones accepting the selected category. Drop-off categories are limited to that center's accepts list. Store actions remain unchanged and assume their caller supplies valid domain values.
+
+## Available selectors
+
+Every selector accepts `Activity[]` and lives in `src/store/selectors.ts`.
+
+| Selector            | Description                                                |
+| ------------------- | ---------------------------------------------------------- |
+| `totals`            | Total logged item count and kg.                            |
+| `diversionRate`     | Non-disposal kg divided by all logged kg, zero-safe.       |
+| `landfillAvoidedKg` | Sum of logged kg whose route is not dispose.               |
+| `co2eSavedKg`       | Non-disposal kg multiplied by indicative category factors. |
+| `itemsRerouted`     | Number of activities with a non-disposal route.            |
+| `handoverCount`     | Count of completed reuse activities.                       |
+| `weeklySeries`      | Last eight Monday-based weeks, kg per route.               |
+| `routeBreakdown`    | Route-level kg, labels, and colors.                        |
+| `categoryBreakdown` | Category-level kg, labels, and colors.                     |
+| `sankeyData`        | Category/route nodes and positive kg links.                |
+
+All statuses, including pending, contribute to logged impact estimates. `groupActivitiesByWeek` in `src/lib/activity.ts` provides chronological Monday-based timeline groups without altering selectors. Opening hours are interpreted in the centers' Bengaluru timezone (`Asia/Kolkata`), refreshed each minute; opening is inclusive, closing exclusive. Overnight intervals are supported, and equal endpoints represent 24-hour opening. Geolocation failure resets distance origin to `CITY_CENTER`.
+
+## Reusable UI
+
+- `Button`: primary, secondary, accent, and disabled variants.
+- `Card`: white bordered rounded surface.
+- `Badge`: lime accent label.
+- `StatNumber`: Fraunces numeral, optional unit/icon, descriptive label.
+- `Highlight`: reusable lime heading underline.
+- `PageHeader`: eyebrow, heading, description, optional action.
+- `EmptyState`: icon/title/description; pages compose their own CTAs.
+- `StatusPill`: status-dependent color and dot.
+- `Toast` / `useToast`: accessible success notification provider/hook.
+- `RouteCard`: ticket-style routing guidance, weight input, logging, center/exchange CTAs.
+- `ActivityModal`: validated manual activity form or center drop-off form.
+- `CenterMap`: typed facility markers, popups, selection focus, OSM attribution, bundled default marker asset fix.
+- `useModal`: keyboard focus containment/restoration and Escape dismissal.
+
+Theme remains forest/mint/lime with Fraunces headings and Inter body text. Desktop uses a fixed sidebar; mobile uses a bottom navigation bar.
+
+## Manual acceptance checks
+
+1. Open Classify → Pick an item → search PET bottle → select PET bottle.
+2. Adjust weight, then Find nearest center. Verify `?category=plastic`, its banner, and the active Plastic chip.
+3. Select a center card: map pans, popup opens, marker enlarges with a lime ring. Select a different marker: matching card highlights and scrolls into view. Reselect a card after closing the popup to reopen it.
+4. Open Log a drop-off: item, category, route, and weight carry forward. Clear the name or use weight 0: submission must display a validation error and add no activity. Correct them and save.
+5. Open My Activity → Collected: the new record appears in This week, with center name and selected weight. Refresh: it remains. Mark completed and verify the status/check and Completed filter.
+6. Open Log activity: submit a new item with an optional accepting center; verify it starts pending. Advance it to collected, then completed. Combine status/route filters and clear them again.
+7. In Centers, combine category/type/Open now filters. Residual has no seeded accepting facility and shows the Reuse Exchange empty state. Invalid category query strings fall back to All materials.
+8. Test Use my location with permission allowed and denied. Check distances and fallback message. Opening status follows IST, regardless of browser timezone.
+9. Test Directions link destinations without needing to navigate to fictional facilities.
+10. At 390px width verify map above list, show/hide map, correct map repaint when reopened, timeline legibility, and bottom tabs. Use Tab/Shift+Tab and Escape in forms; check visible focus.
+
+Automated tests cover distance/opening-hour boundaries (including overnight), IST conversion, directions URL generation, weekly grouping/order, collected center-linked persistence, and status changes, plus the existing catalog/store/classification tests.
+
+## Known limitations / TODOs
+
+- All facilities, addresses, starter activities, and listings are fictional. Replace and verify city data before real use. No availability, holidays, capacity, or facility verification service exists.
+- Directions intentionally open Google Maps coordinates. Distances are straight-line haversine distances, not driving distances or travel times.
+- The `openHours` contract describes a daily interval only; weekly closures and holiday exceptions cannot be represented without an explicitly approved future contract change.
+- Route suggestions and category acceptance are educational guidance. A center's acceptance of a material does not establish that every item or every processing route is supported.
+- Impact includes pending intentions, and CO₂e factors are indicative approximations, not certified savings.
+- Reuse handover weight is estimated from the first catalog entry in the category times quantity.
+- No activity edit/delete, export, undo, deduplication between separately logged pending and collected records, or background pickup integration is implemented. Logging a route-card item and later independently logging a drop-off creates two activities; this continuation does not silently reconcile them.
+- Browser-local storage can be cleared by the user; no account, backup, server validation, or multi-device synchronization exists.
+- TensorFlow.js has large lazy-loaded chunks; Vite emits bundle-size advisories. First inference depends on network/model download. A 45-second model-load timeout offers retry/manual fallback. Model agreement is user-confirmation agreement, not independently measured accuracy.
+- Map tiles and Google Fonts depend on third-party network access. OSM attribution is retained. No offline maps or tile cache is built.
+- Timeline week boundaries use the browser's local timezone. Centers use explicit IST for opening times.
+
+## What is NOT built yet
+
+The requested `/dashboard`, `/exchange`, demo mode, and `/about` are **already present as local demo features**. Their production counterparts are not built:
+
+| Area           | Still not built                                                                                                                                                   |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/dashboard`   | Verified lifecycle/carbon accounting, server analytics, downloadable reports, historical account data.                                                            |
+| `/exchange`    | Real shared marketplace, accounts, ownership enforcement, messages, notifications, moderation, server-backed requests/handovers.                                  |
+| Demo mode      | Explicit demo/live mode switch, separate production dataset, isolated server-side demo accounts. Synthetic defaults and Reset demo already exist.                 |
+| `/about`       | Independently labeled evaluation dataset, audited accuracy/bias reporting, centralized evaluation telemetry. Local confirmation statistics already exist.         |
+| Across the app | Backend/API/database, authentication, real pickup scheduling, real facility directory, deployment/production hosting configuration, automated browser E2E runner. |
+
+## Verification for this continuation
+
+- `npm test`: passed, including new center/time/week/drop-off assertions.
+- `npm run build`: passed; only the existing lazy TensorFlow bundle-size advisory remains.
+- Browser flow passed: Classify → PET bottle route card → category-preselected Centers → prefilled drop-off → My Activity, with center/weight/status intact after refresh → completed.
+- Browser checks passed for manual activity validation and pending-to-collected progression, combined status/route filters, category/type/Open now filtering, empty state, card-to-popup selection, marker-to-card selection (including Enter), mobile map show/hide, dialog Escape dismissal, and mobile horizontal-overflow checks.
+- No browser console errors or warnings were captured during these checks. Geolocation permission outcomes and camera hardware are left in the manual acceptance checklist; neither was spoofed during this continuation.
