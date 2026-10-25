@@ -27,7 +27,7 @@ import {
   overrideSummary,
   LOW_CONFIDENCE_THRESHOLD,
 } from "../lib/evaluation";
-import { evalResults, EVALUATION_IS_PLACEHOLDER } from "../data/evalResults";
+import { evalResults, evaluationReport } from "../data/evalResults";
 import { CATEGORY_META } from "../data/constants";
 import { catalog } from "../data/catalog";
 import { useStore } from "../store/useStore";
@@ -78,6 +78,8 @@ const percentage = (value: number | null) =>
   value === null ? "—" : `${Math.round(value * 100)}%`;
 
 export default function About() {
+  const [showPhotos, setShowPhotos] = useState(false);
+  const [showAllFailures, setShowAllFailures] = useState(false);
   const log = useClassificationLog();
   const evaluation = evaluationSummary(evalResults);
   const overrides = overrideSummary(log);
@@ -155,10 +157,10 @@ export default function About() {
             <h3>What we did not train</h3>
             <p>
               We did not train or fine-tune MobileNet, create a custom waste
-              model, or train a carbon-estimation model. The catalog,
-              facilities, starter records, and evaluation placeholders are
-              synthetic, authored demo data. They are not a municipal directory
-              or an independently labelled waste-image dataset.
+              model, or train a carbon-estimation model. The catalog, facilities
+              and starter records are synthetic demo data. Evaluation uses 99
+              real photographs with labels published by RealWaste’s authors. We
+              did not independently re-annotate these images.
             </p>
           </Card>
         </div>
@@ -168,41 +170,64 @@ export default function About() {
         <div className="section-kicker">03 · EVALUATION</div>
         <div className="row between wrap">
           <h2 id="evaluation-title">Show the evidence. Show the gaps.</h2>
-          <Badge>
-            {EVALUATION_IS_PLACEHOLDER
-              ? "Placeholder results"
-              : "Evaluation results"}
-          </Badge>
+          <Badge>99 real labelled photos</Badge>
         </div>
-        {EVALUATION_IS_PLACEHOLDER && (
-          <div className="notice evaluation-disclosure">
-            <TriangleAlert size={20} aria-hidden="true" />
-            <div>
-              <strong>
-                These are {evaluation.total} invented placeholder rows, not
-                measured model results.
-              </strong>
-              <p>
-                They exercise the evaluation interface. Replace all rows in{" "}
-                <code>src/data/evalResults.ts</code> with real, independently
-                labelled test results before reporting performance. No test
-                photos are bundled.
-              </p>
-            </div>
+        <Card className="benchmark-method">
+          <h3>A small, reproducible public benchmark</h3>
+          <p>
+            99 unchanged RealWaste photos, selected deterministically before
+            inference: 14 per represented category, plus one plastic photo.
+            Paper combines paper/cardboard; organic combines food/vegetation.
+            E-waste and hazardous waste are untested. Source labels describe
+            materials, not local disposal eligibility.
+          </p>
+          <p>
+            MobileNet v2, alpha 1.0, 224 px; TensorFlow.js CPU with RGB
+            decoding. Browser decoding and WebGL results may differ. No training
+            or fine-tuning was performed. This public sample is not an
+            independent validation set or proof of local accuracy.
+          </p>
+          <p>
+            Previous mapper: {evaluationReport.baseline.wrongSuggestions} wrong
+            suggestions and {evaluationReport.baseline.manualReview} unmapped
+            photos. After: {evaluationReport.conservative.wrongSuggestions}{" "}
+            wrong suggestions and {evaluation.manualReview} manual selections.
+            The same top-three model outputs are used for both policies.
+          </p>
+          <p>
+            Fewer wrong suggestions come from abstaining more often. Suggestion
+            accuracy fell from{" "}
+            {percentage(evaluationReport.baseline.suggestionAccuracy)} to{" "}
+            {percentage(evaluation.suggestionAccuracy)}. This is a reduction in
+            guessing, not evidence of improved model accuracy.
+          </p>
+          <div className="row wrap">
+            <a className="text-link" href="/evaluation/report.json" download>
+              Download labels &amp; raw results (JSON)
+            </a>
+            <a className="text-link" href="/evaluation/ATTRIBUTION.md">
+              Sources &amp; licences
+            </a>
           </div>
-        )}
+        </Card>
         <div className="evaluation-metrics">
           <Card>
             <StatNumber
               value={percentage(evaluation.accuracy)}
-              label={
-                EVALUATION_IS_PLACEHOLDER
-                  ? "placeholder overall accuracy"
-                  : "overall test accuracy"
-              }
+              label="overall test accuracy"
             />
             <p>
               {evaluation.correct} correct / {evaluation.total} test rows
+            </p>
+          </Card>
+          <Card>
+            <StatNumber
+              value={percentage(evaluation.suggestionAccuracy)}
+              label="accuracy when a category is suggested"
+            />
+            <p>
+              {evaluation.correct} correct / {evaluation.suggested} suggestions
+              · {evaluation.manualReview} require manual selection
             </p>
           </Card>
           <Card>
@@ -228,10 +253,14 @@ export default function About() {
         </div>
         <p className="evaluation-note">
           Confidence is the model’s top-label score, not calibrated material
-          certainty. Below {LOW_CONFIDENCE_THRESHOLD * 100}% or with an unmapped
-          label, the app asks for manual category review; every photo prediction
-          requires confirmation. The fixture contains no evidence that an
-          override was completed.
+          certainty. Below {LOW_CONFIDENCE_THRESHOLD * 100}%, with an
+          unmapped/ambiguous label, or with conflicting category scores less
+          than 15 percentage points apart, no category is preselected. Overall
+          accuracy counts abstentions as unsuccessful; suggestion accuracy
+          excludes them. Every suggestion still requires confirmation. No human
+          corrections are counted as model successes. Thresholds are fixed
+          heuristics, not calibrated on this benchmark. Measured{" "}
+          {evaluationReport.measuredAt.slice(0, 10)}.
         </p>
         <div className="evaluation-columns">
           <Card className="category-accuracy">
@@ -242,7 +271,7 @@ export default function About() {
                 <div className="row between">
                   <span>{c.label}</span>
                   <strong>
-                    {percentage(c.accuracy)}{" "}
+                    {c.total ? percentage(c.accuracy) : "Untested"}{" "}
                     <small>
                       ({c.correct}/{c.total})
                     </small>
@@ -289,23 +318,23 @@ export default function About() {
         <div className="failure-heading">
           <h3>Failure cases</h3>
           <p>
-            {evaluation.failures.length}{" "}
-            {EVALUATION_IS_PLACEHOLDER
-              ? "placeholder mismatches"
-              : "mismatches"}{" "}
+            {evaluation.failures.length} unsuccessful suggestions / abstentions
             worth examining
           </p>
         </div>
         {evaluation.failures.length ? (
           <div className="failure-grid">
-            {evaluation.failures.map((row) => (
+            {(showAllFailures
+              ? evaluation.failures
+              : evaluation.failures.slice(0, 6)
+            ).map((row) => (
               <Card className="failure-case" key={row.testImage}>
                 <span className="failure-image-id">{row.testImage}</span>
                 <h4>
                   {CATEGORY_META[row.expectedCategory].label} →{" "}
                   {row.predictedCategory
                     ? CATEGORY_META[row.predictedCategory].label
-                    : "Unmapped"}
+                    : "Manual selection"}
                 </h4>
                 <p>
                   {row.failureReason ??
@@ -313,7 +342,7 @@ export default function About() {
                 </p>
                 <small>
                   {Math.round(row.confidence * 100)}% confidence
-                  {row.confidence < LOW_CONFIDENCE_THRESHOLD
+                  {row.predictedCategory === null
                     ? " · manual review required"
                     : " · user confirmation still required"}
                 </small>
@@ -325,6 +354,68 @@ export default function About() {
             title="No mismatches in these rows"
             description="A small sample without failures does not establish general performance."
           />
+        )}
+        {evaluation.failures.length > 6 && (
+          <Button
+            variant="secondary"
+            onClick={() => setShowAllFailures(!showAllFailures)}
+          >
+            {showAllFailures
+              ? "Show fewer cases"
+              : `Review all ${evaluation.failures.length} unsuccessful cases`}
+          </Button>
+        )}
+        <div className="benchmark-gallery-heading">
+          <h3>Inspect the labelled photos</h3>
+          <p>
+            Expected labels come from the source dataset. Review the original
+            image and raw object predictions before drawing conclusions.
+          </p>
+          <Button
+            variant="secondary"
+            aria-expanded={showPhotos}
+            onClick={() => setShowPhotos(!showPhotos)}
+          >
+            {showPhotos ? "Hide photos" : "View 99 labelled photos"}
+          </Button>
+        </div>
+        {showPhotos && (
+          <div className="benchmark-gallery">
+            {evalResults.map((row) => (
+              <Card key={row.testImage}>
+                <a
+                  href={`/evaluation/photos/${row.testImage}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    loading="lazy"
+                    src={`/evaluation/photos/${row.testImage}`}
+                    alt={`Source-labelled ${row.sourceLabel}: ${row.testImage}`}
+                  />
+                </a>
+                <h4>{row.testImage}</h4>
+                <p>
+                  Expected: {CATEGORY_META[row.expectedCategory].label}
+                  <br />
+                  Suggested:{" "}
+                  {row.predictedCategory
+                    ? CATEGORY_META[row.predictedCategory].label
+                    : "Manual selection"}
+                </p>
+                <small>
+                  Source label: {row.sourceLabel}
+                  <br />
+                  {row.predictions
+                    .map(
+                      (p) =>
+                        `${p.className} (${Math.round(p.probability * 100)}%)`,
+                    )
+                    .join(" · ")}
+                </small>
+              </Card>
+            ))}
+          </div>
         )}
       </section>
 

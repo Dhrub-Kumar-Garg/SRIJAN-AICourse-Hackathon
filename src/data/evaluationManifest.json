@@ -1,0 +1,992 @@
+[
+  {
+    "testImage": "glass-01.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_415.jpg",
+    "sha256": "b173bd147c754deedba7fd660ad1aadbb64d871bdfb2c0be97b8fe5da924ddf7",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution)"
+  },
+  {
+    "testImage": "glass-02.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_312.jpg",
+    "sha256": "1974f2447e7cf78088b217708768f86318ca335db850ea8627e39c35122087c1",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "glass-03.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_75.jpg",
+    "sha256": "25176047a52145343bf1b65f7bda827c191c12aed616fe3d0840a7763dab7828",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "glass-04.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_205.jpg",
+    "sha256": "7c503edffbc52eeec04074a7cf45abda5a0265c12fb253a861ed518c6fd3dcfb",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "glass-05.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_43.jpg",
+    "sha256": "418e471d6ee669e1427b1e3e4867a0b1db42b6e050f5601428289d9ce375b2a4",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "glass-06.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_236.jpg",
+    "sha256": "b0b4d47246357f24cacee4acb528a0ade138ccbb03f010107c9de390f27f97e0",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "glass-07.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_33.jpg",
+    "sha256": "08c0ea2c8cc93de6980fc10e689eb63d1715f7554150e46b862dd7b18cf5b09a",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "glass-08.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_372.jpg",
+    "sha256": "055dba297f533f2bcdae1c06d5c3831daa3d6950c15f1996527214008f9b725a",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "glass-09.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_306.jpg",
+    "sha256": "2893793c6cad27d9816ab7869cbc34cdd6c0597f2c703fad9be77cc5adbc0b80",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "glass-10.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_184.jpg",
+    "sha256": "739a5307df58a4cc8f5581cadd66188e4e5a583cd72c5e5779a78e8c5397733b",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "glass-11.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_15.jpg",
+    "sha256": "ff270ebce7f9d424df235cf144beff718707eede0d71b40097b1a72bafe700e0",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "glass-12.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_375.jpg",
+    "sha256": "0ef4afe8b970adbdbfce826d47d62e290b47f853d40c6ccacfa291b81625e6d0",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "glass-13.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_164.jpg",
+    "sha256": "27545b283dae06135d6be16247568f6609095b96444e223face9d6bf8b1aa26a",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "glass-14.jpg",
+    "expectedCategory": "glass",
+    "sourceLabel": "Glass",
+    "sourcePath": "realwaste-main/RealWaste/Glass/Glass_373.jpg",
+    "sha256": "cadb860b30bcf4e176db338f097bc1a5c67527a6affe15243257c52654d25156",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-01.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_332.jpg",
+    "sha256": "c23506bf587657e2c9d805937187e815c59443213dc4181153c86fc37508e5f9",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-02.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_168.jpg",
+    "sha256": "17875b5ec2511acbc12f4e4a5067b18ae5e4953f23bc46b4061f33247cfa412d",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-03.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_320.jpg",
+    "sha256": "1bb9f5fc70056a38be6553b9dbef615e12435e3388e0ab8c6d367d0c853e4767",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-04.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_486.jpg",
+    "sha256": "bee11ea47a887aaffb4645f645cb44438272984c81d97baf7a93943434525d85",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-05.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_470.jpg",
+    "sha256": "c272be1e743cedf7a0b6e0084d5de9d8513ccc1944ccdb4c9b67952340f40210",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-06.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_446.jpg",
+    "sha256": "130c83906181a2c64564532d00bd84eaa2e2e40b1ace2997ed40d70b474272ac",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-07.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_670.jpg",
+    "sha256": "4ae42f2172c3ca63987060d1ce8de9f8786090041752a4afc36ccee67d82fc0e",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-08.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_10.jpg",
+    "sha256": "653da343056095c73260fa51138a853cf751d821dfa631230d5daaf13b248dab",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-09.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_503.jpg",
+    "sha256": "43d1eb59e928a71b5f0b1ed73dbab66e20356442ab13f376ce296986b81a4bec",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-10.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_310.jpg",
+    "sha256": "49e7ca454e114a4d16b45072c7f68caf634b927e80d46202fd1c42bafe33d90d",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-11.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_279.jpg",
+    "sha256": "abba8d604c4110d5c4d0f255734a980de503a3c4bfc395bc6edf3d7863c55f10",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-12.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_86.jpg",
+    "sha256": "a737823221e6c60505678366b2b8eac0d5443d6401d3f0c30cb97313c7225684",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-13.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_70.jpg",
+    "sha256": "c7e3f20fe61ccbe01e1c6b731908bc903935d603d11b310d9fb2d309549b42be",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "metal-14.jpg",
+    "expectedCategory": "metal",
+    "sourceLabel": "Metal",
+    "sourcePath": "realwaste-main/RealWaste/Metal/Metal_695.jpg",
+    "sha256": "0829ecbf8f7e418b9acaf79cd91fe50ee2f766f61b1c7aa5c16f655578e6c313",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-01.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Food Organics",
+    "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_387.jpg",
+    "sha256": "a1f7100a67cb61d08904cccb0dec1b45e9b6eef8ae0cd3e0b594ea80e3dc64fe",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-02.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Vegetation",
+    "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_66.jpg",
+    "sha256": "25919d76fe80387a86c7ea2c6a68a23148d65a6e5b4249206760f2e42450c3f0",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-03.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Vegetation",
+    "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_367.jpg",
+    "sha256": "2751b477c4620fa66b438dee456a23e3f72332e189aabc57959942846b8840f3",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-04.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Vegetation",
+    "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_240.jpg",
+    "sha256": "4f93aefde6228c0136a31abb8c69c031a20ceaa71b796406ba8c1075d72ca0e5",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-05.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Vegetation",
+    "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_382.jpg",
+    "sha256": "fdb3ead85853e26c053e8e488ece1d5ccbaffc1f8c3a6bb703123de71a639203",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-06.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Food Organics",
+    "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_402.jpg",
+    "sha256": "abe0296904e71258c3c68f9990a55fd96b1f4fe999c0495a45d6a539a9c729c6",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-07.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Food Organics",
+    "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_362.jpg",
+    "sha256": "887b472a0ab2da3c19a605e5167908c86d93b9633f1ee30fe4043d87df935538",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-08.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Food Organics",
+    "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_205.jpg",
+    "sha256": "33ea3e307cc23002a28cd409eb9debaeb64437f4f1aa52da6da0d675e7d5324a",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-09.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Vegetation",
+    "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_196.jpg",
+    "sha256": "86a7ee8b65d1b5c338b12a91e14c21b03b6c03ca777e61d50d343e3a63be7797",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-10.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Food Organics",
+    "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_106.jpg",
+    "sha256": "2211fa0667d8fed7f446e552d5d680702800062971ff175f026647ae75992b9d",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-11.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Food Organics",
+    "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_259.jpg",
+    "sha256": "849a592b96fa1772823c529f56c91acb7603d27a612fb10aed275405fe0f7d03",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-12.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Vegetation",
+    "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_306.jpg",
+    "sha256": "a26f4fb36bfe3d9bd2f10537473ab55d597a1058a93a1317854e452b5f150abf",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-13.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Food Organics",
+    "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_136.jpg",
+    "sha256": "992c79996caa0456ae40b3a487bebcf7ca41234ed3ab6cfe4b2830503d978981",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "organic-14.jpg",
+    "expectedCategory": "organic",
+    "sourceLabel": "Vegetation",
+    "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_163.jpg",
+    "sha256": "a3fad105c893283a72af38c60c73467d89f6a49a855ca545e9b1a3713352584e",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-01.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Paper",
+    "sourcePath": "realwaste-main/RealWaste/Paper/Paper_441.jpg",
+    "sha256": "e483a84715ee08912a4f785ec427ac7453871c96e664fcad94eac5451851add0",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-02.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Cardboard",
+    "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_209.jpg",
+    "sha256": "1192b11378a0561ca35c9e9d3ea36c15653a93dea8b5a2f413e8504a220fbf92",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-03.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Cardboard",
+    "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_454.jpg",
+    "sha256": "b914e6c15c6a9979f664c941534d0c2bc6f802699fec0fbcbced9cdeea815fad",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-04.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Paper",
+    "sourcePath": "realwaste-main/RealWaste/Paper/Paper_55.jpg",
+    "sha256": "bb19a502c4aeca4bd106feef05a1b2cce8237bb655203cc7eed0cb409e300243",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-05.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Paper",
+    "sourcePath": "realwaste-main/RealWaste/Paper/Paper_481.jpg",
+    "sha256": "6a1b28beacfd2d0f3ba7587ab4928eb90de1f70345c2c491d336c0cf82a36174",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-06.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Paper",
+    "sourcePath": "realwaste-main/RealWaste/Paper/Paper_248.jpg",
+    "sha256": "846592a8a0ab22668f5b564b06ba6b73d699781a1d742a13a18e8c71a78dbf7b",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-07.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Cardboard",
+    "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_440.jpg",
+    "sha256": "c5ff68b28b4c99bcb40b0005e100fa4e1b789e3333d75088d3b4678747bacbfe",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-08.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Cardboard",
+    "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_414.jpg",
+    "sha256": "21c26e31840566774a30fd96eac6ca48e3af8235879a3596c1c432e1ea712b0a",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-09.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Paper",
+    "sourcePath": "realwaste-main/RealWaste/Paper/Paper_96.jpg",
+    "sha256": "eaf460694313ef22aca6e6ee15e2377e41f81baec70500ce8fb25bc05d34556d",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-10.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Cardboard",
+    "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_275.jpg",
+    "sha256": "c2eb9745df86b546f1b84e4caab3b50c235a6684619089073cdfc2c1f019160b",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-11.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Cardboard",
+    "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_421.jpg",
+    "sha256": "41d02e4330fd1a0acb171eda3936ed9c2d21953919b991fff76d27c65e53f66c",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-12.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Cardboard",
+    "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_89.jpg",
+    "sha256": "183a1c0e7651e4cf69f6bf92a8c702219c640b6b497973633c5954a7a3891e30",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-13.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Paper",
+    "sourcePath": "realwaste-main/RealWaste/Paper/Paper_287.jpg",
+    "sha256": "f8dfbe016b0d2be7a8cd1895481cf7932b8d7414fc35a69a67e690f8769962ee",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "paper-14.jpg",
+    "expectedCategory": "paper",
+    "sourceLabel": "Paper",
+    "sourcePath": "realwaste-main/RealWaste/Paper/Paper_14.jpg",
+    "sha256": "882b3c4f648e0666470962a89f41044c5d900d693efc02799dc365d7a67edf0a",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-01.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_506.jpg",
+    "sha256": "49640c30b11ef397664913e6854dcfd9673dd2c5e9a5e7fb9709bfe0bd90708b",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-02.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_477.jpg",
+    "sha256": "36a5429e05de9522297e3258032a193ba2dbc6ea9ba23a61d5f2a5ac41a2080f",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-03.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_442.jpg",
+    "sha256": "e8300c45da77f840ff7f0d810b70d60650749dcf9a421647d2d60bc789735930",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-04.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_456.jpg",
+    "sha256": "dc0eb3e01ba4cee00ef826c9f80a8de8fe3f91972e7d20aa02a38256c1078985",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-05.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_70.jpg",
+    "sha256": "f6a7feb0ca05c727e4187c04e6312a20defdd35b84e766bf18064bc96e05b505",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-06.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_918.jpg",
+    "sha256": "f98e146c5dcb270ff97668ba377966c9e414680fc7b5d80194ee2739fa23a83c",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-07.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_394.jpg",
+    "sha256": "8dd8232b6e253bfb07e62ff09ee48e5a53bd12f01ca724740718847346356626",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-08.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_242.jpg",
+    "sha256": "07c5a71758c39e2eb30281c51ca4307ab89b8d219cec415af843cc354ca972f8",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-09.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_680.jpg",
+    "sha256": "50f8ce768f5815bcb14c13dcc34823e86a9f7f58025092a9136eec46f6579d82",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-10.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_87.jpg",
+    "sha256": "3585daf9bbdf4aa477e7b549fdc68f7a3186cd8e986c6e2cbdc181f8e12050e6",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-11.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_883.jpg",
+    "sha256": "5f12d7fe88fd633233007c7aebd4397d380118e4f0d124adbc8caf8f6db569b9",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-12.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_143.jpg",
+    "sha256": "6b82ef4dda4c4fe25ab253408ffbade661bcd3113ee95210c556c2d3f2fd643f",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-13.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_31.jpg",
+    "sha256": "8a0e537e4da48e4d750f64566e250c5b15be9cfa9b78ee469b002c212a712e9a",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-14.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_524.jpg",
+    "sha256": "a4a33532193daac3707f6b00e265c96b365ba31447a8c1bec068388b4161dee8",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "plastic-15.jpg",
+    "expectedCategory": "plastic",
+    "sourceLabel": "Plastic",
+    "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_307.jpg",
+    "sha256": "91c8a2ba03af96f8f534ae772bea1d02a93f8e4f9a8fb63b086ed37ff74be81d",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-01.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_467.jpg",
+    "sha256": "ffcc6c828877d90615e0b6054c2566eeb46b8deeee094cc931ce7a444a6f9d63",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-02.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_427.jpg",
+    "sha256": "92214f267d587f3522e72639df8de8a0f4974bff4a4cc5ecf9b6abf5016a1e05",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-03.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_247.jpg",
+    "sha256": "1ef20413167737b0a55bae0f768f2cae0d50e43cea8415a9e81cc0e1dc728b8c",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-04.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_128.jpg",
+    "sha256": "ab724eb721bbd5726e4cfd7d8965a73e28cb5c2e2ae9fe1d7ccedcb835a6959b",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-05.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_323.jpg",
+    "sha256": "ea8dee92464f88977ff5d8b37f5818f2ec8bd35a73aa7ec50131eeb6d5071365",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-06.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_155.jpg",
+    "sha256": "d0e792191fa868c13530d02a12126916df8d366be1199b38b9047a29e97f57de",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-07.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_104.jpg",
+    "sha256": "1db35d3e2d307eed515f9463f19da8c69a9df2206cc77d386421cc1bdf6bb054",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-08.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_340.jpg",
+    "sha256": "a915cf0569492217f95db600a644d7cbedc3bede703f11dc74459cf00267dd7c",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-09.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_262.jpg",
+    "sha256": "50419b5da0dba9c4a641e7e320983b699a70ea59b323cb185284ffb3940edf34",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-10.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_237.jpg",
+    "sha256": "4c2b0349797ecd492cb52007b7d5a0a21239974b4de1c7bae28a73c18d35665a",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-11.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_418.jpg",
+    "sha256": "ab338db0a694d527c8081d5890658dd02ae8fcae66d91a4cb5737a6438de9510",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-12.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_10.jpg",
+    "sha256": "b064d752ef51b004bfff15c89dc487b8d57a3a363f85bdb379628c8ada3f1a97",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-13.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_399.jpg",
+    "sha256": "0bb9ff13d3e364e2a14eae06a993100184312dd4741d66e95c4d3ade9b4bf748",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "residual-14.jpg",
+    "expectedCategory": "residual",
+    "sourceLabel": "Miscellaneous Trash",
+    "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_354.jpg",
+    "sha256": "29c31b493b1e46c4429e4110e2179d4428dcabfc8a1d6f73333deb660e7f4d0c",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-01.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_307.jpg",
+    "sha256": "ef67a807f67f70f993020a1a83c74faa8f76f273c8c92dc16ae9df67c42af092",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-02.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_63.jpg",
+    "sha256": "87f80e8900eb40ed0f846e61ae51c4a5249310c0b4baeeb208e47f176c02567a",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-03.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_105.jpg",
+    "sha256": "16ee92246783456317cbc4043b07c5fa85b6c99019020dafcf554a9a81856694",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-04.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_283.jpg",
+    "sha256": "842a9527a5a94d183911ee7876a92883dfe1e9bd89c8e885ca02967df2926b23",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-05.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_295.jpg",
+    "sha256": "9f39dc63cde6a1b05e49aafefa81a4c82169815b397c301faa0a30de31558d52",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-06.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_193.jpg",
+    "sha256": "4c8e865ce3f6771e042495aca9a26e909a7a63c0046d9ee151346b4ad199df4b",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-07.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_146.jpg",
+    "sha256": "d0ef4e315ae8ddf489d900571fb6058828bba2704e0e880679d71a3b2493abb8",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-08.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_124.jpg",
+    "sha256": "6fd660787577bc808fd06108c6f19e49a66e0df42d96a5cb725f32babab97222",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-09.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_132.jpg",
+    "sha256": "3172764f9e5e0b0de184c3a8d3f67ef2359f713656b2177f037502a8cd496112",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-10.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_78.jpg",
+    "sha256": "d51ec8f62d20d2820f2a499a323998e4d03846df4eaabfa0f82439f729f67891",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-11.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_267.jpg",
+    "sha256": "2930a187b595ec569e3ef33f73410ff81a2798f4174b74a6b005aeae2ab80f76",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-12.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_45.jpg",
+    "sha256": "521477ecd0503b69fd41bf726be7b34974e04a70ef6c475a402ece30aa926041",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-13.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_249.jpg",
+    "sha256": "eacadd0107ed2dddfa6f93fd283f691857708cd5dac93c38486c0d2eebe16b09",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  },
+  {
+    "testImage": "textile-14.jpg",
+    "expectedCategory": "textile",
+    "sourceLabel": "Textile Trash",
+    "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_217.jpg",
+    "sha256": "1d6e1da34518184eafc5073176f7b011091a6dc56b8f1abfbb9c99bbec65efc0",
+    "source": "RealWaste (UCI distribution)",
+    "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+    "license": "CC BY 4.0 (UCI distribution; see attribution) "
+  }
+]

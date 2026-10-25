@@ -42,7 +42,7 @@ src/
     catalog.ts               42 synthetic catalog entries
     centers.ts               14 fictional Bengaluru-area facilities
     seed.ts                  35 activities and 8 exchange listings
-    evalResults.ts           20 explicitly invented evaluation fixtures
+    evalResults.ts           99 measured real-photo benchmark results
   lib/
     centers.ts               Type metadata, haversine distance, opening hours, directions
     activity.ts              Monday-based weekly activity grouping
@@ -71,7 +71,7 @@ tests/domain.test.ts        Domain/store integration assertions
 | `/activity`  | My Activity    | Items logged/diverted kg/pending counts, status chips, route filter, weekly timeline, center attribution, status progression, validated manual logging, empty-state CTA.                                                                                                                   |
 | `/exchange`  | Reuse Exchange | Live journey counts, category/condition/availability/search filters, synthetic names, relative times, validated URL-prefilled listing and display-name request dialogs, handover confirmation and weight toast, completed-card ribbon.                                                     |
 | `/dashboard` | Impact         | Four animated lime-highlighted metrics, full-width colored and labeled category-to-route Sankey, eight-week stacked bars, category share donut, 70% diversion goal, reuse count/link, five recent completed wins, and demo reset.                                                          |
-| `/about`     | AI & Ethics    | Styled workflow diagram, method/data and no-training disclosure, placeholder evaluation metrics/category bars/failures, live override rate, six responsible-AI cards, SDG alignment, implemented/planned roadmap, and demo-reset confirmation.                                             |
+| `/about`     | AI & Ethics    | Styled workflow diagram, method/data and no-training disclosure, real-photo evaluation metrics/category bars/failures, live override rate, six responsible-AI cards, SDG alignment, implemented/planned roadmap, and demo-reset confirmation.                                              |
 
 Impact and Reuse Exchange have now been extended from their existing prototypes. All pages remain browser-local demos; `/about` and seeded demo/reset behavior were already present.
 
@@ -83,11 +83,11 @@ Impact and Reuse Exchange have now been extended from their existing prototypes.
 - Tour state is separate from domain data, in sessionStorage under `srijan-guided-demo-v1`. It records start time, baseline metrics, and generated activity/listing IDs; malformed sessions are ignored. Refresh resumes the tour, navigation away offers Return to step, canceled forms offer Open drop-off/Open listing, and missing records offer Restart demo. Exit retains saved actions. Restart does not reset activities/listings; repeated runs can create further actions.
 - Classify accepts `?q=` and `?item=` for catalog prefilling. Centers now accepts validated `itemId`, positive `weightKg`, accepting `centerId`, and `dropoff=1` query parameters while preserving the existing navigation-state handoff. Exchange accepts `?focus=<listingId>` to highlight and scroll to a listing. The `demo` query parameter identifies the active tour step.
 - AI & Ethics now contains all six requested sections. Its architecture diagram uses styled, numbered boxes and arrows; manual input is explicitly described as bypassing the model/mapping stages. Method/data copy identifies pretrained MobileNet v2/ImageNet, our keyword rules, the 42-item catalog, synthetic records, and the fact that no custom model or fine-tuning was performed.
-- `src/data/evalResults.ts` contains **20 invented fixtures**, not real photos or inference outputs. `EVALUATION_IS_PLACEHOLDER` remains true. Replace every row with independently labelled results before changing that flag. Current fixture-only metrics are 14/20 correct (70%), 7/20 below 45% confidence (35%), and six amber mismatch cards with reasons. Category bars group by expected category and show sample counts. Empty sample metrics use null/em dashes.
-- Low-confidence share is labelled manual review, not successful intervention. Below 45% confidence and unmapped labels require category review; every photo prediction requires confirmation. The dataset has no confirmed-category field or override outcomes. Live override rate is calculated separately from confirmed photo logs: changed/unmapped prediction divided by total confirmed photo runs. User confirmation is not independently verified accuracy.
+- The 20 invented fixtures were replaced by 99 actual MobileNet inference outputs. `EVALUATION_IS_PLACEHOLDER` is false. `src/data/evaluationManifest.json` records original RealWaste labels/paths and hashes; `evaluationReport.json` records raw top-three predictions, baseline and conservative decisions, backend/version/date, and failure reasons. Seven categories are represented (14 each, plastic 15). E-waste/hazardous have zero samples and are marked untested. Photos are unchanged under `public/evaluation/photos`; `ATTRIBUTION.md` preserves the UCI CC BY and conflicting upstream NC-SA notice. No training/fine-tuning was performed.
+- Shared `assessPredictions` requires explicit category selection below 45%, for unmapped/material-ambiguous object labels, or conflicting mapped categories within 15 percentage points. It leaves no category preselected. Generic bottle/water-bottle/bucket/packet/mouse rules were removed. All other suggestions still require confirmation. These are fixed heuristics chosen before inference, not calibrated scores. Overall accuracy includes abstentions; suggestion accuracy excludes them. Local overrides remain separately measured and are not verified ground truth.
 - Classification log reads now validate shape, categories, confidence, and timestamps. Corrupt/non-array storage is safe. Writes notify subscribers and return failure safely; Classify reports unavailable storage through a toast. The About view responds to same-tab confirmation events, cross-tab storage events, and window focus. Catalog/manual-without-inference choices and guided actions do not create new photo-log entries.
 - Added route titles (`Page | Srijan`), a local SVG favicon, short page-entry transitions, labelled route-loading state, a route error boundary with reload/home recovery, stronger secondary-text contrast, keyboard arrow/Home/End navigation for classification tabs, and associated tab panels. Motion still respects reduced-motion settings. Existing empty/error/form states remain available throughout the app.
-- Rewrote README with setup, features, guided-demo instructions, architecture, evaluation replacement guidance, implemented/planned scope, and privacy/estimate limitations. The fixed `src/data/types.ts`, domain store, and selectors remain unchanged.
+- Rewrote README with setup, features, guided-demo instructions, architecture, benchmark reproduction and interpretation guidance, implemented/planned scope, and privacy/estimate limitations. The fixed `src/data/types.ts`, domain store, and selectors remain unchanged.
 
 ### Verification for this continuation
 
@@ -214,13 +214,13 @@ Automated tests cover distance/opening-hour boundaries (including overnight), IS
 
 The requested `/dashboard`, `/exchange`, demo mode, and `/about` are **already present as local demo features**. Their production counterparts are not built:
 
-| Area           | Still not built                                                                                                                                                   |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/dashboard`   | Verified lifecycle/carbon accounting, server analytics, downloadable reports, historical account data.                                                            |
-| `/exchange`    | Real shared marketplace, accounts, ownership enforcement, messages, notifications, moderation, server-backed requests/handovers.                                  |
-| Demo mode      | Isolated production/demo datasets and server-side demo accounts. A guided browser-local phone/lamp tour, synthetic defaults, and Reset demo are now implemented.  |
-| `/about`       | Independently labeled evaluation dataset, audited accuracy/bias reporting, centralized evaluation telemetry. Local confirmation statistics already exist.         |
-| Across the app | Backend/API/database, authentication, real pickup scheduling, real facility directory, deployment/production hosting configuration, automated browser E2E runner. |
+| Area           | Still not built                                                                                                                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `/dashboard`   | Verified lifecycle/carbon accounting, server analytics, downloadable reports, historical account data.                                                                                                 |
+| `/exchange`    | Real shared marketplace, accounts, ownership enforcement, messages, notifications, moderation, server-backed requests/handovers.                                                                       |
+| Demo mode      | Isolated production/demo datasets and server-side demo accounts. A guided browser-local phone/lamp tour, synthetic defaults, and Reset demo are now implemented.                                       |
+| `/about`       | Independent local validation, e-waste/hazardous samples, audited bias reporting and centralized evaluation telemetry. The 99-photo public benchmark and local confirmation statistics are implemented. |
+| Across the app | Backend/API/database, authentication, real pickup scheduling, real facility directory, deployment/production hosting configuration, automated browser E2E runner.                                      |
 
 ## Verification for Impact / Exchange continuation
 
@@ -238,3 +238,15 @@ The requested `/dashboard`, `/exchange`, demo mode, and `/about` are **already p
 - Browser flow passed: Classify → PET bottle route card → category-preselected Centers → prefilled drop-off → My Activity, with center/weight/status intact after refresh → completed.
 - Browser checks passed for manual activity validation and pending-to-collected progression, combined status/route filters, category/type/Open now filtering, empty state, card-to-popup selection, marker-to-card selection (including Enter), mobile map show/hide, dialog Escape dismissal, and mobile horizontal-overflow checks.
 - No browser console errors or warnings were captured during these checks. Geolocation permission outcomes and camera hardware are left in the manual acceptance checklist; neither was spoofed during this continuation.
+
+## Latest continuation — real evaluation and cautious photo suggestions
+
+- Measured 2026-10-25: baseline mapper 15 correct / 31 suggestions (16 wrong, 68 unmapped); conservative policy 2 correct / 8 suggestions (6 wrong, 91 manual selections). Suggestion accuracy falls from 48.4% to 25%, overall accuracy counting abstentions is 2.0%. Reduced wrong-suggestion count reflects more abstention, not improved material recognition. Do not advertise an accuracy gain.
+- Fixed layout-dependent photo preprocessing: natural-size offscreen canvas RGB input replaces directly classifying the displayed image element. Responsive previews can no longer resize inference input. Tensors are disposed after inference.
+
+- Selected 99 RealWaste images before inference using deterministic SHA-256 ordering; included source labels, original paths and file hashes. This is a diagnostic public benchmark, not a training set or general accuracy claim.
+- Added `scripts/prepare-evaluation.py` and `npm run evaluate` (Node CPU + sharp); raw predictions and comparison to the frozen pre-change mapper are reproducible. Cache archives are gitignored.
+- AI & Ethics now provides suggestion accuracy/manual-review counts, before/after wrong-suggestion counts, downloadable full results/attribution and an expandable lazy photo gallery. Failure cards expand from six; untested categories are explicit.
+- Manual selections are no longer silently prefilled from low-confidence predictions. Confirmation logs use the final policy decision (null when review is required). Domain types, store and selectors remain unchanged.
+- Remaining evaluation work: independent label review, local photos across varied lighting/backgrounds, e-waste/hazardous coverage, a truly held-out validation set and calibrated thresholds. A waste-specific trained model is still planned.
+- Validation: `npm test` and `npm run build` pass. The production output includes all 99 photos and natural-size decoding; source/downloadable reports match byte-for-byte. Browser checks at 375px and 1280px found no horizontal overflow. The real plastic-14 photo produced the same 97% object-label score at both sizes, with no selected category and confirmation disabled until explicit selection. Expanded gallery contains 99 labelled images; no browser console errors were observed. Existing TensorFlow chunk-size advisories remain.

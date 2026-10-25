@@ -21,9 +21,8 @@ import {
   useToast,
 } from "../components/ui";
 import RouteCard from "../components/RouteCard";
-import { mapImageNetLabel } from "../lib/imagenetMap";
+import { assessPredictions, type Prediction } from "../lib/predictionPolicy";
 import { logClassification } from "../lib/classificationLog";
-import { LOW_CONFIDENCE_THRESHOLD } from "../lib/evaluation";
 let classifier:
   | ReturnType<(typeof import("@tensorflow-models/mobilenet"))["load"]>
   | undefined;
@@ -43,7 +42,6 @@ async function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
     clearTimeout(timer);
   }
 }
-type Prediction = { className: string; probability: number };
 function fuzzy(text: string, query: string) {
   const source = text.toLowerCase();
   return query
@@ -105,17 +103,16 @@ export default function Classify() {
     },
     [preview],
   );
-  const predicted = predictions[0]
-    ? mapImageNetLabel(predictions[0].className)
-    : null;
-  const uncertain =
-    !predicted || (predictions[0]?.probability ?? 0) < LOW_CONFIDENCE_THRESHOLD;
+  const assessment = assessPredictions(predictions);
+  const predicted = assessment.category;
+  const uncertain = predicted === null;
   async function classify() {
     const id = ++runId.current;
     setBusy(true);
     setConfirmed(false);
     setSelected(null);
     setPredictions([]);
+    setCategory(null);
     setError("");
     try {
       const tf = await import("@tensorflow/tfjs");
@@ -130,10 +127,25 @@ export default function Classify() {
       });
       const model = await classifier;
       if (!img.current || id !== runId.current) return;
-      const p = await model.classify(img.current, 3);
+      // fromPixels(image) uses rendered width/height. Decode at natural size so
+      // the same photo does not change predictions across responsive layouts.
+      const canvas = document.createElement("canvas");
+      canvas.width = img.current.naturalWidth;
+      canvas.height = img.current.naturalHeight;
+      const context = canvas.getContext("2d");
+      if (!context) throw new Error("Image decoding is unavailable");
+      context.drawImage(img.current, 0, 0);
+      const pixels = tf.browser.fromPixels(canvas);
+      let p: Prediction[];
+      try {
+        p = await model.classify(pixels, 3);
+      } finally {
+        pixels.dispose();
+        canvas.width = canvas.height = 0;
+      }
       if (id !== runId.current) return;
       setPredictions(p);
-      setCategory(p[0] ? mapImageNetLabel(p[0].className) : null);
+      setCategory(assessPredictions(p).category);
     } catch {
       if (id === runId.current)
         setError(
@@ -348,11 +360,13 @@ export default function Classify() {
                     {uncertain && (
                       <p className="notice">
                         <TriangleAlert size={17} />
-                        Not confident - please confirm the category
+                        Manual selection needed. {assessment.reason}
                       </p>
                     )}
                     <p className="muted text-sm">
-                      You know your item best. Always check the category.
+                      Scores describe object labels, not material certainty. A
+                      bottle may be glass or plastic; packaging may contain
+                      mixed materials. Always check the category.
                     </p>
                   </Card>
                 )}
@@ -394,6 +408,7 @@ export default function Classify() {
                     <button
                       key={key}
                       className={`category-tile ${category === key ? "selected" : ""}`}
+                      aria-pressed={category === key}
                       onClick={() => {
                         setCategory(key as Category);
                         setConfirmed(false);

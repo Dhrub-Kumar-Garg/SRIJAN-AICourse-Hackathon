@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "test": "node scripts/test.mjs"
+    "test": "node scripts/test.mjs",
+    "evaluate": "node scripts/evaluate.mjs"
   },
   "dependencies": {
     "@tensorflow-models/mobilenet": "^2.1.1",
@@ -32,6 +33,7 @@
     "esbuild": "^0.25.12",
     "postcss": "^8.5.3",
     "prettier": "^3.9.10",
+    "sharp": "0.35.5",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.7.3",
     "vite": "^6.1.0"

@@ -3,7 +3,8 @@ import type { EvaluationResult } from "../data/evalResults";
 import type { Category } from "../data/types";
 import type { ClassificationRun } from "./classificationLog";
 
-export const LOW_CONFIDENCE_THRESHOLD = 0.45;
+import { LOW_CONFIDENCE_THRESHOLD } from "./predictionPolicy";
+export { LOW_CONFIDENCE_THRESHOLD } from "./predictionPolicy";
 export function evaluationSummary(rows: EvaluationResult[]) {
   const correct = rows.filter(
     (r) => r.expectedCategory === r.predictedCategory,
@@ -12,6 +13,11 @@ export function evaluationSummary(rows: EvaluationResult[]) {
     (r) => r.confidence < LOW_CONFIDENCE_THRESHOLD,
   ).length;
   return {
+    suggested: rows.filter((r) => r.predictedCategory !== null).length,
+    manualReview: rows.filter((r) => r.predictedCategory === null).length,
+    suggestionAccuracy: rows.some((r) => r.predictedCategory !== null)
+      ? correct / rows.filter((r) => r.predictedCategory !== null).length
+      : null,
     total: rows.length,
     correct,
     accuracy: rows.length ? correct / rows.length : null,

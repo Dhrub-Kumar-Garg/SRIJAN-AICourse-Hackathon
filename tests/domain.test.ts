@@ -8,6 +8,10 @@ import * as selectors from "../src/store/selectors";
 import type { Activity } from "../src/data/types";
 import { evalResults } from "../src/data/evalResults";
 import { evaluationSummary, overrideSummary } from "../src/lib/evaluation";
+import { assessPredictions } from "../src/lib/predictionPolicy";
+import manifest from "../src/data/evaluationManifest.json";
+import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import {
   demoCenter,
   demoDestination,
@@ -55,7 +59,12 @@ for (const item of catalog) {
 assert.ok(IMAGENET_RULES.length >= 40);
 for (const [label, category] of [
   ["glass bottle", "glass"],
-  ["water bottle", "plastic"],
+  ["water bottle", null],
+  ["bottle", null],
+  ["packet", null],
+  ["bucket", null],
+  ["mouse", null],
+  ["computer mouse", "ewaste"],
   ["tin can", "metal"],
   ["envelope", "paper"],
   ["banana", "organic"],
@@ -251,18 +260,99 @@ useStore.getState().resetDemo();
 assert.equal(useStore.getState().activities.length, 35);
 assert.equal(useStore.getState().listings.length, 8);
 assert.equal(readClassificationLog().length, 1);
-// Fixture scores are calculated from rows, with explicit zero-sample behavior.
-assert.equal(evalResults.length, 20);
-assert.equal(new Set(evalResults.map((r) => r.expectedCategory)).size, 9);
+// Real benchmark integrity and reproducible inference decisions.
+assert.equal(evalResults.length, 99);
+assert.equal(new Set(evalResults.map((r) => r.expectedCategory)).size, 7);
+assert.equal(new Set(manifest.map((r) => r.sha256)).size, 99);
+for (const row of evalResults) {
+  const photo = manifest.find((p) => p.testImage === row.testImage)!;
+  assert.ok(photo);
+  assert.equal(
+    createHash("sha256")
+      .update(readFileSync(`public/evaluation/photos/${row.testImage}`))
+      .digest("hex"),
+    photo.sha256,
+  );
+  assert.equal(row.expectedCategory, photo.expectedCategory);
+  assert.equal(
+    assessPredictions(row.predictions).category,
+    row.predictedCategory,
+  );
+  assert.ok(
+    Number.isFinite(row.confidence) &&
+      row.confidence >= 0 &&
+      row.confidence <= 1,
+  );
+  assert.equal(row.confidence, row.predictions[0].probability);
+}
 const evaluation = evaluationSummary(evalResults);
-assert.equal(evaluation.accuracy, 14 / 20);
-assert.equal(evaluation.lowConfidenceShare, 7 / 20);
-assert.equal(evaluation.failures.length, 6);
+assert.equal(evaluation.accuracy, evaluation.correct / 99);
+assert.equal(evaluation.suggested + evaluation.manualReview, 99);
 assert.ok(evaluation.failures.every((r) => r.failureReason));
 assert.equal(
-  evaluation.perCategory.find((c) => c.category === "glass")?.accuracy,
-  0.5,
+  evaluation.perCategory.find((c) => c.category === "ewaste")?.accuracy,
+  null,
 );
+assert.equal(
+  evaluation.perCategory.find((c) => c.category === "hazardous")?.total,
+  0,
+);
+const fixture = evaluationSummary([
+  {
+    testImage: "a",
+    expectedCategory: "glass",
+    predictedCategory: "glass",
+    confidence: 0.8,
+  },
+  {
+    testImage: "b",
+    expectedCategory: "glass",
+    predictedCategory: null,
+    confidence: 0.2,
+  },
+  {
+    testImage: "c",
+    expectedCategory: "metal",
+    predictedCategory: "paper",
+    confidence: 0.7,
+  },
+]);
+assert.equal(fixture.accuracy, 1 / 3);
+assert.equal(fixture.suggestionAccuracy, 1 / 2);
+assert.equal(fixture.lowConfidenceShare, 1 / 3);
+assert.equal(
+  assessPredictions([{ className: "water bottle", probability: 0.99 }])
+    .category,
+  null,
+);
+assert.equal(
+  assessPredictions([{ className: "packet", probability: 0.99 }]).category,
+  null,
+);
+assert.equal(
+  assessPredictions([{ className: "glass bottle", probability: 0.44 }])
+    .category,
+  null,
+);
+assert.equal(
+  assessPredictions([
+    { className: "glass bottle", probability: 0.48 },
+    { className: "plastic bottle", probability: 0.4 },
+  ]).category,
+  null,
+);
+assert.equal(
+  assessPredictions([
+    { className: "glass bottle", probability: 0.85 },
+    { className: "plastic bottle", probability: 0.1 },
+  ]).category,
+  "glass",
+);
+assert.equal(
+  assessPredictions([{ className: "banana", probability: NaN }]).category,
+  null,
+);
+assert.equal(assessPredictions([]).category, null);
 assert.equal(evaluationSummary([]).accuracy, null);
 assert.ok(evaluationSummary([]).perCategory.every((c) => c.accuracy === null));
 assert.equal(overrideSummary([]).rate, null);
