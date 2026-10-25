@@ -1,0 +1,2801 @@
+{
+  "version": 1,
+  "measuredAt": "2026-10-25T04:57:43.330Z",
+  "model": "@tensorflow-models/mobilenet 2.1.1 / MobileNet v2 alpha 1.0 / ImageNet 224",
+  "backend": "TensorFlow.js 4.22.0 CPU, sharp RGB decoding",
+  "selection": "SHA-256(srijan-eval-v1:sourcePath), 14 per represented category plus 1 plastic, deduplicated bytes; selected before inference",
+  "untestedCategories": [
+    "ewaste",
+    "hazardous"
+  ],
+  "baseline": {
+    "correct": 15,
+    "total": 99,
+    "accuracy": 0.15151515151515152,
+    "suggested": 31,
+    "wrongSuggestions": 16,
+    "manualReview": 68,
+    "suggestionAccuracy": 0.4838709677419355
+  },
+  "conservative": {
+    "correct": 2,
+    "total": 99,
+    "accuracy": 0.020202020202020204,
+    "suggested": 8,
+    "wrongSuggestions": 6,
+    "manualReview": 91,
+    "suggestionAccuracy": 0.25
+  },
+  "results": [
+    {
+      "testImage": "glass-01.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_415.jpg",
+      "sha256": "b173bd147c754deedba7fd660ad1aadbb64d871bdfb2c0be97b8fe5da924ddf7",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.37351101636886597,
+      "predictions": [
+        {
+          "className": "pop bottle, soda bottle",
+          "probability": 0.37351101636886597
+        },
+        {
+          "className": "saltshaker, salt shaker",
+          "probability": 0.17669233679771423
+        },
+        {
+          "className": "perfume, essence",
+          "probability": 0.05811954662203789
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "glass-02.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_312.jpg",
+      "sha256": "1974f2447e7cf78088b217708768f86318ca335db850ea8627e39c35122087c1",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.28883859515190125,
+      "predictions": [
+        {
+          "className": "wine bottle",
+          "probability": 0.28883859515190125
+        },
+        {
+          "className": "beer bottle",
+          "probability": 0.19137075543403625
+        },
+        {
+          "className": "pop bottle, soda bottle",
+          "probability": 0.10821633785963058
+        }
+      ],
+      "baselineCategory": "glass",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "glass-03.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_75.jpg",
+      "sha256": "25176047a52145343bf1b65f7bda827c191c12aed616fe3d0840a7763dab7828",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.27545520663261414,
+      "predictions": [
+        {
+          "className": "saltshaker, salt shaker",
+          "probability": 0.27545520663261414
+        },
+        {
+          "className": "water bottle",
+          "probability": 0.19338470697402954
+        },
+        {
+          "className": "water jug",
+          "probability": 0.06832297891378403
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "glass-04.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_205.jpg",
+      "sha256": "7c503edffbc52eeec04074a7cf45abda5a0265c12fb253a861ed518c6fd3dcfb",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.37005317211151123,
+      "predictions": [
+        {
+          "className": "plastic bag",
+          "probability": 0.37005317211151123
+        },
+        {
+          "className": "handkerchief, hankie, hanky, hankey",
+          "probability": 0.077936552464962
+        },
+        {
+          "className": "shovel",
+          "probability": 0.04545393958687782
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "glass-05.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_43.jpg",
+      "sha256": "418e471d6ee669e1427b1e3e4867a0b1db42b6e050f5601428289d9ce375b2a4",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": "hazardous",
+      "confidence": 0.9283807277679443,
+      "predictions": [
+        {
+          "className": "syringe",
+          "probability": 0.9283807277679443
+        },
+        {
+          "className": "paintbrush",
+          "probability": 0.02028721384704113
+        },
+        {
+          "className": "rubber eraser, rubber, pencil eraser",
+          "probability": 0.0074315620586276054
+        }
+      ],
+      "baselineCategory": "hazardous",
+      "failureReason": "Object-label mapping suggested hazardous; source label is Glass. Material cannot reliably be inferred from this object label."
+    },
+    {
+      "testImage": "glass-06.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_236.jpg",
+      "sha256": "b0b4d47246357f24cacee4acb528a0ade138ccbb03f010107c9de390f27f97e0",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.2389664649963379,
+      "predictions": [
+        {
+          "className": "fiddler crab",
+          "probability": 0.2389664649963379
+        },
+        {
+          "className": "rock crab, Cancer irroratus",
+          "probability": 0.11918199062347412
+        },
+        {
+          "className": "hermit crab",
+          "probability": 0.023156244307756424
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "glass-07.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_33.jpg",
+      "sha256": "08c0ea2c8cc93de6980fc10e689eb63d1715f7554150e46b862dd7b18cf5b09a",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.33032551407814026,
+      "predictions": [
+        {
+          "className": "beer bottle",
+          "probability": 0.33032551407814026
+        },
+        {
+          "className": "pop bottle, soda bottle",
+          "probability": 0.14743056893348694
+        },
+        {
+          "className": "wine bottle",
+          "probability": 0.14174312353134155
+        }
+      ],
+      "baselineCategory": "glass",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "glass-08.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_372.jpg",
+      "sha256": "055dba297f533f2bcdae1c06d5c3831daa3d6950c15f1996527214008f9b725a",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.3634079396724701,
+      "predictions": [
+        {
+          "className": "beer bottle",
+          "probability": 0.3634079396724701
+        },
+        {
+          "className": "wine bottle",
+          "probability": 0.09676536172628403
+        },
+        {
+          "className": "stopwatch, stop watch",
+          "probability": 0.08043713867664337
+        }
+      ],
+      "baselineCategory": "glass",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "glass-09.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_306.jpg",
+      "sha256": "2893793c6cad27d9816ab7869cbc34cdd6c0597f2c703fad9be77cc5adbc0b80",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.4243575632572174,
+      "predictions": [
+        {
+          "className": "slug",
+          "probability": 0.4243575632572174
+        },
+        {
+          "className": "centipede",
+          "probability": 0.10973908007144928
+        },
+        {
+          "className": "night snake, Hypsiglena torquata",
+          "probability": 0.07269112765789032
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "glass-10.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_184.jpg",
+      "sha256": "739a5307df58a4cc8f5581cadd66188e4e5a583cd72c5e5779a78e8c5397733b",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.8278024196624756,
+      "predictions": [
+        {
+          "className": "screwdriver",
+          "probability": 0.8278024196624756
+        },
+        {
+          "className": "lighter, light, igniter, ignitor",
+          "probability": 0.026022721081972122
+        },
+        {
+          "className": "beer bottle",
+          "probability": 0.005748928990215063
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "glass-11.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_15.jpg",
+      "sha256": "ff270ebce7f9d424df235cf144beff718707eede0d71b40097b1a72bafe700e0",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.5769748687744141,
+      "predictions": [
+        {
+          "className": "pop bottle, soda bottle",
+          "probability": 0.5769748687744141
+        },
+        {
+          "className": "beer bottle",
+          "probability": 0.1409473419189453
+        },
+        {
+          "className": "water bottle",
+          "probability": 0.046811241656541824
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "glass-12.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_375.jpg",
+      "sha256": "0ef4afe8b970adbdbfce826d47d62e290b47f853d40c6ccacfa291b81625e6d0",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.7261237502098083,
+      "predictions": [
+        {
+          "className": "conch",
+          "probability": 0.7261237502098083
+        },
+        {
+          "className": "switch, electric switch, electrical switch",
+          "probability": 0.03467712178826332
+        },
+        {
+          "className": "hermit crab",
+          "probability": 0.027665620669722557
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "glass-13.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_164.jpg",
+      "sha256": "27545b283dae06135d6be16247568f6609095b96444e223face9d6bf8b1aa26a",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.11991981416940689,
+      "predictions": [
+        {
+          "className": "soup bowl",
+          "probability": 0.11991981416940689
+        },
+        {
+          "className": "Petri dish",
+          "probability": 0.0771571546792984
+        },
+        {
+          "className": "mortar",
+          "probability": 0.06738822162151337
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "glass-14.jpg",
+      "expectedCategory": "glass",
+      "sourceLabel": "Glass",
+      "sourcePath": "realwaste-main/RealWaste/Glass/Glass_373.jpg",
+      "sha256": "cadb860b30bcf4e176db338f097bc1a5c67527a6affe15243257c52654d25156",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.3034657835960388,
+      "predictions": [
+        {
+          "className": "pop bottle, soda bottle",
+          "probability": 0.3034657835960388
+        },
+        {
+          "className": "beer bottle",
+          "probability": 0.1397566944360733
+        },
+        {
+          "className": "bucket, pail",
+          "probability": 0.11373201757669449
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "metal-01.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_332.jpg",
+      "sha256": "c23506bf587657e2c9d805937187e815c59443213dc4181153c86fc37508e5f9",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.28318068385124207,
+      "predictions": [
+        {
+          "className": "packet",
+          "probability": 0.28318068385124207
+        },
+        {
+          "className": "pick, plectrum, plectron",
+          "probability": 0.04606672748923302
+        },
+        {
+          "className": "bolo tie, bolo, bola tie, bola",
+          "probability": 0.043017975986003876
+        }
+      ],
+      "baselineCategory": "paper",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "metal-02.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_168.jpg",
+      "sha256": "17875b5ec2511acbc12f4e4a5067b18ae5e4953f23bc46b4061f33247cfa412d",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.5239982008934021,
+      "predictions": [
+        {
+          "className": "pop bottle, soda bottle",
+          "probability": 0.5239982008934021
+        },
+        {
+          "className": "beer bottle",
+          "probability": 0.330104798078537
+        },
+        {
+          "className": "lighter, light, igniter, ignitor",
+          "probability": 0.02851910889148712
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "metal-03.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_320.jpg",
+      "sha256": "1bb9f5fc70056a38be6553b9dbef615e12435e3388e0ab8c6d367d0c853e4767",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.16028709709644318,
+      "predictions": [
+        {
+          "className": "trilobite",
+          "probability": 0.16028709709644318
+        },
+        {
+          "className": "honeycomb",
+          "probability": 0.09401379525661469
+        },
+        {
+          "className": "chiton, coat-of-mail shell, sea cradle, polyplacophore",
+          "probability": 0.036314576864242554
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "metal-04.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_486.jpg",
+      "sha256": "bee11ea47a887aaffb4645f645cb44438272984c81d97baf7a93943434525d85",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.2403929978609085,
+      "predictions": [
+        {
+          "className": "sea urchin",
+          "probability": 0.2403929978609085
+        },
+        {
+          "className": "conch",
+          "probability": 0.07480378448963165
+        },
+        {
+          "className": "puffer, pufferfish, blowfish, globefish",
+          "probability": 0.0694301500916481
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "metal-05.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_470.jpg",
+      "sha256": "c272be1e743cedf7a0b6e0084d5de9d8513ccc1944ccdb4c9b67952340f40210",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.2285190224647522,
+      "predictions": [
+        {
+          "className": "shield, buckler",
+          "probability": 0.2285190224647522
+        },
+        {
+          "className": "tray",
+          "probability": 0.09650484472513199
+        },
+        {
+          "className": "bolo tie, bolo, bola tie, bola",
+          "probability": 0.04709911718964577
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "metal-06.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_446.jpg",
+      "sha256": "130c83906181a2c64564532d00bd84eaa2e2e40b1ace2997ed40d70b474272ac",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.04002668336033821,
+      "predictions": [
+        {
+          "className": "mixing bowl",
+          "probability": 0.04002668336033821
+        },
+        {
+          "className": "soup bowl",
+          "probability": 0.03634045273065567
+        },
+        {
+          "className": "dough",
+          "probability": 0.03352240100502968
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "metal-07.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_670.jpg",
+      "sha256": "4ae42f2172c3ca63987060d1ce8de9f8786090041752a4afc36ccee67d82fc0e",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.561714231967926,
+      "predictions": [
+        {
+          "className": "bucket, pail",
+          "probability": 0.561714231967926
+        },
+        {
+          "className": "mixing bowl",
+          "probability": 0.12424135208129883
+        },
+        {
+          "className": "dough",
+          "probability": 0.050637584179639816
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "metal-08.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_10.jpg",
+      "sha256": "653da343056095c73260fa51138a853cf751d821dfa631230d5daaf13b248dab",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.19059565663337708,
+      "predictions": [
+        {
+          "className": "spindle",
+          "probability": 0.19059565663337708
+        },
+        {
+          "className": "bucket, pail",
+          "probability": 0.06143965572118759
+        },
+        {
+          "className": "hermit crab",
+          "probability": 0.04851604998111725
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "metal-09.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_503.jpg",
+      "sha256": "43d1eb59e928a71b5f0b1ed73dbab66e20356442ab13f376ce296986b81a4bec",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.4169812500476837,
+      "predictions": [
+        {
+          "className": "conch",
+          "probability": 0.4169812500476837
+        },
+        {
+          "className": "knot",
+          "probability": 0.16989584267139435
+        },
+        {
+          "className": "starfish, sea star",
+          "probability": 0.032683633267879486
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "metal-10.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_310.jpg",
+      "sha256": "49e7ca454e114a4d16b45072c7f68caf634b927e80d46202fd1c42bafe33d90d",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.58196622133255,
+      "predictions": [
+        {
+          "className": "lighter, light, igniter, ignitor",
+          "probability": 0.58196622133255
+        },
+        {
+          "className": "pill bottle",
+          "probability": 0.08204863220453262
+        },
+        {
+          "className": "ice lolly, lolly, lollipop, popsicle",
+          "probability": 0.0410781055688858
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "metal-11.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_279.jpg",
+      "sha256": "abba8d604c4110d5c4d0f255734a980de503a3c4bfc395bc6edf3d7863c55f10",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": "glass",
+      "confidence": 0.7125502228736877,
+      "predictions": [
+        {
+          "className": "beer bottle",
+          "probability": 0.7125502228736877
+        },
+        {
+          "className": "pop bottle, soda bottle",
+          "probability": 0.0916522890329361
+        },
+        {
+          "className": "wine bottle",
+          "probability": 0.014807149767875671
+        }
+      ],
+      "baselineCategory": "glass",
+      "failureReason": "Object-label mapping suggested glass; source label is Metal. Material cannot reliably be inferred from this object label."
+    },
+    {
+      "testImage": "metal-12.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_86.jpg",
+      "sha256": "a737823221e6c60505678366b2b8eac0d5443d6401d3f0c30cb97313c7225684",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.2974054217338562,
+      "predictions": [
+        {
+          "className": "oil filter",
+          "probability": 0.2974054217338562
+        },
+        {
+          "className": "spotlight, spot",
+          "probability": 0.18280920386314392
+        },
+        {
+          "className": "water bottle",
+          "probability": 0.02623286098241806
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "metal-13.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_70.jpg",
+      "sha256": "c7e3f20fe61ccbe01e1c6b731908bc903935d603d11b310d9fb2d309549b42be",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.6060554385185242,
+      "predictions": [
+        {
+          "className": "oil filter",
+          "probability": 0.6060554385185242
+        },
+        {
+          "className": "lighter, light, igniter, ignitor",
+          "probability": 0.10785353928804398
+        },
+        {
+          "className": "thimble",
+          "probability": 0.03225957974791527
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "metal-14.jpg",
+      "expectedCategory": "metal",
+      "sourceLabel": "Metal",
+      "sourcePath": "realwaste-main/RealWaste/Metal/Metal_695.jpg",
+      "sha256": "0829ecbf8f7e418b9acaf79cd91fe50ee2f766f61b1c7aa5c16f655578e6c313",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.13833221793174744,
+      "predictions": [
+        {
+          "className": "bottlecap",
+          "probability": 0.13833221793174744
+        },
+        {
+          "className": "saltshaker, salt shaker",
+          "probability": 0.11840043216943741
+        },
+        {
+          "className": "spotlight, spot",
+          "probability": 0.10303976386785507
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "organic-01.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Food Organics",
+      "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_387.jpg",
+      "sha256": "a1f7100a67cb61d08904cccb0dec1b45e9b6eef8ae0cd3e0b594ea80e3dc64fe",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.16563495993614197,
+      "predictions": [
+        {
+          "className": "night snake, Hypsiglena torquata",
+          "probability": 0.16563495993614197
+        },
+        {
+          "className": "eft",
+          "probability": 0.12445105612277985
+        },
+        {
+          "className": "pretzel",
+          "probability": 0.09278471767902374
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "organic-02.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Vegetation",
+      "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_66.jpg",
+      "sha256": "25919d76fe80387a86c7ea2c6a68a23148d65a6e5b4249206760f2e42450c3f0",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.416146844625473,
+      "predictions": [
+        {
+          "className": "head cabbage",
+          "probability": 0.416146844625473
+        },
+        {
+          "className": "common iguana, iguana, Iguana iguana",
+          "probability": 0.05819504335522652
+        },
+        {
+          "className": "artichoke, globe artichoke",
+          "probability": 0.037267353385686874
+        }
+      ],
+      "baselineCategory": "organic",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "organic-03.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Vegetation",
+      "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_367.jpg",
+      "sha256": "2751b477c4620fa66b438dee456a23e3f72332e189aabc57959942846b8840f3",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.5917637944221497,
+      "predictions": [
+        {
+          "className": "green snake, grass snake",
+          "probability": 0.5917637944221497
+        },
+        {
+          "className": "sea snake",
+          "probability": 0.13243268430233002
+        },
+        {
+          "className": "green mamba",
+          "probability": 0.0759434774518013
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "organic-04.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Vegetation",
+      "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_240.jpg",
+      "sha256": "4f93aefde6228c0136a31abb8c69c031a20ceaa71b796406ba8c1075d72ca0e5",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.09128376096487045,
+      "predictions": [
+        {
+          "className": "spider web, spider's web",
+          "probability": 0.09128376096487045
+        },
+        {
+          "className": "cliff, drop, drop-off",
+          "probability": 0.08192747086286545
+        },
+        {
+          "className": "ant, emmet, pismire",
+          "probability": 0.07889143377542496
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "organic-05.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Vegetation",
+      "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_382.jpg",
+      "sha256": "fdb3ead85853e26c053e8e488ece1d5ccbaffc1f8c3a6bb703123de71a639203",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.2817082405090332,
+      "predictions": [
+        {
+          "className": "scabbard",
+          "probability": 0.2817082405090332
+        },
+        {
+          "className": "sea snake",
+          "probability": 0.16901227831840515
+        },
+        {
+          "className": "thunder snake, worm snake, Carphophis amoenus",
+          "probability": 0.05691804736852646
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "organic-06.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Food Organics",
+      "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_402.jpg",
+      "sha256": "abe0296904e71258c3c68f9990a55fd96b1f4fe999c0495a45d6a539a9c729c6",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.15514534711837769,
+      "predictions": [
+        {
+          "className": "mink",
+          "probability": 0.15514534711837769
+        },
+        {
+          "className": "frilled lizard, Chlamydosaurus kingi",
+          "probability": 0.0593145489692688
+        },
+        {
+          "className": "loggerhead, loggerhead turtle, Caretta caretta",
+          "probability": 0.044095478951931
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "organic-07.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Food Organics",
+      "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_362.jpg",
+      "sha256": "887b472a0ab2da3c19a605e5167908c86d93b9633f1ee30fe4043d87df935538",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.17883388698101044,
+      "predictions": [
+        {
+          "className": "trilobite",
+          "probability": 0.17883388698101044
+        },
+        {
+          "className": "head cabbage",
+          "probability": 0.10124635696411133
+        },
+        {
+          "className": "brain coral",
+          "probability": 0.06701354682445526
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "organic-08.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Food Organics",
+      "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_205.jpg",
+      "sha256": "33ea3e307cc23002a28cd409eb9debaeb64437f4f1aa52da6da0d675e7d5324a",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.6189563870429993,
+      "predictions": [
+        {
+          "className": "isopod",
+          "probability": 0.6189563870429993
+        },
+        {
+          "className": "sea cucumber, holothurian",
+          "probability": 0.21986128389835358
+        },
+        {
+          "className": "slug",
+          "probability": 0.030412176623940468
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "organic-09.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Vegetation",
+      "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_196.jpg",
+      "sha256": "86a7ee8b65d1b5c338b12a91e14c21b03b6c03ca777e61d50d343e3a63be7797",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.15465833246707916,
+      "predictions": [
+        {
+          "className": "centipede",
+          "probability": 0.15465833246707916
+        },
+        {
+          "className": "banded gecko",
+          "probability": 0.09764882922172546
+        },
+        {
+          "className": "sea snake",
+          "probability": 0.06302054971456528
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "organic-10.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Food Organics",
+      "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_106.jpg",
+      "sha256": "2211fa0667d8fed7f446e552d5d680702800062971ff175f026647ae75992b9d",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.3287563920021057,
+      "predictions": [
+        {
+          "className": "trilobite",
+          "probability": 0.3287563920021057
+        },
+        {
+          "className": "dung beetle",
+          "probability": 0.19736380875110626
+        },
+        {
+          "className": "puffer, pufferfish, blowfish, globefish",
+          "probability": 0.10037333518266678
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "organic-11.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Food Organics",
+      "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_259.jpg",
+      "sha256": "849a592b96fa1772823c529f56c91acb7603d27a612fb10aed275405fe0f7d03",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.448705792427063,
+      "predictions": [
+        {
+          "className": "sea cucumber, holothurian",
+          "probability": 0.448705792427063
+        },
+        {
+          "className": "puffer, pufferfish, blowfish, globefish",
+          "probability": 0.10235673189163208
+        },
+        {
+          "className": "isopod",
+          "probability": 0.04153136536478996
+        }
+      ],
+      "baselineCategory": "organic",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "organic-12.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Vegetation",
+      "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_306.jpg",
+      "sha256": "a26f4fb36bfe3d9bd2f10537473ab55d597a1058a93a1317854e452b5f150abf",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.2644268870353699,
+      "predictions": [
+        {
+          "className": "mantis, mantid",
+          "probability": 0.2644268870353699
+        },
+        {
+          "className": "grasshopper, hopper",
+          "probability": 0.044961508363485336
+        },
+        {
+          "className": "eel",
+          "probability": 0.04011305794119835
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "organic-13.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Food Organics",
+      "sourcePath": "realwaste-main/RealWaste/Food Organics/Food Organics_136.jpg",
+      "sha256": "992c79996caa0456ae40b3a487bebcf7ca41234ed3ab6cfe4b2830503d978981",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.12835946679115295,
+      "predictions": [
+        {
+          "className": "conch",
+          "probability": 0.12835946679115295
+        },
+        {
+          "className": "doormat, welcome mat",
+          "probability": 0.0835338607430458
+        },
+        {
+          "className": "French loaf",
+          "probability": 0.0329907089471817
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "organic-14.jpg",
+      "expectedCategory": "organic",
+      "sourceLabel": "Vegetation",
+      "sourcePath": "realwaste-main/RealWaste/Vegetation/Vegetation_163.jpg",
+      "sha256": "a3fad105c893283a72af38c60c73467d89f6a49a855ca545e9b1a3713352584e",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.1444646567106247,
+      "predictions": [
+        {
+          "className": "nail",
+          "probability": 0.1444646567106247
+        },
+        {
+          "className": "walking stick, walkingstick, stick insect",
+          "probability": 0.12318453192710876
+        },
+        {
+          "className": "bannister, banister, balustrade, balusters, handrail",
+          "probability": 0.1042446419596672
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "paper-01.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Paper",
+      "sourcePath": "realwaste-main/RealWaste/Paper/Paper_441.jpg",
+      "sha256": "e483a84715ee08912a4f785ec427ac7453871c96e664fcad94eac5451851add0",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.4248480200767517,
+      "predictions": [
+        {
+          "className": "envelope",
+          "probability": 0.4248480200767517
+        },
+        {
+          "className": "handkerchief, hankie, hanky, hankey",
+          "probability": 0.2590143084526062
+        },
+        {
+          "className": "packet",
+          "probability": 0.030185174196958542
+        }
+      ],
+      "baselineCategory": "paper",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "paper-02.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Cardboard",
+      "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_209.jpg",
+      "sha256": "1192b11378a0561ca35c9e9d3ea36c15653a93dea8b5a2f413e8504a220fbf92",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.34140753746032715,
+      "predictions": [
+        {
+          "className": "packet",
+          "probability": 0.34140753746032715
+        },
+        {
+          "className": "pencil box, pencil case",
+          "probability": 0.047162026166915894
+        },
+        {
+          "className": "Band Aid",
+          "probability": 0.044731274247169495
+        }
+      ],
+      "baselineCategory": "paper",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "paper-03.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Cardboard",
+      "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_454.jpg",
+      "sha256": "b914e6c15c6a9979f664c941534d0c2bc6f802699fec0fbcbced9cdeea815fad",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.2520078122615814,
+      "predictions": [
+        {
+          "className": "buckle",
+          "probability": 0.2520078122615814
+        },
+        {
+          "className": "switch, electric switch, electrical switch",
+          "probability": 0.09856732934713364
+        },
+        {
+          "className": "purse",
+          "probability": 0.07767300307750702
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "paper-04.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Paper",
+      "sourcePath": "realwaste-main/RealWaste/Paper/Paper_55.jpg",
+      "sha256": "bb19a502c4aeca4bd106feef05a1b2cce8237bb655203cc7eed0cb409e300243",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": "paper",
+      "confidence": 0.767791211605072,
+      "predictions": [
+        {
+          "className": "envelope",
+          "probability": 0.767791211605072
+        },
+        {
+          "className": "packet",
+          "probability": 0.09393010288476944
+        },
+        {
+          "className": "handkerchief, hankie, hanky, hankey",
+          "probability": 0.03895561769604683
+        }
+      ],
+      "baselineCategory": "paper"
+    },
+    {
+      "testImage": "paper-05.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Paper",
+      "sourcePath": "realwaste-main/RealWaste/Paper/Paper_481.jpg",
+      "sha256": "6a1b28beacfd2d0f3ba7587ab4928eb90de1f70345c2c491d336c0cf82a36174",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.2529607117176056,
+      "predictions": [
+        {
+          "className": "hard disc, hard disk, fixed disk",
+          "probability": 0.2529607117176056
+        },
+        {
+          "className": "padlock",
+          "probability": 0.09383619576692581
+        },
+        {
+          "className": "envelope",
+          "probability": 0.08009711652994156
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "paper-06.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Paper",
+      "sourcePath": "realwaste-main/RealWaste/Paper/Paper_248.jpg",
+      "sha256": "846592a8a0ab22668f5b564b06ba6b73d699781a1d742a13a18e8c71a78dbf7b",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.19662843644618988,
+      "predictions": [
+        {
+          "className": "shower cap",
+          "probability": 0.19662843644618988
+        },
+        {
+          "className": "plastic bag",
+          "probability": 0.12638570368289948
+        },
+        {
+          "className": "bonnet, poke bonnet",
+          "probability": 0.10945278406143188
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "paper-07.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Cardboard",
+      "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_440.jpg",
+      "sha256": "c5ff68b28b4c99bcb40b0005e100fa4e1b789e3333d75088d3b4678747bacbfe",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.4186915457248688,
+      "predictions": [
+        {
+          "className": "wallet, billfold, notecase, pocketbook",
+          "probability": 0.4186915457248688
+        },
+        {
+          "className": "packet",
+          "probability": 0.30903926491737366
+        },
+        {
+          "className": "paintbrush",
+          "probability": 0.02599717304110527
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "paper-08.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Cardboard",
+      "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_414.jpg",
+      "sha256": "21c26e31840566774a30fd96eac6ca48e3af8235879a3596c1c432e1ea712b0a",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.17908255755901337,
+      "predictions": [
+        {
+          "className": "wallet, billfold, notecase, pocketbook",
+          "probability": 0.17908255755901337
+        },
+        {
+          "className": "cassette",
+          "probability": 0.06596902757883072
+        },
+        {
+          "className": "packet",
+          "probability": 0.05853744596242905
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "paper-09.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Paper",
+      "sourcePath": "realwaste-main/RealWaste/Paper/Paper_96.jpg",
+      "sha256": "eaf460694313ef22aca6e6ee15e2377e41f81baec70500ce8fb25bc05d34556d",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.09375211596488953,
+      "predictions": [
+        {
+          "className": "crossword puzzle, crossword",
+          "probability": 0.09375211596488953
+        },
+        {
+          "className": "packet",
+          "probability": 0.08841287344694138
+        },
+        {
+          "className": "binder, ring-binder",
+          "probability": 0.05271367356181145
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "paper-10.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Cardboard",
+      "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_275.jpg",
+      "sha256": "c2eb9745df86b546f1b84e4caab3b50c235a6684619089073cdfc2c1f019160b",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.23904447257518768,
+      "predictions": [
+        {
+          "className": "lighter, light, igniter, ignitor",
+          "probability": 0.23904447257518768
+        },
+        {
+          "className": "ashcan, trash can, garbage can, wastebin, ash bin, ash-bin, ashbin, dustbin, trash barrel, trash bin",
+          "probability": 0.11368784308433533
+        },
+        {
+          "className": "water bottle",
+          "probability": 0.04282454401254654
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "paper-11.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Cardboard",
+      "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_421.jpg",
+      "sha256": "41d02e4330fd1a0acb171eda3936ed9c2d21953919b991fff76d27c65e53f66c",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.62336665391922,
+      "predictions": [
+        {
+          "className": "shovel",
+          "probability": 0.62336665391922
+        },
+        {
+          "className": "plow, plough",
+          "probability": 0.08206512033939362
+        },
+        {
+          "className": "umbrella",
+          "probability": 0.025270244106650352
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "paper-12.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Cardboard",
+      "sourcePath": "realwaste-main/RealWaste/Cardboard/Cardboard_89.jpg",
+      "sha256": "183a1c0e7651e4cf69f6bf92a8c702219c640b6b497973633c5954a7a3891e30",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.5221725106239319,
+      "predictions": [
+        {
+          "className": "packet",
+          "probability": 0.5221725106239319
+        },
+        {
+          "className": "lighter, light, igniter, ignitor",
+          "probability": 0.0395311564207077
+        },
+        {
+          "className": "paintbrush",
+          "probability": 0.03828747943043709
+        }
+      ],
+      "baselineCategory": "paper",
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "paper-13.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Paper",
+      "sourcePath": "realwaste-main/RealWaste/Paper/Paper_287.jpg",
+      "sha256": "f8dfbe016b0d2be7a8cd1895481cf7932b8d7414fc35a69a67e690f8769962ee",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.42957818508148193,
+      "predictions": [
+        {
+          "className": "lighter, light, igniter, ignitor",
+          "probability": 0.42957818508148193
+        },
+        {
+          "className": "packet",
+          "probability": 0.14278745651245117
+        },
+        {
+          "className": "padlock",
+          "probability": 0.05088459327816963
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "paper-14.jpg",
+      "expectedCategory": "paper",
+      "sourceLabel": "Paper",
+      "sourcePath": "realwaste-main/RealWaste/Paper/Paper_14.jpg",
+      "sha256": "882b3c4f648e0666470962a89f41044c5d900d693efc02799dc365d7a67edf0a",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.19908253848552704,
+      "predictions": [
+        {
+          "className": "pencil box, pencil case",
+          "probability": 0.19908253848552704
+        },
+        {
+          "className": "packet",
+          "probability": 0.18338820338249207
+        },
+        {
+          "className": "rubber eraser, rubber, pencil eraser",
+          "probability": 0.07239336520433426
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "plastic-01.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_506.jpg",
+      "sha256": "49640c30b11ef397664913e6854dcfd9673dd2c5e9a5e7fb9709bfe0bd90708b",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.7168654203414917,
+      "predictions": [
+        {
+          "className": "pop bottle, soda bottle",
+          "probability": 0.7168654203414917
+        },
+        {
+          "className": "bottlecap",
+          "probability": 0.20669542253017426
+        },
+        {
+          "className": "nipple",
+          "probability": 0.013478869572281837
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "plastic-02.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_477.jpg",
+      "sha256": "36a5429e05de9522297e3258032a193ba2dbc6ea9ba23a61d5f2a5ac41a2080f",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.2773149907588959,
+      "predictions": [
+        {
+          "className": "mousetrap",
+          "probability": 0.2773149907588959
+        },
+        {
+          "className": "tray",
+          "probability": 0.21760185062885284
+        },
+        {
+          "className": "cassette",
+          "probability": 0.06142066419124603
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "plastic-03.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_442.jpg",
+      "sha256": "e8300c45da77f840ff7f0d810b70d60650749dcf9a421647d2d60bc789735930",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.24916686117649078,
+      "predictions": [
+        {
+          "className": "packet",
+          "probability": 0.24916686117649078
+        },
+        {
+          "className": "plastic bag",
+          "probability": 0.10025086253881454
+        },
+        {
+          "className": "rubber eraser, rubber, pencil eraser",
+          "probability": 0.06086109206080437
+        }
+      ],
+      "baselineCategory": "paper",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "plastic-04.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_456.jpg",
+      "sha256": "dc0eb3e01ba4cee00ef826c9f80a8de8fe3f91972e7d20aa02a38256c1078985",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.3055275082588196,
+      "predictions": [
+        {
+          "className": "plastic bag",
+          "probability": 0.3055275082588196
+        },
+        {
+          "className": "handkerchief, hankie, hanky, hankey",
+          "probability": 0.21288847923278809
+        },
+        {
+          "className": "packet",
+          "probability": 0.15877169370651245
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "plastic-05.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_70.jpg",
+      "sha256": "f6a7feb0ca05c727e4187c04e6312a20defdd35b84e766bf18064bc96e05b505",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.11592712253332138,
+      "predictions": [
+        {
+          "className": "hard disc, hard disk, fixed disk",
+          "probability": 0.11592712253332138
+        },
+        {
+          "className": "packet",
+          "probability": 0.10875311493873596
+        },
+        {
+          "className": "brass, memorial tablet, plaque",
+          "probability": 0.06540070474147797
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "plastic-06.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_918.jpg",
+      "sha256": "f98e146c5dcb270ff97668ba377966c9e414680fc7b5d80194ee2739fa23a83c",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.27516427636146545,
+      "predictions": [
+        {
+          "className": "water bottle",
+          "probability": 0.27516427636146545
+        },
+        {
+          "className": "perfume, essence",
+          "probability": 0.2558754086494446
+        },
+        {
+          "className": "pop bottle, soda bottle",
+          "probability": 0.13288137316703796
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "plastic-07.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_394.jpg",
+      "sha256": "8dd8232b6e253bfb07e62ff09ee48e5a53bd12f01ca724740718847346356626",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.14798712730407715,
+      "predictions": [
+        {
+          "className": "Petri dish",
+          "probability": 0.14798712730407715
+        },
+        {
+          "className": "ant, emmet, pismire",
+          "probability": 0.1413538008928299
+        },
+        {
+          "className": "bubble",
+          "probability": 0.06003730371594429
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "plastic-08.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_242.jpg",
+      "sha256": "07c5a71758c39e2eb30281c51ca4307ab89b8d219cec415af843cc354ca972f8",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.17765992879867554,
+      "predictions": [
+        {
+          "className": "clog, geta, patten, sabot",
+          "probability": 0.17765992879867554
+        },
+        {
+          "className": "ladybug, ladybeetle, lady beetle, ladybird, ladybird beetle",
+          "probability": 0.13465768098831177
+        },
+        {
+          "className": "ocarina, sweet potato",
+          "probability": 0.07898546010255814
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "plastic-09.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_680.jpg",
+      "sha256": "50f8ce768f5815bcb14c13dcc34823e86a9f7f58025092a9136eec46f6579d82",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.1605156809091568,
+      "predictions": [
+        {
+          "className": "switch, electric switch, electrical switch",
+          "probability": 0.1605156809091568
+        },
+        {
+          "className": "tray",
+          "probability": 0.11623609066009521
+        },
+        {
+          "className": "mousetrap",
+          "probability": 0.10807683318853378
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "plastic-10.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_87.jpg",
+      "sha256": "3585daf9bbdf4aa477e7b549fdc68f7a3186cd8e986c6e2cbdc181f8e12050e6",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.06546064466238022,
+      "predictions": [
+        {
+          "className": "wallet, billfold, notecase, pocketbook",
+          "probability": 0.06546064466238022
+        },
+        {
+          "className": "mousetrap",
+          "probability": 0.06166580319404602
+        },
+        {
+          "className": "cleaver, meat cleaver, chopper",
+          "probability": 0.05991801619529724
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "plastic-11.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_883.jpg",
+      "sha256": "5f12d7fe88fd633233007c7aebd4397d380118e4f0d124adbc8caf8f6db569b9",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.1620568186044693,
+      "predictions": [
+        {
+          "className": "tray",
+          "probability": 0.1620568186044693
+        },
+        {
+          "className": "rubber eraser, rubber, pencil eraser",
+          "probability": 0.09395811706781387
+        },
+        {
+          "className": "ice lolly, lolly, lollipop, popsicle",
+          "probability": 0.0679335966706276
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "plastic-12.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_143.jpg",
+      "sha256": "6b82ef4dda4c4fe25ab253408ffbade661bcd3113ee95210c556c2d3f2fd643f",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.5216259360313416,
+      "predictions": [
+        {
+          "className": "barometer",
+          "probability": 0.5216259360313416
+        },
+        {
+          "className": "oil filter",
+          "probability": 0.0601043663918972
+        },
+        {
+          "className": "bottlecap",
+          "probability": 0.04554435983300209
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "plastic-13.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_31.jpg",
+      "sha256": "8a0e537e4da48e4d750f64566e250c5b15be9cfa9b78ee469b002c212a712e9a",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.08781629055738449,
+      "predictions": [
+        {
+          "className": "thimble",
+          "probability": 0.08781629055738449
+        },
+        {
+          "className": "buckle",
+          "probability": 0.07429371774196625
+        },
+        {
+          "className": "matchstick",
+          "probability": 0.0484187975525856
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "plastic-14.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_524.jpg",
+      "sha256": "a4a33532193daac3707f6b00e265c96b365ba31447a8c1bec068388b4161dee8",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.9723377823829651,
+      "predictions": [
+        {
+          "className": "water bottle",
+          "probability": 0.9723377823829651
+        },
+        {
+          "className": "syringe",
+          "probability": 0.013325449079275131
+        },
+        {
+          "className": "pop bottle, soda bottle",
+          "probability": 0.00252763950265944
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "plastic-15.jpg",
+      "expectedCategory": "plastic",
+      "sourceLabel": "Plastic",
+      "sourcePath": "realwaste-main/RealWaste/Plastic/Plastic_307.jpg",
+      "sha256": "91c8a2ba03af96f8f534ae772bea1d02a93f8e4f9a8fb63b086ed37ff74be81d",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.42454034090042114,
+      "predictions": [
+        {
+          "className": "water bottle",
+          "probability": 0.42454034090042114
+        },
+        {
+          "className": "pop bottle, soda bottle",
+          "probability": 0.39005598425865173
+        },
+        {
+          "className": "beer bottle",
+          "probability": 0.13068191707134247
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "residual-01.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_467.jpg",
+      "sha256": "ffcc6c828877d90615e0b6054c2566eeb46b8deeee094cc931ce7a444a6f9d63",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.12546516954898834,
+      "predictions": [
+        {
+          "className": "ant, emmet, pismire",
+          "probability": 0.12546516954898834
+        },
+        {
+          "className": "puffer, pufferfish, blowfish, globefish",
+          "probability": 0.08329284191131592
+        },
+        {
+          "className": "sandbar, sand bar",
+          "probability": 0.06786956638097763
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "residual-02.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_427.jpg",
+      "sha256": "92214f267d587f3522e72639df8de8a0f4974bff4a4cc5ecf9b6abf5016a1e05",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.8242895007133484,
+      "predictions": [
+        {
+          "className": "doormat, welcome mat",
+          "probability": 0.8242895007133484
+        },
+        {
+          "className": "tray",
+          "probability": 0.018386589363217354
+        },
+        {
+          "className": "thatch, thatched roof",
+          "probability": 0.012637857347726822
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "residual-03.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_247.jpg",
+      "sha256": "1ef20413167737b0a55bae0f768f2cae0d50e43cea8415a9e81cc0e1dc728b8c",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.7014017105102539,
+      "predictions": [
+        {
+          "className": "shovel",
+          "probability": 0.7014017105102539
+        },
+        {
+          "className": "wooden spoon",
+          "probability": 0.07822451740503311
+        },
+        {
+          "className": "spatula",
+          "probability": 0.04399630054831505
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "residual-04.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_128.jpg",
+      "sha256": "ab724eb721bbd5726e4cfd7d8965a73e28cb5c2e2ae9fe1d7ccedcb835a6959b",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.7661041021347046,
+      "predictions": [
+        {
+          "className": "necklace",
+          "probability": 0.7661041021347046
+        },
+        {
+          "className": "hair slide",
+          "probability": 0.056408170610666275
+        },
+        {
+          "className": "sandal",
+          "probability": 0.025844955816864967
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "residual-05.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_323.jpg",
+      "sha256": "ea8dee92464f88977ff5d8b37f5818f2ec8bd35a73aa7ec50131eeb6d5071365",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.12341690808534622,
+      "predictions": [
+        {
+          "className": "broom",
+          "probability": 0.12341690808534622
+        },
+        {
+          "className": "porcupine, hedgehog",
+          "probability": 0.04962959885597229
+        },
+        {
+          "className": "spider web, spider's web",
+          "probability": 0.03618115559220314
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "residual-06.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_155.jpg",
+      "sha256": "d0e792191fa868c13530d02a12126916df8d366be1199b38b9047a29e97f57de",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.19597989320755005,
+      "predictions": [
+        {
+          "className": "dishrag, dishcloth",
+          "probability": 0.19597989320755005
+        },
+        {
+          "className": "doormat, welcome mat",
+          "probability": 0.054095711559057236
+        },
+        {
+          "className": "poncho",
+          "probability": 0.027047984302043915
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "residual-07.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_104.jpg",
+      "sha256": "1db35d3e2d307eed515f9463f19da8c69a9df2206cc77d386421cc1bdf6bb054",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.11583703756332397,
+      "predictions": [
+        {
+          "className": "screw",
+          "probability": 0.11583703756332397
+        },
+        {
+          "className": "nail",
+          "probability": 0.10909772664308548
+        },
+        {
+          "className": "thimble",
+          "probability": 0.08951939642429352
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "residual-08.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_340.jpg",
+      "sha256": "a915cf0569492217f95db600a644d7cbedc3bede703f11dc74459cf00267dd7c",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.3523435890674591,
+      "predictions": [
+        {
+          "className": "conch",
+          "probability": 0.3523435890674591
+        },
+        {
+          "className": "leopard, Panthera pardus",
+          "probability": 0.0782693400979042
+        },
+        {
+          "className": "lynx, catamount",
+          "probability": 0.05820464715361595
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "residual-09.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_262.jpg",
+      "sha256": "50419b5da0dba9c4a641e7e320983b699a70ea59b323cb185284ffb3940edf34",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": "plastic",
+      "confidence": 0.6039226055145264,
+      "predictions": [
+        {
+          "className": "plastic bag",
+          "probability": 0.6039226055145264
+        },
+        {
+          "className": "diaper, nappy, napkin",
+          "probability": 0.2119436115026474
+        },
+        {
+          "className": "toilet tissue, toilet paper, bathroom tissue",
+          "probability": 0.08788693696260452
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "Object-label mapping suggested plastic; source label is Miscellaneous Trash. Material cannot reliably be inferred from this object label."
+    },
+    {
+      "testImage": "residual-10.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_237.jpg",
+      "sha256": "4c2b0349797ecd492cb52007b7d5a0a21239974b4de1c7bae28a73c18d35665a",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.08968314528465271,
+      "predictions": [
+        {
+          "className": "packet",
+          "probability": 0.08968314528465271
+        },
+        {
+          "className": "chain mail, ring mail, mail, chain armor, chain armour, ring armor, ring armour",
+          "probability": 0.07301414012908936
+        },
+        {
+          "className": "dishrag, dishcloth",
+          "probability": 0.04118131101131439
+        }
+      ],
+      "baselineCategory": "paper",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "residual-11.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_418.jpg",
+      "sha256": "ab338db0a694d527c8081d5890658dd02ae8fcae66d91a4cb5737a6438de9510",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": "plastic",
+      "confidence": 0.8660635352134705,
+      "predictions": [
+        {
+          "className": "plastic bag",
+          "probability": 0.8660635352134705
+        },
+        {
+          "className": "diaper, nappy, napkin",
+          "probability": 0.0905979722738266
+        },
+        {
+          "className": "toilet tissue, toilet paper, bathroom tissue",
+          "probability": 0.011139060370624065
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "Object-label mapping suggested plastic; source label is Miscellaneous Trash. Material cannot reliably be inferred from this object label."
+    },
+    {
+      "testImage": "residual-12.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_10.jpg",
+      "sha256": "b064d752ef51b004bfff15c89dc487b8d57a3a363f85bdb379628c8ada3f1a97",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.24227507412433624,
+      "predictions": [
+        {
+          "className": "fountain pen",
+          "probability": 0.24227507412433624
+        },
+        {
+          "className": "syringe",
+          "probability": 0.10095776617527008
+        },
+        {
+          "className": "rubber eraser, rubber, pencil eraser",
+          "probability": 0.08944597095251083
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "residual-13.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_399.jpg",
+      "sha256": "0bb9ff13d3e364e2a14eae06a993100184312dd4741d66e95c4d3ade9b4bf748",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.43213900923728943,
+      "predictions": [
+        {
+          "className": "electric ray, crampfish, numbfish, torpedo",
+          "probability": 0.43213900923728943
+        },
+        {
+          "className": "stingray",
+          "probability": 0.08948801457881927
+        },
+        {
+          "className": "flatworm, platyhelminth",
+          "probability": 0.042983438819646835
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "residual-14.jpg",
+      "expectedCategory": "residual",
+      "sourceLabel": "Miscellaneous Trash",
+      "sourcePath": "realwaste-main/RealWaste/Miscellaneous Trash/Miscellaneous Trash_354.jpg",
+      "sha256": "29c31b493b1e46c4429e4110e2179d4428dcabfc8a1d6f73333deb660e7f4d0c",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.22297681868076324,
+      "predictions": [
+        {
+          "className": "handkerchief, hankie, hanky, hankey",
+          "probability": 0.22297681868076324
+        },
+        {
+          "className": "paper towel",
+          "probability": 0.21697717905044556
+        },
+        {
+          "className": "wool, woolen, woollen",
+          "probability": 0.0711841881275177
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "textile-01.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_307.jpg",
+      "sha256": "ef67a807f67f70f993020a1a83c74faa8f76f273c8c92dc16ae9df67c42af092",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.2848941385746002,
+      "predictions": [
+        {
+          "className": "wool, woolen, woollen",
+          "probability": 0.2848941385746002
+        },
+        {
+          "className": "electric ray, crampfish, numbfish, torpedo",
+          "probability": 0.07905346155166626
+        },
+        {
+          "className": "stole",
+          "probability": 0.0609532929956913
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "textile-02.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_63.jpg",
+      "sha256": "87f80e8900eb40ed0f846e61ae51c4a5249310c0b4baeeb208e47f176c02567a",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.34977906942367554,
+      "predictions": [
+        {
+          "className": "sunglass",
+          "probability": 0.34977906942367554
+        },
+        {
+          "className": "sunglasses, dark glasses, shades",
+          "probability": 0.20260916650295258
+        },
+        {
+          "className": "barrow, garden cart, lawn cart, wheelbarrow",
+          "probability": 0.05879274755716324
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "textile-03.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_105.jpg",
+      "sha256": "16ee92246783456317cbc4043b07c5fa85b6c99019020dafcf554a9a81856694",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": "residual",
+      "confidence": 0.58091801404953,
+      "predictions": [
+        {
+          "className": "diaper, nappy, napkin",
+          "probability": 0.58091801404953
+        },
+        {
+          "className": "bath towel",
+          "probability": 0.043433524668216705
+        },
+        {
+          "className": "bonnet, poke bonnet",
+          "probability": 0.03698820248246193
+        }
+      ],
+      "baselineCategory": "residual",
+      "failureReason": "Object-label mapping suggested residual; source label is Textile Trash. Material cannot reliably be inferred from this object label."
+    },
+    {
+      "testImage": "textile-04.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_283.jpg",
+      "sha256": "842a9527a5a94d183911ee7876a92883dfe1e9bd89c8e885ca02967df2926b23",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.4206942915916443,
+      "predictions": [
+        {
+          "className": "envelope",
+          "probability": 0.4206942915916443
+        },
+        {
+          "className": "handkerchief, hankie, hanky, hankey",
+          "probability": 0.2092430293560028
+        },
+        {
+          "className": "packet",
+          "probability": 0.08628304302692413
+        }
+      ],
+      "baselineCategory": "paper",
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "textile-05.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_295.jpg",
+      "sha256": "9f39dc63cde6a1b05e49aafefa81a4c82169815b397c301faa0a30de31558d52",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.6689407825469971,
+      "predictions": [
+        {
+          "className": "mitten",
+          "probability": 0.6689407825469971
+        },
+        {
+          "className": "wool, woolen, woollen",
+          "probability": 0.03020738810300827
+        },
+        {
+          "className": "platypus, duckbill, duckbilled platypus, duck-billed platypus, Ornithorhynchus anatinus",
+          "probability": 0.029934192076325417
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "textile-06.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_193.jpg",
+      "sha256": "4c8e865ce3f6771e042495aca9a26e909a7a63c0046d9ee151346b4ad199df4b",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.0691414549946785,
+      "predictions": [
+        {
+          "className": "hatchet",
+          "probability": 0.0691414549946785
+        },
+        {
+          "className": "sock",
+          "probability": 0.06527513265609741
+        },
+        {
+          "className": "stole",
+          "probability": 0.03809451684355736
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "textile-07.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_146.jpg",
+      "sha256": "d0ef4e315ae8ddf489d900571fb6058828bba2704e0e880679d71a3b2493abb8",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.589226484298706,
+      "predictions": [
+        {
+          "className": "stole",
+          "probability": 0.589226484298706
+        },
+        {
+          "className": "velvet",
+          "probability": 0.070297472178936
+        },
+        {
+          "className": "fur coat",
+          "probability": 0.06689724326133728
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "textile-08.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_124.jpg",
+      "sha256": "6fd660787577bc808fd06108c6f19e49a66e0df42d96a5cb725f32babab97222",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": "plastic",
+      "confidence": 0.5090038776397705,
+      "predictions": [
+        {
+          "className": "plastic bag",
+          "probability": 0.5090038776397705
+        },
+        {
+          "className": "shower cap",
+          "probability": 0.11251647770404816
+        },
+        {
+          "className": "diaper, nappy, napkin",
+          "probability": 0.033560410141944885
+        }
+      ],
+      "baselineCategory": "plastic",
+      "failureReason": "Object-label mapping suggested plastic; source label is Textile Trash. Material cannot reliably be inferred from this object label."
+    },
+    {
+      "testImage": "textile-09.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_132.jpg",
+      "sha256": "3172764f9e5e0b0de184c3a8d3f67ef2359f713656b2177f037502a8cd496112",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.25555408000946045,
+      "predictions": [
+        {
+          "className": "knot",
+          "probability": 0.25555408000946045
+        },
+        {
+          "className": "wool, woolen, woollen",
+          "probability": 0.12937603890895844
+        },
+        {
+          "className": "handkerchief, hankie, hanky, hankey",
+          "probability": 0.06241898611187935
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "Low confidence. Please inspect the item and choose its category."
+    },
+    {
+      "testImage": "textile-10.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_78.jpg",
+      "sha256": "d51ec8f62d20d2820f2a499a323998e4d03846df4eaabfa0f82439f729f67891",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.49155372381210327,
+      "predictions": [
+        {
+          "className": "holster",
+          "probability": 0.49155372381210327
+        },
+        {
+          "className": "whistle",
+          "probability": 0.2601850926876068
+        },
+        {
+          "className": "sandal",
+          "probability": 0.10707342624664307
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "textile-11.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_267.jpg",
+      "sha256": "2930a187b595ec569e3ef33f73410ff81a2798f4174b74a6b005aeae2ab80f76",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.4606628715991974,
+      "predictions": [
+        {
+          "className": "Loafer",
+          "probability": 0.4606628715991974
+        },
+        {
+          "className": "sandal",
+          "probability": 0.28529706597328186
+        },
+        {
+          "className": "clog, geta, patten, sabot",
+          "probability": 0.0368519201874733
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "textile-12.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_45.jpg",
+      "sha256": "521477ecd0503b69fd41bf726be7b34974e04a70ef6c475a402ece30aa926041",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.9644267559051514,
+      "predictions": [
+        {
+          "className": "doormat, welcome mat",
+          "probability": 0.9644267559051514
+        },
+        {
+          "className": "loudspeaker, speaker, speaker unit, loudspeaker system, speaker system",
+          "probability": 0.00876819621771574
+        },
+        {
+          "className": "wallet, billfold, notecase, pocketbook",
+          "probability": 0.005777186248451471
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "textile-13.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_249.jpg",
+      "sha256": "eacadd0107ed2dddfa6f93fd283f691857708cd5dac93c38486c0d2eebe16b09",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": null,
+      "confidence": 0.5571510791778564,
+      "predictions": [
+        {
+          "className": "knot",
+          "probability": 0.5571510791778564
+        },
+        {
+          "className": "wool, woolen, woollen",
+          "probability": 0.049077101051807404
+        },
+        {
+          "className": "screw",
+          "probability": 0.025903888046741486
+        }
+      ],
+      "baselineCategory": null,
+      "failureReason": "This object label does not establish its material. Check what the item is made of and choose a category."
+    },
+    {
+      "testImage": "textile-14.jpg",
+      "expectedCategory": "textile",
+      "sourceLabel": "Textile Trash",
+      "sourcePath": "realwaste-main/RealWaste/Textile Trash/Textile Trash_217.jpg",
+      "sha256": "1d6e1da34518184eafc5073176f7b011091a6dc56b8f1abfbb9c99bbec65efc0",
+      "source": "RealWaste (UCI distribution)",
+      "sourceUrl": "https://archive.ics.uci.edu/dataset/908/realwaste",
+      "license": "CC BY 4.0 (UCI distribution; see attribution) ",
+      "predictedCategory": "textile",
+      "confidence": 0.4523591101169586,
+      "predictions": [
+        {
+          "className": "jean, blue jean, denim",
+          "probability": 0.4523591101169586
+        },
+        {
+          "className": "handkerchief, hankie, hanky, hankey",
+          "probability": 0.06719394028186798
+        },
+        {
+          "className": "packet",
+          "probability": 0.02948722243309021
+        }
+      ],
+      "baselineCategory": "textile"
+    }
+  ]
+}

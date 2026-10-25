@@ -2,6 +2,20 @@
 
 Srijan is the current name. Earlier prompts used “ReRoute”; keep **Srijan** in product copy, metadata, package naming, and future changes.
 
+## Current photo model — 25 October 2026
+
+- Photo classification now uses **waste-v1**, a trained 9-material head over the unchanged frozen MobileNet v2 1.0/224 feature checkpoint. The legacy ImageNet keyword mapper is retained for historical evaluation only. Domain types, store and selectors remain unchanged.
+- Split: 4,031 training, 674 validation, 818 held-out test images, plus the separately reserved original 99 photos. Source augmentation filenames, byte hashes and perceptual hashes group related images; test/validation keep one representative. Checkpoint and review-policy choices use validation only.
+- Measured: **691/818 (84.5%) top-1 test accuracy**; 689/810 (85.1%) accepted-suggestion accuracy at 99.0% coverage. Original 99-photo benchmark: **86/99 (86.9%)**. App inference independently matches all 99 top-1 predictions; maximum native/TF.js CPU score difference 0.000022. Same-source public results are not independent local field validation.
+- Added e-waste and battery-labelled training from Mendeley version 1. Hazardous coverage is batteries only (17 test photos); other hazards remain unvalidated. Source dataset augmentations are disclosed and grouped. Model card, split manifest, head/base hashes, held-out predictions and confusion matrices are in `public/models/waste-v1/`.
+- Runtime artifacts are self-hosted static files, with no prediction API or photo upload. The browser verifies the head hash and applies temperature 1.7; validation selected score threshold 0.35 and no extra margin cutoff. Human confirmation remains mandatory. Model-load failure offers retry/manual selection.
+- Added optional square crop with zoom and horizontal/vertical position sliders, shared modal focus containment/Escape, cancellation, and natural-size canvas inference. Crop output remains local. Photo guidance asks for one item in good light.
+- Reproduction: `scripts/download-training-data.py`, `prepare-feature-model.mjs`, `prepare-training.py`, `train-waste.py`, `finalize-training.py`, pinned training requirements, and `npm run evaluate`. See README for exact commands. All large archives, environments and intermediate features stay in `.evaluation-cache/`.
+- Browser permission gates rejected the local trainer and the app origin during this continuation. Training and inference verification were completed via CLI. No visual browser validation is claimed for this change. Earlier browser notes below describe prior commits.
+- Verification: `npm test` passes, including split/source-group separation, nine-class totals, model hashes, all 99 stored policy decisions, evidence-page rendering/download links, crop control accessibility, corrupt-head cleanup, load retry and model caching. `npm run build` passes; the existing lazy TensorFlow bundle advisory remains. Pinned Pillow 11.3.0 reproduces all 6,580 preparation hashes. Exact app inference was independently checked on all 99 photos; `tfjs-verification.json` records model hashes and measured outputs.
+
+Historical implementation snapshots below describe earlier commits; this section supersedes earlier pretrained-only/no-training and mapper accuracy descriptions.
+
 ## Run locally
 
 Requires Node.js 22 (tested with 22.20.0) and npm.
@@ -66,12 +80,12 @@ tests/domain.test.ts        Domain/store integration assertions
 | Route        | Page           | Implemented behavior                                                                                                                                                                                                                                                                       |
 | ------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `/`          | Home           | Responsive hero, live counters, three-step introduction, CTAs, and Start demo entry.                                                                                                                                                                                                       |
-| `/classify`  | Classify       | Photo upload/camera, lazy MobileNet, top-three predictions, confidence notice, category confirmation/override, catalog search, item route ticket.                                                                                                                                          |
+| `/classify`  | Classify       | Photo upload/camera, optional crop controls, frozen MobileNet + trained 9-material head, validation-selected review policy, confirmation/override, catalog search and item route ticket.                                                                                                   |
 | `/centers`   | Find Centers   | Category chips and URL preselection, type and Open now filters, distance sorting, geolocation fallback, synchronized list/map, colored Lucide markers, selected lime ring, Google Maps directions, collected drop-off logging. Mobile puts the map above the list with a show/hide toggle. |
 | `/activity`  | My Activity    | Items logged/diverted kg/pending counts, status chips, route filter, weekly timeline, center attribution, status progression, validated manual logging, empty-state CTA.                                                                                                                   |
 | `/exchange`  | Reuse Exchange | Live journey counts, category/condition/availability/search filters, synthetic names, relative times, validated URL-prefilled listing and display-name request dialogs, handover confirmation and weight toast, completed-card ribbon.                                                     |
 | `/dashboard` | Impact         | Four animated lime-highlighted metrics, full-width colored and labeled category-to-route Sankey, eight-week stacked bars, category share donut, 70% diversion goal, reuse count/link, five recent completed wins, and demo reset.                                                          |
-| `/about`     | AI & Ethics    | Styled workflow diagram, method/data and no-training disclosure, real-photo evaluation metrics/category bars/failures, live override rate, six responsible-AI cards, SDG alignment, implemented/planned roadmap, and demo-reset confirmation.                                              |
+| `/about`     | AI & Ethics    | Styled workflow diagram, method/training/data disclosure, real-photo evaluation metrics/category bars/failures, live override rate, six responsible-AI cards, SDG alignment, implemented/planned roadmap, and demo-reset confirmation.                                                     |
 
 Impact and Reuse Exchange have now been extended from their existing prototypes. All pages remain browser-local demos; `/about` and seeded demo/reset behavior were already present.
 

@@ -1,0 +1,661 @@
+{
+  "metadata": {
+    "version": "waste-v1",
+    "trainedAt": "2026-10-25T06:03:43.925686+00:00",
+    "categories": [
+      "plastic",
+      "paper",
+      "glass",
+      "metal",
+      "organic",
+      "ewaste",
+      "textile",
+      "hazardous",
+      "residual"
+    ],
+    "unsupportedCategories": [],
+    "architecture": "Frozen MobileNet v2 alpha 1.0 224px / 1280 embedding -> Dense(128, ReLU) -> Dropout(0.3 training only) -> Dense(9) -> temperature-scaled softmax",
+    "baseWeightsSha256": "9dbf187ba6a6b5eaf37f7932fc513f281fa6ac277f0bfa3c7df288e687cc3644",
+    "headWeightsSha256": "56216882e986f18b5c4051291c5327866af64d25127469796e39929cb214c952",
+    "headWeights": [
+      {
+        "shape": [
+          1280,
+          128
+        ],
+        "dtype": "float32"
+      },
+      {
+        "shape": [
+          128
+        ],
+        "dtype": "float32"
+      },
+      {
+        "shape": [
+          128,
+          9
+        ],
+        "dtype": "float32"
+      },
+      {
+        "shape": [
+          9
+        ],
+        "dtype": "float32"
+      }
+    ],
+    "preprocessing": {
+      "inputRange": [
+        0,
+        1
+      ],
+      "imageSize": 224,
+      "alignCorners": true,
+      "naturalDimensions": true
+    },
+    "embeddingNode": "module_apply_default/MobilenetV2/Logits/AvgPool",
+    "seed": 20261025,
+    "policy": {
+      "confidenceThreshold": 0.35,
+      "marginThreshold": 0,
+      "temperature": 1.7,
+      "selection": "Validation only: temperature minimizes NLL; maximize coverage with >=30 suggestions and >=80% suggestion accuracy; fallback threshold 0.9 / margin 0.2."
+    },
+    "splitCounts": {
+      "test": 818,
+      "train": 4031,
+      "validation": 674,
+      "benchmark": 99,
+      "excluded-label-conflict": 21,
+      "excluded-heldout-duplicate": 937
+    },
+    "epochs": 36,
+    "bestValidationEpoch": 26,
+    "training": "New head only; original feature extractor frozen. Class-balanced loss, training-only horizontal flips, L2, dropout, Adam 0.0005, validation-loss early stopping (patience 10).",
+    "backend": "TensorFlow 2.16.2 CPU / original TensorFlow.js MobileNet graph; NumPy calibration",
+    "limitations": [
+      "Hazardous examples cover batteries only; other hazards are not validated.",
+      "Same-source public holdout; not independent local photos.",
+      "Perceptual duplicate grouping is heuristic; physical-object identities are unavailable.",
+      "Scores do not establish composition, toxicity or recycling eligibility."
+    ]
+  },
+  "validation": {
+    "total": 674,
+    "top1Correct": 576,
+    "top1Accuracy": 0.8545994065281899,
+    "correct": 573,
+    "accuracy": 0.8501483679525222,
+    "suggested": 665,
+    "manualReview": 9,
+    "coverage": 0.9866468842729971,
+    "wrongSuggestions": 92,
+    "suggestionAccuracy": 0.8616541353383459,
+    "perCategory": [
+      {
+        "category": "plastic",
+        "total": 136,
+        "correct": 112,
+        "precision": 0.8888888888888888,
+        "recall": 0.8235294117647058,
+        "f1": 0.8549618320610687
+      },
+      {
+        "category": "paper",
+        "total": 115,
+        "correct": 101,
+        "precision": 0.8632478632478633,
+        "recall": 0.8782608695652174,
+        "f1": 0.8706896551724138
+      },
+      {
+        "category": "glass",
+        "total": 48,
+        "correct": 39,
+        "precision": 0.7647058823529411,
+        "recall": 0.8125,
+        "f1": 0.787878787878788
+      },
+      {
+        "category": "metal",
+        "total": 126,
+        "correct": 114,
+        "precision": 0.8571428571428571,
+        "recall": 0.9047619047619048,
+        "f1": 0.8803088803088803
+      },
+      {
+        "category": "organic",
+        "total": 91,
+        "correct": 89,
+        "precision": 0.9368421052631579,
+        "recall": 0.978021978021978,
+        "f1": 0.956989247311828
+      },
+      {
+        "category": "ewaste",
+        "total": 38,
+        "correct": 33,
+        "precision": 0.8048780487804879,
+        "recall": 0.868421052631579,
+        "f1": 0.8354430379746836
+      },
+      {
+        "category": "textile",
+        "total": 39,
+        "correct": 29,
+        "precision": 0.7837837837837838,
+        "recall": 0.7435897435897436,
+        "f1": 0.7631578947368421
+      },
+      {
+        "category": "hazardous",
+        "total": 10,
+        "correct": 8,
+        "precision": 0.8,
+        "recall": 0.8,
+        "f1": 0.8000000000000002
+      },
+      {
+        "category": "residual",
+        "total": 71,
+        "correct": 51,
+        "precision": 0.796875,
+        "recall": 0.7183098591549296,
+        "f1": 0.7555555555555555
+      }
+    ],
+    "macroF1": 0.8338872101111179,
+    "confusionMatrix": [
+      [
+        112,
+        4,
+        6,
+        10,
+        0,
+        2,
+        0,
+        0,
+        2
+      ],
+      [
+        3,
+        101,
+        4,
+        0,
+        1,
+        2,
+        0,
+        0,
+        4
+      ],
+      [
+        6,
+        0,
+        39,
+        2,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        5,
+        5,
+        1,
+        114,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        2,
+        89,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        3,
+        0,
+        0,
+        0,
+        33,
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        2,
+        0,
+        0,
+        1,
+        0,
+        29,
+        0,
+        7
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        8,
+        0
+      ],
+      [
+        0,
+        2,
+        1,
+        5,
+        4,
+        0,
+        8,
+        0,
+        51
+      ]
+    ]
+  },
+  "test": {
+    "total": 818,
+    "top1Correct": 691,
+    "top1Accuracy": 0.8447432762836186,
+    "correct": 689,
+    "accuracy": 0.8422982885085575,
+    "suggested": 810,
+    "manualReview": 8,
+    "coverage": 0.9902200488997555,
+    "wrongSuggestions": 121,
+    "suggestionAccuracy": 0.8506172839506173,
+    "perCategory": [
+      {
+        "category": "plastic",
+        "total": 170,
+        "correct": 131,
+        "precision": 0.8675496688741722,
+        "recall": 0.7705882352941177,
+        "f1": 0.8161993769470405
+      },
+      {
+        "category": "paper",
+        "total": 159,
+        "correct": 146,
+        "precision": 0.9012345679012346,
+        "recall": 0.9182389937106918,
+        "f1": 0.9096573208722741
+      },
+      {
+        "category": "glass",
+        "total": 65,
+        "correct": 46,
+        "precision": 0.8070175438596491,
+        "recall": 0.7076923076923077,
+        "f1": 0.7540983606557378
+      },
+      {
+        "category": "metal",
+        "total": 133,
+        "correct": 115,
+        "precision": 0.7718120805369127,
+        "recall": 0.8646616541353384,
+        "f1": 0.8156028368794326
+      },
+      {
+        "category": "organic",
+        "total": 107,
+        "correct": 102,
+        "precision": 0.8947368421052632,
+        "recall": 0.9532710280373832,
+        "f1": 0.923076923076923
+      },
+      {
+        "category": "ewaste",
+        "total": 78,
+        "correct": 70,
+        "precision": 0.9333333333333333,
+        "recall": 0.8974358974358975,
+        "f1": 0.9150326797385621
+      },
+      {
+        "category": "textile",
+        "total": 42,
+        "correct": 37,
+        "precision": 0.8043478260869565,
+        "recall": 0.8809523809523809,
+        "f1": 0.8409090909090908
+      },
+      {
+        "category": "hazardous",
+        "total": 17,
+        "correct": 13,
+        "precision": 0.7222222222222222,
+        "recall": 0.7647058823529411,
+        "f1": 0.7428571428571428
+      },
+      {
+        "category": "residual",
+        "total": 47,
+        "correct": 31,
+        "precision": 0.6739130434782609,
+        "recall": 0.6595744680851063,
+        "f1": 0.6666666666666667
+      }
+    ],
+    "macroF1": 0.8204555998447635,
+    "confusionMatrix": [
+      [
+        131,
+        6,
+        5,
+        19,
+        3,
+        3,
+        0,
+        0,
+        3
+      ],
+      [
+        1,
+        146,
+        0,
+        4,
+        1,
+        0,
+        1,
+        3,
+        3
+      ],
+      [
+        9,
+        3,
+        46,
+        7,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        6,
+        0,
+        5,
+        115,
+        1,
+        0,
+        3,
+        0,
+        3
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        102,
+        0,
+        1,
+        0,
+        3
+      ],
+      [
+        1,
+        3,
+        0,
+        2,
+        0,
+        70,
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        37,
+        0,
+        3
+      ],
+      [
+        1,
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        13,
+        0
+      ],
+      [
+        2,
+        2,
+        1,
+        1,
+        6,
+        0,
+        4,
+        0,
+        31
+      ]
+    ]
+  },
+  "benchmark": {
+    "total": 99,
+    "top1Correct": 86,
+    "top1Accuracy": 0.8686868686868687,
+    "correct": 86,
+    "accuracy": 0.8686868686868687,
+    "suggested": 99,
+    "manualReview": 0,
+    "coverage": 1.0,
+    "wrongSuggestions": 13,
+    "suggestionAccuracy": 0.8686868686868687,
+    "perCategory": [
+      {
+        "category": "plastic",
+        "total": 15,
+        "correct": 9,
+        "precision": 0.9,
+        "recall": 0.6,
+        "f1": 0.7200000000000001
+      },
+      {
+        "category": "paper",
+        "total": 14,
+        "correct": 14,
+        "precision": 0.875,
+        "recall": 1.0,
+        "f1": 0.9333333333333333
+      },
+      {
+        "category": "glass",
+        "total": 14,
+        "correct": 13,
+        "precision": 0.9285714285714286,
+        "recall": 0.9285714285714286,
+        "f1": 0.9285714285714286
+      },
+      {
+        "category": "metal",
+        "total": 14,
+        "correct": 12,
+        "precision": 0.8571428571428571,
+        "recall": 0.8571428571428571,
+        "f1": 0.8571428571428571
+      },
+      {
+        "category": "organic",
+        "total": 14,
+        "correct": 13,
+        "precision": 0.9285714285714286,
+        "recall": 0.9285714285714286,
+        "f1": 0.9285714285714286
+      },
+      {
+        "category": "ewaste",
+        "total": 0,
+        "correct": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "category": "textile",
+        "total": 14,
+        "correct": 13,
+        "precision": 0.9285714285714286,
+        "recall": 0.9285714285714286,
+        "f1": 0.9285714285714286
+      },
+      {
+        "category": "hazardous",
+        "total": 0,
+        "correct": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      {
+        "category": "residual",
+        "total": 14,
+        "correct": 12,
+        "precision": 0.7058823529411765,
+        "recall": 0.8571428571428571,
+        "f1": 0.7741935483870968
+      }
+    ],
+    "macroF1": 0.6744871138419526,
+    "confusionMatrix": [
+      [
+        9,
+        1,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        14,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        13,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        12,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        13,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        13,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        12
+      ]
+    ]
+  },
+  "categories": [
+    "plastic",
+    "paper",
+    "glass",
+    "metal",
+    "organic",
+    "ewaste",
+    "textile",
+    "hazardous",
+    "residual"
+  ],
+  "splitMethod": "SHA-256 bytes, source augmentation filenames and dHash Hamming <=4 form groups. Conflicting labels excluded. Original 99 benchmark groups reserved. RealWaste: SHA-256 group buckets 75/12/13 train/validation/test. Mendeley: source train/valid/test partitions preserved (test takes precedence on overlap). Only one representative per validation/test group. Mixed-class source images, Medical_Waste and Light_Bulb omitted. All source augmentations of one original stay together.",
+  "limitations": "No physical-object identity metadata; perceptual grouping reduces but cannot rule out leakage. Same-source held-out data is not independent local validation."
+}

@@ -17,25 +17,16 @@ import {
   Card,
   Button,
   Badge,
-  EmptyState,
   useToast,
-  StatNumber,
 } from "../components/ui";
-import { useClassificationLog } from "../lib/useClassificationLog";
-import {
-  evaluationSummary,
-  overrideSummary,
-  LOW_CONFIDENCE_THRESHOLD,
-} from "../lib/evaluation";
-import { evalResults, evaluationReport } from "../data/evalResults";
-import { CATEGORY_META } from "../data/constants";
+import ModelEvaluation from "../components/ModelEvaluation";
 import { catalog } from "../data/catalog";
 import { useStore } from "../store/useStore";
 
 const workflow = [
   ["Input", "Photo or manual category"],
   ["MobileNet", "Photo inference in the browser"],
-  ["Label → category", "Our keyword mapping rules"],
+  ["Material classifier", "Our trained nine-category head"],
   ["User confirmation", "Accept or override the category"],
   ["Catalog lookup", "Choose the exact item"],
   ["Route Card", "Route, reason, and handling tip"],
@@ -51,7 +42,7 @@ const responsibilities = [
   {
     icon: Eye,
     title: "Bias",
-    text: "ImageNet recognises objects, not local waste streams. Lighting, backgrounds, packaging, and unfamiliar objects can change predictions. We have not established performance across communities or conditions.",
+    text: "The new material head learns from two public datasets. Lighting, backgrounds and source-specific cues may bias its predictions. Hazardous examples cover batteries; performance across communities and local conditions is unverified.",
   },
   {
     icon: LockKeyhole,
@@ -71,18 +62,10 @@ const responsibilities = [
   {
     icon: UserCheck,
     title: "Human oversight",
-    text: "You confirm every photo category and choose the exact item. Low-confidence or unmapped labels need manual review. Check real facility rules, and seek specialist guidance for hazardous items.",
+    text: "You confirm every photo category and choose the exact item. Low-scoring or closely matched materials need manual review. Check real facility rules, and seek specialist guidance for hazardous items.",
   },
 ];
-const percentage = (value: number | null) =>
-  value === null ? "—" : `${Math.round(value * 100)}%`;
-
 export default function About() {
-  const [showPhotos, setShowPhotos] = useState(false);
-  const [showAllFailures, setShowAllFailures] = useState(false);
-  const log = useClassificationLog();
-  const evaluation = evaluationSummary(evalResults);
-  const overrides = overrideSummary(log);
   const [reset, setReset] = useState(false);
   const resetDemo = useStore((s) => s.resetDemo);
   const toast = useToast();
@@ -103,7 +86,7 @@ export default function About() {
           <Badge>AI suggests. You decide.</Badge>
           <h2>A starting point for better decisions.</h2>
           <p>
-            An object label is a clue, not proof of its material. Every route
+            An image-based material prediction is a clue, not proof. Every route
             stays in your hands.
           </p>
         </div>
@@ -113,7 +96,8 @@ export default function About() {
         <div className="section-kicker">01 · THE WORKFLOW</div>
         <h2 id="how-it-works">How it works</h2>
         <p className="section-description">
-          A small model, explicit rules, and a person making the final call.
+          A trained material classifier, a review policy, and a person making
+          the final call.
         </p>
         <Card className="workflow-card">
           <ol
@@ -132,9 +116,8 @@ export default function About() {
             ))}
           </ol>
           <p className="footnote">
-            Manual category or catalog input skips MobileNet and label mapping.
-            The guided demo uses this manual path; it does not simulate photo
-            inference.
+            Manual category or catalog input skips the photo model. The guided
+            demo uses this manual path; it does not simulate photo inference.
           </p>
         </Card>
       </section>
@@ -148,276 +131,26 @@ export default function About() {
             <p>
               Pretrained MobileNet v2, trained on ImageNet, runs through
               TensorFlow.js in your browser. Photos stay on the device. Our
-              rule-based keyword mapping translates object labels into nine
-              material categories; you confirm the category and choose an item
-              from our {catalog.length}-item catalog.
+              trained material head predicts nine categories from frozen image
+              features; you confirm the category and choose an item from our{" "}
+              {catalog.length}-item catalog.
             </p>
           </Card>
           <Card>
-            <h3>What we did not train</h3>
+            <h3>What we trained and what we did not</h3>
             <p>
-              We did not train or fine-tune MobileNet, create a custom waste
-              model, or train a carbon-estimation model. The catalog, facilities
-              and starter records are synthetic demo data. Evaluation uses 99
-              real photographs with labels published by RealWaste’s authors. We
-              did not independently re-annotate these images.
+              We trained a new material classification head using published
+              RealWaste and Bangladeshi E-Waste labels. MobileNet’s pretrained
+              image features remain frozen; no carbon-estimation model was
+              trained. The catalog, facilities and starter records remain
+              synthetic. Public-source evaluation does not establish local
+              real-world performance.
             </p>
           </Card>
         </div>
       </section>
 
-      <section className="ethics-section" aria-labelledby="evaluation-title">
-        <div className="section-kicker">03 · EVALUATION</div>
-        <div className="row between wrap">
-          <h2 id="evaluation-title">Show the evidence. Show the gaps.</h2>
-          <Badge>99 real labelled photos</Badge>
-        </div>
-        <Card className="benchmark-method">
-          <h3>A small, reproducible public benchmark</h3>
-          <p>
-            99 unchanged RealWaste photos, selected deterministically before
-            inference: 14 per represented category, plus one plastic photo.
-            Paper combines paper/cardboard; organic combines food/vegetation.
-            E-waste and hazardous waste are untested. Source labels describe
-            materials, not local disposal eligibility.
-          </p>
-          <p>
-            MobileNet v2, alpha 1.0, 224 px; TensorFlow.js CPU with RGB
-            decoding. Browser decoding and WebGL results may differ. No training
-            or fine-tuning was performed. This public sample is not an
-            independent validation set or proof of local accuracy.
-          </p>
-          <p>
-            Previous mapper: {evaluationReport.baseline.wrongSuggestions} wrong
-            suggestions and {evaluationReport.baseline.manualReview} unmapped
-            photos. After: {evaluationReport.conservative.wrongSuggestions}{" "}
-            wrong suggestions and {evaluation.manualReview} manual selections.
-            The same top-three model outputs are used for both policies.
-          </p>
-          <p>
-            Fewer wrong suggestions come from abstaining more often. Suggestion
-            accuracy fell from{" "}
-            {percentage(evaluationReport.baseline.suggestionAccuracy)} to{" "}
-            {percentage(evaluation.suggestionAccuracy)}. This is a reduction in
-            guessing, not evidence of improved model accuracy.
-          </p>
-          <div className="row wrap">
-            <a className="text-link" href="/evaluation/report.json" download>
-              Download labels &amp; raw results (JSON)
-            </a>
-            <a className="text-link" href="/evaluation/ATTRIBUTION.md">
-              Sources &amp; licences
-            </a>
-          </div>
-        </Card>
-        <div className="evaluation-metrics">
-          <Card>
-            <StatNumber
-              value={percentage(evaluation.accuracy)}
-              label="overall test accuracy"
-            />
-            <p>
-              {evaluation.correct} correct / {evaluation.total} test rows
-            </p>
-          </Card>
-          <Card>
-            <StatNumber
-              value={percentage(evaluation.suggestionAccuracy)}
-              label="accuracy when a category is suggested"
-            />
-            <p>
-              {evaluation.correct} correct / {evaluation.suggested} suggestions
-              · {evaluation.manualReview} require manual selection
-            </p>
-          </Card>
-          <Card>
-            <StatNumber
-              value={percentage(evaluation.lowConfidenceShare)}
-              label="low-confidence share → manual review"
-            />
-            <p>
-              {evaluation.lowConfidence} / {evaluation.total} below{" "}
-              {LOW_CONFIDENCE_THRESHOLD * 100}% confidence
-            </p>
-          </Card>
-          <Card>
-            <StatNumber
-              value={percentage(overrides.rate)}
-              label="live local override rate"
-            />
-            <p>
-              {overrides.overridden} overrides / {overrides.total} confirmed
-              photo runs
-            </p>
-          </Card>
-        </div>
-        <p className="evaluation-note">
-          Confidence is the model’s top-label score, not calibrated material
-          certainty. Below {LOW_CONFIDENCE_THRESHOLD * 100}%, with an
-          unmapped/ambiguous label, or with conflicting category scores less
-          than 15 percentage points apart, no category is preselected. Overall
-          accuracy counts abstentions as unsuccessful; suggestion accuracy
-          excludes them. Every suggestion still requires confirmation. No human
-          corrections are counted as model successes. Thresholds are fixed
-          heuristics, not calibrated on this benchmark. Measured{" "}
-          {evaluationReport.measuredAt.slice(0, 10)}.
-        </p>
-        <div className="evaluation-columns">
-          <Card className="category-accuracy">
-            <h3>Per-category accuracy</h3>
-            <p>Grouped by expected category · correct / tested</p>
-            {evaluation.perCategory.map((c) => (
-              <div className="accuracy-row" key={c.category}>
-                <div className="row between">
-                  <span>{c.label}</span>
-                  <strong>
-                    {c.total ? percentage(c.accuracy) : "Untested"}{" "}
-                    <small>
-                      ({c.correct}/{c.total})
-                    </small>
-                  </strong>
-                </div>
-                <progress
-                  max={100}
-                  value={(c.accuracy ?? 0) * 100}
-                  aria-label={`${c.label} accuracy: ${c.total ? `${c.correct} of ${c.total}` : "no test rows"}`}
-                  style={{ accentColor: c.color }}
-                />
-              </div>
-            ))}
-          </Card>
-          <Card className="live-evaluation">
-            <h3>Live confirmation log</h3>
-            <p>
-              Updates from classificationLog on this device. A changed or
-              unmapped prediction counts as an override. User agreement is not
-              independently verified accuracy.
-            </p>
-            {log.length ? (
-              <>
-                <div className="live-override">
-                  <strong>{percentage(overrides.rate)}</strong>
-                  <span>
-                    of {overrides.total} confirmed photo runs changed the
-                    predicted category
-                  </span>
-                </div>
-                <p className="footnote">
-                  Manual catalog choices and guided-demo actions are excluded.
-                  Photos and contact information are never recorded in this log.
-                </p>
-              </>
-            ) : (
-              <EmptyState
-                title="No confirmed photo runs yet"
-                description="Confirm a photo classification to start your local log. An empty log has no measurable override rate."
-              />
-            )}
-          </Card>
-        </div>
-        <div className="failure-heading">
-          <h3>Failure cases</h3>
-          <p>
-            {evaluation.failures.length} unsuccessful suggestions / abstentions
-            worth examining
-          </p>
-        </div>
-        {evaluation.failures.length ? (
-          <div className="failure-grid">
-            {(showAllFailures
-              ? evaluation.failures
-              : evaluation.failures.slice(0, 6)
-            ).map((row) => (
-              <Card className="failure-case" key={row.testImage}>
-                <span className="failure-image-id">{row.testImage}</span>
-                <h4>
-                  {CATEGORY_META[row.expectedCategory].label} →{" "}
-                  {row.predictedCategory
-                    ? CATEGORY_META[row.predictedCategory].label
-                    : "Manual selection"}
-                </h4>
-                <p>
-                  {row.failureReason ??
-                    "Prediction differs from the expected category; review the image and mapping rules."}
-                </p>
-                <small>
-                  {Math.round(row.confidence * 100)}% confidence
-                  {row.predictedCategory === null
-                    ? " · manual review required"
-                    : " · user confirmation still required"}
-                </small>
-              </Card>
-            ))}
-          </div>
-        ) : (
-          <EmptyState
-            title="No mismatches in these rows"
-            description="A small sample without failures does not establish general performance."
-          />
-        )}
-        {evaluation.failures.length > 6 && (
-          <Button
-            variant="secondary"
-            onClick={() => setShowAllFailures(!showAllFailures)}
-          >
-            {showAllFailures
-              ? "Show fewer cases"
-              : `Review all ${evaluation.failures.length} unsuccessful cases`}
-          </Button>
-        )}
-        <div className="benchmark-gallery-heading">
-          <h3>Inspect the labelled photos</h3>
-          <p>
-            Expected labels come from the source dataset. Review the original
-            image and raw object predictions before drawing conclusions.
-          </p>
-          <Button
-            variant="secondary"
-            aria-expanded={showPhotos}
-            onClick={() => setShowPhotos(!showPhotos)}
-          >
-            {showPhotos ? "Hide photos" : "View 99 labelled photos"}
-          </Button>
-        </div>
-        {showPhotos && (
-          <div className="benchmark-gallery">
-            {evalResults.map((row) => (
-              <Card key={row.testImage}>
-                <a
-                  href={`/evaluation/photos/${row.testImage}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img
-                    loading="lazy"
-                    src={`/evaluation/photos/${row.testImage}`}
-                    alt={`Source-labelled ${row.sourceLabel}: ${row.testImage}`}
-                  />
-                </a>
-                <h4>{row.testImage}</h4>
-                <p>
-                  Expected: {CATEGORY_META[row.expectedCategory].label}
-                  <br />
-                  Suggested:{" "}
-                  {row.predictedCategory
-                    ? CATEGORY_META[row.predictedCategory].label
-                    : "Manual selection"}
-                </p>
-                <small>
-                  Source label: {row.sourceLabel}
-                  <br />
-                  {row.predictions
-                    .map(
-                      (p) =>
-                        `${p.className} (${Math.round(p.probability * 100)}%)`,
-                    )
-                    .join(" · ")}
-                </small>
-              </Card>
-            ))}
-          </div>
-        )}
-      </section>
+      <ModelEvaluation />
 
       <section className="ethics-section" aria-labelledby="responsible-title">
         <div className="section-kicker">04 · RESPONSIBLE AI</div>
@@ -476,7 +209,7 @@ export default function About() {
             </h3>
             <ul>
               {[
-                "Browser classification & manual confirmation",
+                "Trained material classifier & manual confirmation",
                 "Catalog lookup & Route Cards",
                 "Illustrative center directory & map",
                 "Local activity and drop-off tracking",
@@ -498,7 +231,7 @@ export default function About() {
             </h3>
             <ul>
               {[
-                "Custom-trained waste model",
+                "Broader local waste training and independent validation",
                 "Verified municipal data",
                 "Pickup scheduling",
                 "User accounts & shared marketplace",

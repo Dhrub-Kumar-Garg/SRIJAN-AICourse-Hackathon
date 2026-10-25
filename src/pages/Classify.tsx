@@ -8,6 +8,7 @@ import {
   Check,
   LoaderCircle,
   TriangleAlert,
+  Crop,
 } from "lucide-react";
 import type { Category, CatalogItem } from "../data/types";
 import { CATEGORY_META } from "../data/constants";
@@ -21,11 +22,10 @@ import {
   useToast,
 } from "../components/ui";
 import RouteCard from "../components/RouteCard";
-import { assessPredictions, type Prediction } from "../lib/predictionPolicy";
+import ImageCropper from "../components/ImageCropper";
+import type { Prediction } from "../lib/predictionPolicy";
+import { assessWastePredictions } from "../lib/wastePolicy";
 import { logClassification } from "../lib/classificationLog";
-let classifier:
-  | ReturnType<(typeof import("@tensorflow-models/mobilenet"))["load"]>
-  | undefined;
 async function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
   let timer: ReturnType<typeof setTimeout> | undefined;
   try {
@@ -70,11 +70,18 @@ export default function Classify() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [confirmed, setConfirmed] = useState(false);
+  const [cropping, setCropping] = useState(false);
   const img = useRef<HTMLImageElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const camera = useRef<HTMLInputElement>(null);
   const runId = useRef(0);
   const selectMethod = (method: "snap" | "pick") => {
+    if (method === tab) return;
+    runId.current++;
+    setBusy(false);
+    setPredictions([]);
+    setConfirmed(false);
+    setError("");
     setTab(method);
     setSelected(null);
     setCategory(null);
@@ -103,7 +110,7 @@ export default function Classify() {
     },
     [preview],
   );
-  const assessment = assessPredictions(predictions);
+  const assessment = assessWastePredictions(predictions);
   const predicted = assessment.category;
   const uncertain = predicted === null;
   async function classify() {
@@ -117,15 +124,8 @@ export default function Classify() {
     try {
       const tf = await import("@tensorflow/tfjs");
       await tf.ready();
-      const mobilenet = await import("@tensorflow-models/mobilenet");
-      classifier ??= withTimeout(
-        mobilenet.load({ version: 2, alpha: 1 }),
-        45000,
-      ).catch((err) => {
-        classifier = undefined;
-        throw err;
-      });
-      const model = await classifier;
+      const { loadWasteClassifier } = await import("../lib/wasteClassifier");
+      const model = await withTimeout(loadWasteClassifier(), 45000);
       if (!img.current || id !== runId.current) return;
       // fromPixels(image) uses rendered width/height. Decode at natural size so
       // the same photo does not change predictions across responsive layouts.
@@ -138,14 +138,14 @@ export default function Classify() {
       const pixels = tf.browser.fromPixels(canvas);
       let p: Prediction[];
       try {
-        p = await model.classify(pixels, 3);
+        p = await model.classify(pixels);
       } finally {
         pixels.dispose();
         canvas.width = canvas.height = 0;
       }
       if (id !== runId.current) return;
       setPredictions(p);
-      setCategory(assessPredictions(p).category);
+      setCategory(assessWastePredictions(p).category);
     } catch {
       if (id === runId.current)
         setError(
@@ -186,6 +186,16 @@ export default function Classify() {
         description="Start with a photo or an everyday item. We’ll help with what comes next."
       />
       <div className="classify-layout">
+        {cropping && preview && (
+          <ImageCropper
+            source={preview}
+            onClose={() => setCropping(false)}
+            onApply={(file) => {
+              setCropping(false);
+              upload(file);
+            }}
+          />
+        )}
         <div>
           <div
             className="tabs"
@@ -283,6 +293,16 @@ export default function Classify() {
                     hidden
                   />
                   <div className="row wrap center">
+                    {preview && (
+                      <Button
+                        variant="secondary"
+                        onClick={() => setCropping(true)}
+                        disabled={busy}
+                      >
+                        <Crop size={16} />
+                        Crop item
+                      </Button>
+                    )}
                     <Button
                       variant="secondary"
                       onClick={() => input.current?.click()}
@@ -310,6 +330,11 @@ export default function Classify() {
                   <small>
                     Photos stay in your browser. Nothing is uploaded.
                   </small>
+                  <small>
+                    Use good light, show one whole item, and crop out
+                    distractions. Chemicals, medicine and mixed materials need
+                    your judgement.
+                  </small>
                 </div>
                 {busy && (
                   <div className="model-loading" role="status">
@@ -336,7 +361,7 @@ export default function Classify() {
                       </Button>
                       <Button
                         variant="secondary"
-                        onClick={() => setTab("pick")}
+                        onClick={() => selectMethod("pick")}
                       >
                         Pick an item
                       </Button>
@@ -345,7 +370,7 @@ export default function Classify() {
                 )}
                 {predictions.length > 0 && (
                   <Card className="predictions">
-                    <span className="eyebrow">WHAT THE MODEL SEES</span>
+                    <span className="eyebrow">MATERIAL MODEL SUGGESTIONS</span>
                     {predictions.map((p) => (
                       <div key={p.className} className="prediction">
                         <div className="row between">
@@ -364,9 +389,9 @@ export default function Classify() {
                       </p>
                     )}
                     <p className="muted text-sm">
-                      Scores describe object labels, not material certainty. A
-                      bottle may be glass or plastic; packaging may contain
-                      mixed materials. Always check the category.
+                      This trained material model covers nine categories. Scores
+                      are estimates; packaging can contain mixed materials.
+                      Hazardous training covers batteries only. Always confirm.
                     </p>
                   </Card>
                 )}

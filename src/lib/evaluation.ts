@@ -3,8 +3,8 @@ import type { EvaluationResult } from "../data/evalResults";
 import type { Category } from "../data/types";
 import type { ClassificationRun } from "./classificationLog";
 
-import { LOW_CONFIDENCE_THRESHOLD } from "./predictionPolicy";
-export { LOW_CONFIDENCE_THRESHOLD } from "./predictionPolicy";
+import { MATERIAL_THRESHOLD as LOW_CONFIDENCE_THRESHOLD } from "./wastePolicy";
+export { MATERIAL_THRESHOLD as LOW_CONFIDENCE_THRESHOLD } from "./wastePolicy";
 export function evaluationSummary(rows: EvaluationResult[]) {
   const correct = rows.filter(
     (r) => r.expectedCategory === r.predictedCategory,

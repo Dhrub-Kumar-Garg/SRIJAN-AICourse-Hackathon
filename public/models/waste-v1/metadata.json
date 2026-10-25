@@ -1,0 +1,82 @@
+{
+  "version": "waste-v1",
+  "trainedAt": "2026-10-25T06:03:43.925686+00:00",
+  "categories": [
+    "plastic",
+    "paper",
+    "glass",
+    "metal",
+    "organic",
+    "ewaste",
+    "textile",
+    "hazardous",
+    "residual"
+  ],
+  "unsupportedCategories": [],
+  "architecture": "Frozen MobileNet v2 alpha 1.0 224px / 1280 embedding -> Dense(128, ReLU) -> Dropout(0.3 training only) -> Dense(9) -> temperature-scaled softmax",
+  "baseWeightsSha256": "9dbf187ba6a6b5eaf37f7932fc513f281fa6ac277f0bfa3c7df288e687cc3644",
+  "headWeightsSha256": "56216882e986f18b5c4051291c5327866af64d25127469796e39929cb214c952",
+  "headWeights": [
+    {
+      "shape": [
+        1280,
+        128
+      ],
+      "dtype": "float32"
+    },
+    {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    {
+      "shape": [
+        128,
+        9
+      ],
+      "dtype": "float32"
+    },
+    {
+      "shape": [
+        9
+      ],
+      "dtype": "float32"
+    }
+  ],
+  "preprocessing": {
+    "inputRange": [
+      0,
+      1
+    ],
+    "imageSize": 224,
+    "alignCorners": true,
+    "naturalDimensions": true
+  },
+  "embeddingNode": "module_apply_default/MobilenetV2/Logits/AvgPool",
+  "seed": 20261025,
+  "policy": {
+    "confidenceThreshold": 0.35,
+    "marginThreshold": 0,
+    "temperature": 1.7,
+    "selection": "Validation only: temperature minimizes NLL; maximize coverage with >=30 suggestions and >=80% suggestion accuracy; fallback threshold 0.9 / margin 0.2."
+  },
+  "splitCounts": {
+    "test": 818,
+    "train": 4031,
+    "validation": 674,
+    "benchmark": 99,
+    "excluded-label-conflict": 21,
+    "excluded-heldout-duplicate": 937
+  },
+  "epochs": 36,
+  "bestValidationEpoch": 26,
+  "training": "New head only; original feature extractor frozen. Class-balanced loss, training-only horizontal flips, L2, dropout, Adam 0.0005, validation-loss early stopping (patience 10).",
+  "backend": "TensorFlow 2.16.2 CPU / original TensorFlow.js MobileNet graph; NumPy calibration",
+  "limitations": [
+    "Hazardous examples cover batteries only; other hazards are not validated.",
+    "Same-source public holdout; not independent local photos.",
+    "Perceptual duplicate grouping is heuristic; physical-object identities are unavailable.",
+    "Scores do not establish composition, toxicity or recycling eligibility."
+  ]
+}

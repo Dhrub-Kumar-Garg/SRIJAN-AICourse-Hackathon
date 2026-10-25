@@ -1,0 +1,6 @@
+# Training only; browser inference still needs no backend/API or Python.
+tensorflow-cpu==2.16.2; sys_platform != 'darwin'
+tensorflow==2.16.2; sys_platform == 'darwin'
+keras==3.3.3
+Pillow==11.3.0
+numpy==1.26.4

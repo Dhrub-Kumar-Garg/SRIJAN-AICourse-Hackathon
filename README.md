@@ -22,11 +22,11 @@ npm run preview  # Serve the production build locally
 npm run format   # Format source and documentation
 ```
 
-The first photo classification downloads MobileNet. Google Fonts and OpenStreetMap tiles also require network access. Camera and location features require permission and a secure context; localhost works. Production hosting must serve `index.html` for client-side routes. Large lazy TensorFlow chunks produce a Vite bundle-size advisory; the build still succeeds.
+The first photo classification downloads the static model artifacts from the app’s own host; prediction runs locally. Google Fonts and OpenStreetMap tiles also require network access. Camera and location features require permission and a secure context; localhost works. Production hosting must serve `index.html` for client-side routes. Large lazy TensorFlow chunks produce a Vite bundle-size advisory; the build still succeeds.
 
 ## Features
 
-- Photo upload/camera with browser-side MobileNet v2 and TensorFlow.js, top-three labels, confidence scores, rule-based label mapping, mandatory category confirmation, and manual overrides.
+- Photo upload/camera with a trained nine-material head on frozen MobileNet v2 features, optional crop/zoom/position controls, validation-selected review thresholds, mandatory confirmation, and manual overrides. Inference stays in the browser.
 - Manual search and category selection across a 42-item catalog, with Route Cards explaining the route, reason, handling tip, and estimated weight.
 - A map and directory of 14 fictional Bengaluru-area centers, accepted-material/type/opening filters, distance sorting, optional geolocation, and validated collected drop-off logging.
 - Persistent local activity tracking, status progression, and weekly timelines.
@@ -50,7 +50,7 @@ The tour resumes within the same browser tab after refresh using sessionStorage.
 ## Architecture
 
 ```text
-Photo -> MobileNet (in-browser) -> object label -> keyword/category rules
+Photo -> frozen MobileNet features -> trained material head -> review policy
                                                       |
 Manual category/catalog selection --------------------+
                                                       v
@@ -65,7 +65,7 @@ User confirmation -> exact catalog item -> Route Card
 
 - `src/data/types.ts`: fixed domain contract; unchanged by this continuation.
 - `src/data/catalog.ts`, `centers.ts`, `seed.ts`: synthetic demo content.
-- `src/pages/Classify.tsx`, `src/lib/imagenetMap.ts`: lazy photo inference and explicit mapping rules.
+- `src/pages/Classify.tsx`, `src/lib/wasteClassifier.ts`, `src/lib/wastePolicy.ts`: lazy trained inference and validation-selected review policy. The old ImageNet mapper remains for historical comparisons.
 - `src/store/useStore.ts`: existing activity/listing actions, persisted under `srijan-store-v1`. A handover creates exactly one completed reuse activity.
 - `src/store/selectors.ts`: pure totals, diversion, carbon estimates, weekly series, and chart transformations. All logged statuses contribute to impact estimates.
 - `src/lib/demo.ts`, `src/components/GuidedDemo.tsx`: tour destinations, action gates, baseline metrics, and separate tab-local tour state.
@@ -75,40 +75,50 @@ User confirmation -> exact catalog item -> Route Card
 
 There is no backend, authentication, shared marketplace, or server-side photo processing.
 
-## Evaluation: 99 real labelled photographs
+## Trained photo model and measured evaluation
 
-99 unchanged, source-labelled RealWaste photos are bundled in `public/evaluation/photos` (~14 MB). Labels come from the dataset authors, not model predictions or our independent annotation. A fixed SHA-256 ordering of source paths selects 14 per represented category plus one plastic photo before inference; duplicate bytes are excluded. Seven categories are represented. **E-waste and hazardous waste are untested.** Paper combines paper/cardboard; organic combines food/vegetation.
+`waste-v1` uses the **unchanged MobileNet v2 alpha 1.0 / 224 pretrained feature extractor** plus a new trained head: 1280 → Dense 128/ReLU → training-only dropout 0.3 → Dense 9. We trained the head, not the backbone or a carbon model. All nine existing app categories are supported. Hazardous examples cover batteries only; other hazards are not validated.
 
-AI & Ethics shows measured scores, failure reasons, a gallery of every photo with expected category and raw top-three labels, plus downloadable JSON results and attribution. The old invented 20-row fixture has been removed.
+Sources are RealWaste (UCI, DOI 10.24432/C5SS4G) and the Custom Bangladeshi E-Waste dataset (Mendeley Data V1, DOI 10.17632/77383kmdnw.1). The latter archive has source-authored augmentation variants and YOLO segmentation labels. We retain single-source-class images, map their labels to app categories, and omit mixed-class, Medical_Waste and Light_Bulb images. Full citations, label mappings, licences and limitations are in `public/models/waste-v1/README.md`. The UCI/upstream RealWaste licensing discrepancy remains disclosed in the existing attribution file.
 
-Reproduce from the repository root (Python 3 and Node 22):
+The fixed split contains **4,031 training images, 674 validation images, 818 held-out test images and 99 separately reserved benchmark photos**. Training counts include source-authored augmentation variants. Grouping uses byte hashes, original augmentation filenames and perceptual dHash distance ≤4. Related images stay in one split; conflicting labels are excluded. E-waste source partitions are preserved; RealWaste uses deterministic SHA-256 group buckets. Validation/test contain one representative per group. Physical-object identity metadata is unavailable, so heuristic grouping cannot rule out every leak.
 
-```sh
-python scripts/prepare-evaluation.py # Initial download ~657 MB, ignored cache
-npm run evaluate                  # Official MobileNet weights; real inference on all 99
+Training uses class-balanced loss, Adam 0.0005, batch 64, training-only horizontal flips, L2 regularization and dropout. Early stopping selects the best validation-loss epoch. Validation alone chooses temperature and review thresholds; the test set and original 99 photos do not choose model weights or policy. Auditable manifests, held-out predictions, confusion matrices, optimization history and artifact hashes ship alongside the model.
+
+| Measured set                               | Top-1 material accuracy | Accepted-suggestion accuracy | Suggestion coverage |
+| ------------------------------------------ | ----------------------- | ---------------------------- | ------------------- |
+| 818-image held-out test, all nine classes  | 691/818 **84.5%**       | 689/810 **85.1%**            | 810/818 **99.0%**   |
+| Original 99-photo benchmark, seven classes | 86/99 **86.9%**         | 86/99 **86.9%**              | 99/99 **100%**      |
+
+Top-1 accuracy measures the highest-scoring class before review. Accepted-suggestion accuracy excludes abstentions; coverage records how often a suggestion is offered. The validation-selected policy is score ≥35%, no additional margin cutoff, temperature 1.7. Every suggestion still needs human confirmation. Scores do not establish composition, toxicity, contamination or disposal eligibility. These are **same-source public dataset results, not independent local/field accuracy**; the hazardous holdout contains just 17 battery photos. The old 99-photo rule-based results are archived in `public/evaluation/legacy-report.json`.
+
+All 99 photos were also evaluated using the exact application inference function in TensorFlow.js CPU: 86/99 correct, with all 99 top-1 predictions matching native TensorFlow and maximum score difference 0.000022. Browser WebGL/decoding can vary slightly. The AI & Ethics page shows the fresh holdout, per-class precision/recall, original benchmark failures, photo gallery and separate live local override rate. Existing confirmation logs can include earlier model versions; user agreement is not ground truth.
+
+### Reproduce training
+
+Use Node 22 and Python 3.12. The regular app needs only `npm ci`; Python/TensorFlow are training dependencies. Example PowerShell commands from the repository root:
+
+```powershell
+py -3.12 -m venv .evaluation-cache/train-env
+.\.evaluation-cache\train-env\Scripts\python.exe -m pip install -r scripts/requirements-training.txt
+.\.evaluation-cache\train-env\Scripts\python.exe scripts/download-training-data.py
+npm run train:prepare-model
+.\.evaluation-cache\train-env\Scripts\python.exe scripts/prepare-training.py
+.\.evaluation-cache\train-env\Scripts\python.exe scripts/train-waste.py
+npm run evaluate
 npm test
 npm run build
 ```
 
-The runner uses MobileNet v2 alpha 1.0 / 224 px, TensorFlow.js CPU and sharp RGB decoding. It writes `src/data/evaluationReport.json` and `public/evaluation/report.json`; the app reads these through `evalResults.ts`. The manifest records source paths, labels and SHA-256 hashes. Browser WebGL results may vary slightly. The frozen old mapper allows comparison on exactly the same raw outputs. This small public benchmark is diagnostic, not independent validation or proof of local accuracy. No thresholds were fitted to its results. See `public/evaluation/ATTRIBUTION.md` for citations, category mappings and the UCI/upstream licensing discrepancy.
+On macOS/Linux, use Python 3.12's `venv` and substitute `.evaluation-cache/train-env/bin/python`. Dataset archives initially download ~730 MB; feature extraction/training runs on the CPU and uses an ignored cache. The original MobileNet graph is downloaded during preparation, then hosted with the app. Training exports the head as four float32 tensors plus metadata for TensorFlow.js. Native features use the same graph/weights and RGB → [0,1] → bilinear resize with `alignCorners=true`; natural image dimensions prevent responsive layouts from changing inputs. CPU/platform differences can prevent bit-for-bit training reproducibility.
 
-Overall accuracy counts abstentions as unsuccessful. Suggestion accuracy excludes abstentions; coverage is the fraction receiving suggestions. Per-category bars include sample counts and mark untested categories. Scores below 45%, unmapped/ambiguous labels, or conflicting mapped categories within 15 percentage points require explicit manual selection with no preselected category. Generic bottle, water bottle, bucket, packet and mouse labels no longer assume material/type. These thresholds are fixed heuristics, not calibrated probabilities. Every suggestion still requires confirmation. No human corrections are counted as model successes.
-
-Live override rate is separate: changed or unmapped predicted categories divided by confirmed photo runs in this browser's classificationLog. Manual catalog choices and guided-demo actions are excluded. An empty log displays an em dash, not 0% accuracy. The view updates for same-tab confirmations, cross-tab storage changes, and window focus. User confirmation is not independently verified ground truth.
-
-We use pretrained MobileNet weights trained on ImageNet. We **did not train or fine-tune** a waste classifier, MobileNet, or a carbon model. Object appearance cannot establish material composition, toxicity, or a facility's acceptance rules.
-
-## Measured results
-
-Measured on 25 October 2026: the previous mapper made 15 correct and 16 wrong suggestions (31/99 coverage, 48.4% suggestion accuracy). The conservative policy made 2 correct and 6 wrong suggestions (8/99 coverage, 25% suggestion accuracy), requiring manual selection on 91 photos. Overall accuracy including abstentions is 2/99 (2.0%); 68/99 have low confidence. Fewer wrong guesses come from abstaining more, **not improved suggestion accuracy**. These results expose the pretrained object model's limitations on landfill waste.
-
-Photo inference decodes at natural dimensions into an offscreen canvas, so responsive preview sizes do not alter the model input. The runner also uses original image dimensions before MobileNet's own resize.
+`npm run evaluate` independently re-runs the deployed model on all 99 photos and checks native/JS agreement; it saves a full-run verification report beside the model and in the ignored cache. A smoke subset writes only to the cache. `npm run evaluate:legacy` checks the former ImageNet mapper without overwriting published current reports. Training scripts regenerate reports and model metadata; do not hand-edit scores. No hosted prediction API, API key or production training server is required.
 
 ## Implemented vs planned
 
 | Implemented locally                            | Planned / not implemented                                     |
 | ---------------------------------------------- | ------------------------------------------------------------- |
-| Browser classification and manual confirmation | Custom-trained waste model and independent local validation   |
+| Browser classification and manual confirmation | Broader local training and independent field validation       |
 | Catalog lookup and Route Cards                 | Verified municipal/facility data                              |
 | Illustrative center directory and map          | Real pickup scheduling                                        |
 | Activity and collected drop-off tracking       | User accounts, authentication, moderation, and shared records |
@@ -117,7 +127,7 @@ Photo inference decodes at natural dimensions into an offscreen canvas, so respo
 
 ## Privacy and estimation boundaries
 
-Photos never leave the device and are never persisted. Model weights, fonts, and map tiles make separate third-party network requests. Local activity, listing, and confirmation data can be cleared with browser storage; there is no backup or multi-device sync. Exchange forms have no photo upload, phone, or email fields. Requests and handovers do not contact other people.
+Photos never leave the device and are never persisted. Model artifacts load from the app’s own host; fonts and map tiles make separate third-party requests. Local activity, listing, and confirmation data can be cleared with browser storage; there is no backup or multi-device sync. Exchange forms have no photo upload, phone, or email fields. Requests and handovers do not contact other people.
 
 All starter activities, listings, names, addresses and center locations are synthetic. Benchmark photos are real source-labelled images. Center distances are straight-line estimates; opening hours use Asia/Kolkata. Verify real facilities before travelling. Carbon factors are approximate educational values, not verified offsets; pending intentions count toward logged estimates. Reuse weights use the first catalog entry in the category times quantity, so the demo lamp's estimated handover weight is 0.18 kg.
 

@@ -105,11 +105,11 @@ const report = {
   results,
 };
 await writeFile(
-  "src/data/evaluationReport.json",
+  ".evaluation-cache/legacy-rerun.json",
   JSON.stringify(report, null, 2) + "\n",
 );
 await writeFile(
-  "public/evaluation/report.json",
+  ".evaluation-cache/legacy-rerun-public.json",
   JSON.stringify(report, null, 2) + "\n",
 );
 console.log(

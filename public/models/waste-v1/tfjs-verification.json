@@ -1,0 +1,1896 @@
+{
+  "backend": "TensorFlow.js 4.22.0 CPU / application inference",
+  "smokeOnly": false,
+  "total": 99,
+  "top1Correct": 86,
+  "suggested": 99,
+  "correctSuggestions": 86,
+  "maxNativeScoreDifference": 2.1548313440811206e-05,
+  "results": [
+    {
+      "testImage": "glass-01.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.9569162130355835
+        },
+        {
+          "className": "plastic",
+          "probability": 0.038370173424482346
+        },
+        {
+          "className": "metal",
+          "probability": 0.0036101413425058126
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "glass-02.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.994440495967865
+        },
+        {
+          "className": "plastic",
+          "probability": 0.0018995063146576285
+        },
+        {
+          "className": "metal",
+          "probability": 0.0009961493778973818
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "glass-03.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "plastic",
+          "probability": 0.5548802614212036
+        },
+        {
+          "className": "glass",
+          "probability": 0.4405062198638916
+        },
+        {
+          "className": "residual",
+          "probability": 0.002293664263561368
+        }
+      ],
+      "predictedCategory": "plastic"
+    },
+    {
+      "testImage": "glass-04.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.8517422676086426
+        },
+        {
+          "className": "plastic",
+          "probability": 0.11309023201465607
+        },
+        {
+          "className": "textile",
+          "probability": 0.016694065183401108
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "glass-05.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.602760910987854
+        },
+        {
+          "className": "plastic",
+          "probability": 0.2026064395904541
+        },
+        {
+          "className": "residual",
+          "probability": 0.18077586591243744
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "glass-06.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.8600411415100098
+        },
+        {
+          "className": "plastic",
+          "probability": 0.11412022262811661
+        },
+        {
+          "className": "metal",
+          "probability": 0.012317035347223282
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "glass-07.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.6605673432350159
+        },
+        {
+          "className": "metal",
+          "probability": 0.18928605318069458
+        },
+        {
+          "className": "plastic",
+          "probability": 0.11116696149110794
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "glass-08.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.9922154545783997
+        },
+        {
+          "className": "metal",
+          "probability": 0.003257008735090494
+        },
+        {
+          "className": "plastic",
+          "probability": 0.0024301940575242043
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "glass-09.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.8228714466094971
+        },
+        {
+          "className": "textile",
+          "probability": 0.12599411606788635
+        },
+        {
+          "className": "metal",
+          "probability": 0.030256997793912888
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "glass-10.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.6774977445602417
+        },
+        {
+          "className": "metal",
+          "probability": 0.16556182503700256
+        },
+        {
+          "className": "paper",
+          "probability": 0.10665366053581238
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "glass-11.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.5529736280441284
+        },
+        {
+          "className": "plastic",
+          "probability": 0.43244263529777527
+        },
+        {
+          "className": "metal",
+          "probability": 0.00683927396312356
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "glass-12.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.9031789898872375
+        },
+        {
+          "className": "plastic",
+          "probability": 0.06283406168222427
+        },
+        {
+          "className": "residual",
+          "probability": 0.011055314913392067
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "glass-13.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.7963785529136658
+        },
+        {
+          "className": "plastic",
+          "probability": 0.18085354566574097
+        },
+        {
+          "className": "residual",
+          "probability": 0.01725689321756363
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "glass-14.jpg",
+      "expectedCategory": "glass",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.5225932598114014
+        },
+        {
+          "className": "plastic",
+          "probability": 0.4313335716724396
+        },
+        {
+          "className": "metal",
+          "probability": 0.03079374134540558
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "metal-01.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.951599657535553
+        },
+        {
+          "className": "plastic",
+          "probability": 0.03619152307510376
+        },
+        {
+          "className": "paper",
+          "probability": 0.009579296223819256
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "metal-02.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.7681859135627747
+        },
+        {
+          "className": "plastic",
+          "probability": 0.1867697834968567
+        },
+        {
+          "className": "glass",
+          "probability": 0.04014431685209274
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "metal-03.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.6173470616340637
+        },
+        {
+          "className": "plastic",
+          "probability": 0.3256697356700897
+        },
+        {
+          "className": "paper",
+          "probability": 0.0374726839363575
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "metal-04.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.9908327460289001
+        },
+        {
+          "className": "residual",
+          "probability": 0.005182979162782431
+        },
+        {
+          "className": "paper",
+          "probability": 0.0016908927354961634
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "metal-05.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.992412269115448
+        },
+        {
+          "className": "plastic",
+          "probability": 0.004458503797650337
+        },
+        {
+          "className": "glass",
+          "probability": 0.0022621278185397387
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "metal-06.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.6384835243225098
+        },
+        {
+          "className": "metal",
+          "probability": 0.14835654199123383
+        },
+        {
+          "className": "plastic",
+          "probability": 0.10119745880365372
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "metal-07.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.8110442757606506
+        },
+        {
+          "className": "glass",
+          "probability": 0.08264876902103424
+        },
+        {
+          "className": "plastic",
+          "probability": 0.037696510553359985
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "metal-08.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.4993094801902771
+        },
+        {
+          "className": "textile",
+          "probability": 0.2876117527484894
+        },
+        {
+          "className": "residual",
+          "probability": 0.06911446154117584
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "metal-09.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.6689013838768005
+        },
+        {
+          "className": "residual",
+          "probability": 0.291797399520874
+        },
+        {
+          "className": "textile",
+          "probability": 0.019212787970900536
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "metal-10.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.9479967355728149
+        },
+        {
+          "className": "plastic",
+          "probability": 0.04408811777830124
+        },
+        {
+          "className": "hazardous",
+          "probability": 0.003997209016233683
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "metal-11.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.7815384268760681
+        },
+        {
+          "className": "glass",
+          "probability": 0.19069422781467438
+        },
+        {
+          "className": "plastic",
+          "probability": 0.018123485147953033
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "metal-12.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.962073028087616
+        },
+        {
+          "className": "paper",
+          "probability": 0.022719867527484894
+        },
+        {
+          "className": "plastic",
+          "probability": 0.0055723488330841064
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "metal-13.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.9721686244010925
+        },
+        {
+          "className": "glass",
+          "probability": 0.018220918253064156
+        },
+        {
+          "className": "plastic",
+          "probability": 0.003177845850586891
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "metal-14.jpg",
+      "expectedCategory": "metal",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.9812224507331848
+        },
+        {
+          "className": "glass",
+          "probability": 0.010441482067108154
+        },
+        {
+          "className": "plastic",
+          "probability": 0.005124880000948906
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "organic-01.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.9775463938713074
+        },
+        {
+          "className": "plastic",
+          "probability": 0.008024108596146107
+        },
+        {
+          "className": "metal",
+          "probability": 0.004938341211527586
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "organic-02.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.9932017922401428
+        },
+        {
+          "className": "residual",
+          "probability": 0.003135324688628316
+        },
+        {
+          "className": "paper",
+          "probability": 0.0013798396103084087
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "organic-03.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.9757537841796875
+        },
+        {
+          "className": "residual",
+          "probability": 0.02242293767631054
+        },
+        {
+          "className": "glass",
+          "probability": 0.0009183564106933773
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "organic-04.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.996664822101593
+        },
+        {
+          "className": "residual",
+          "probability": 0.0012950397795066237
+        },
+        {
+          "className": "ewaste",
+          "probability": 0.0004684539162553847
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "organic-05.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.8931449055671692
+        },
+        {
+          "className": "residual",
+          "probability": 0.05609617754817009
+        },
+        {
+          "className": "textile",
+          "probability": 0.028975602239370346
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "organic-06.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.9521583914756775
+        },
+        {
+          "className": "residual",
+          "probability": 0.04155544564127922
+        },
+        {
+          "className": "glass",
+          "probability": 0.0020365440286695957
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "organic-07.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.9533453583717346
+        },
+        {
+          "className": "residual",
+          "probability": 0.030942443758249283
+        },
+        {
+          "className": "plastic",
+          "probability": 0.006723248865455389
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "organic-08.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.999506950378418
+        },
+        {
+          "className": "residual",
+          "probability": 0.00020812269940506667
+        },
+        {
+          "className": "plastic",
+          "probability": 0.00011642093159025535
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "organic-09.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.9824618697166443
+        },
+        {
+          "className": "residual",
+          "probability": 0.004972856491804123
+        },
+        {
+          "className": "glass",
+          "probability": 0.0029199535492807627
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "organic-10.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.9648211002349854
+        },
+        {
+          "className": "residual",
+          "probability": 0.03053807094693184
+        },
+        {
+          "className": "metal",
+          "probability": 0.002067947294563055
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "organic-11.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.9987444877624512
+        },
+        {
+          "className": "residual",
+          "probability": 0.0003838457050733268
+        },
+        {
+          "className": "plastic",
+          "probability": 0.00028351740911602974
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "organic-12.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.9580647349357605
+        },
+        {
+          "className": "glass",
+          "probability": 0.01733670011162758
+        },
+        {
+          "className": "residual",
+          "probability": 0.01497288141399622
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "organic-13.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.5283464789390564
+        },
+        {
+          "className": "organic",
+          "probability": 0.3550323247909546
+        },
+        {
+          "className": "plastic",
+          "probability": 0.08577550202608109
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "organic-14.jpg",
+      "expectedCategory": "organic",
+      "predictions": [
+        {
+          "className": "organic",
+          "probability": 0.8573347330093384
+        },
+        {
+          "className": "residual",
+          "probability": 0.13423997163772583
+        },
+        {
+          "className": "textile",
+          "probability": 0.002571611665189266
+        }
+      ],
+      "predictedCategory": "organic"
+    },
+    {
+      "testImage": "paper-01.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.9255708456039429
+        },
+        {
+          "className": "residual",
+          "probability": 0.06203417852520943
+        },
+        {
+          "className": "glass",
+          "probability": 0.004528624005615711
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-02.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.9892075657844543
+        },
+        {
+          "className": "metal",
+          "probability": 0.004009600728750229
+        },
+        {
+          "className": "plastic",
+          "probability": 0.00246671331115067
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-03.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.9960120916366577
+        },
+        {
+          "className": "textile",
+          "probability": 0.002342996886000037
+        },
+        {
+          "className": "ewaste",
+          "probability": 0.0006086870562285185
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-04.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.917849063873291
+        },
+        {
+          "className": "residual",
+          "probability": 0.046616341918706894
+        },
+        {
+          "className": "glass",
+          "probability": 0.015035929158329964
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-05.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.9843342900276184
+        },
+        {
+          "className": "metal",
+          "probability": 0.009556462056934834
+        },
+        {
+          "className": "ewaste",
+          "probability": 0.002868586452677846
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-06.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.9802554845809937
+        },
+        {
+          "className": "textile",
+          "probability": 0.008668087422847748
+        },
+        {
+          "className": "residual",
+          "probability": 0.0065469820983707905
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-07.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.9408261179924011
+        },
+        {
+          "className": "metal",
+          "probability": 0.047450125217437744
+        },
+        {
+          "className": "ewaste",
+          "probability": 0.005834678653627634
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-08.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.9446483850479126
+        },
+        {
+          "className": "plastic",
+          "probability": 0.014245642349123955
+        },
+        {
+          "className": "metal",
+          "probability": 0.012188517488539219
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-09.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.9346619844436646
+        },
+        {
+          "className": "residual",
+          "probability": 0.03145140781998634
+        },
+        {
+          "className": "plastic",
+          "probability": 0.025273891165852547
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-10.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.9205453991889954
+        },
+        {
+          "className": "residual",
+          "probability": 0.052901607006788254
+        },
+        {
+          "className": "plastic",
+          "probability": 0.02159234695136547
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-11.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.633569061756134
+        },
+        {
+          "className": "residual",
+          "probability": 0.3524278998374939
+        },
+        {
+          "className": "glass",
+          "probability": 0.0066512939520180225
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-12.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.5076913237571716
+        },
+        {
+          "className": "metal",
+          "probability": 0.269565612077713
+        },
+        {
+          "className": "plastic",
+          "probability": 0.17773282527923584
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-13.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.9766372442245483
+        },
+        {
+          "className": "residual",
+          "probability": 0.015123415738344193
+        },
+        {
+          "className": "textile",
+          "probability": 0.003110950579866767
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "paper-14.jpg",
+      "expectedCategory": "paper",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.980798065662384
+        },
+        {
+          "className": "metal",
+          "probability": 0.005503457505255938
+        },
+        {
+          "className": "residual",
+          "probability": 0.0036307096015661955
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "plastic-01.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "plastic",
+          "probability": 0.5844613313674927
+        },
+        {
+          "className": "glass",
+          "probability": 0.4024783670902252
+        },
+        {
+          "className": "metal",
+          "probability": 0.008686255663633347
+        }
+      ],
+      "predictedCategory": "plastic"
+    },
+    {
+      "testImage": "plastic-02.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "plastic",
+          "probability": 0.9820899963378906
+        },
+        {
+          "className": "residual",
+          "probability": 0.008672978729009628
+        },
+        {
+          "className": "glass",
+          "probability": 0.004396483767777681
+        }
+      ],
+      "predictedCategory": "plastic"
+    },
+    {
+      "testImage": "plastic-03.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "plastic",
+          "probability": 0.99184250831604
+        },
+        {
+          "className": "metal",
+          "probability": 0.005787997972220182
+        },
+        {
+          "className": "residual",
+          "probability": 0.0015528658404946327
+        }
+      ],
+      "predictedCategory": "plastic"
+    },
+    {
+      "testImage": "plastic-04.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "plastic",
+          "probability": 0.8485454320907593
+        },
+        {
+          "className": "glass",
+          "probability": 0.133596271276474
+        },
+        {
+          "className": "residual",
+          "probability": 0.011907869949936867
+        }
+      ],
+      "predictedCategory": "plastic"
+    },
+    {
+      "testImage": "plastic-05.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.8058562874794006
+        },
+        {
+          "className": "metal",
+          "probability": 0.11042611300945282
+        },
+        {
+          "className": "plastic",
+          "probability": 0.058997105807065964
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "plastic-06.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "glass",
+          "probability": 0.8084396719932556
+        },
+        {
+          "className": "plastic",
+          "probability": 0.10927519202232361
+        },
+        {
+          "className": "metal",
+          "probability": 0.05745844170451164
+        }
+      ],
+      "predictedCategory": "glass"
+    },
+    {
+      "testImage": "plastic-07.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "plastic",
+          "probability": 0.9530296325683594
+        },
+        {
+          "className": "organic",
+          "probability": 0.020262552425265312
+        },
+        {
+          "className": "residual",
+          "probability": 0.015513399615883827
+        }
+      ],
+      "predictedCategory": "plastic"
+    },
+    {
+      "testImage": "plastic-08.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.3692479729652405
+        },
+        {
+          "className": "textile",
+          "probability": 0.20214782655239105
+        },
+        {
+          "className": "plastic",
+          "probability": 0.15327607095241547
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "plastic-09.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "plastic",
+          "probability": 0.9720813632011414
+        },
+        {
+          "className": "residual",
+          "probability": 0.010722457431256771
+        },
+        {
+          "className": "glass",
+          "probability": 0.010433749295771122
+        }
+      ],
+      "predictedCategory": "plastic"
+    },
+    {
+      "testImage": "plastic-10.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.42767149209976196
+        },
+        {
+          "className": "paper",
+          "probability": 0.21767103672027588
+        },
+        {
+          "className": "metal",
+          "probability": 0.11194325238466263
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "plastic-11.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "plastic",
+          "probability": 0.9927156567573547
+        },
+        {
+          "className": "glass",
+          "probability": 0.0032895549666136503
+        },
+        {
+          "className": "residual",
+          "probability": 0.0018909971695393324
+        }
+      ],
+      "predictedCategory": "plastic"
+    },
+    {
+      "testImage": "plastic-12.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.8669883012771606
+        },
+        {
+          "className": "plastic",
+          "probability": 0.08940117806196213
+        },
+        {
+          "className": "paper",
+          "probability": 0.028180960565805435
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "plastic-13.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "metal",
+          "probability": 0.6728814840316772
+        },
+        {
+          "className": "glass",
+          "probability": 0.20731356739997864
+        },
+        {
+          "className": "plastic",
+          "probability": 0.06553681939840317
+        }
+      ],
+      "predictedCategory": "metal"
+    },
+    {
+      "testImage": "plastic-14.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "plastic",
+          "probability": 0.9953082203865051
+        },
+        {
+          "className": "residual",
+          "probability": 0.0019819282460957766
+        },
+        {
+          "className": "glass",
+          "probability": 0.0018735980847850442
+        }
+      ],
+      "predictedCategory": "plastic"
+    },
+    {
+      "testImage": "plastic-15.jpg",
+      "expectedCategory": "plastic",
+      "predictions": [
+        {
+          "className": "plastic",
+          "probability": 0.8537642955780029
+        },
+        {
+          "className": "glass",
+          "probability": 0.09856875985860825
+        },
+        {
+          "className": "metal",
+          "probability": 0.027002740651369095
+        }
+      ],
+      "predictedCategory": "plastic"
+    },
+    {
+      "testImage": "residual-01.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.6720135807991028
+        },
+        {
+          "className": "organic",
+          "probability": 0.1557369977235794
+        },
+        {
+          "className": "plastic",
+          "probability": 0.061838485300540924
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "residual-02.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.6060444712638855
+        },
+        {
+          "className": "paper",
+          "probability": 0.353719025850296
+        },
+        {
+          "className": "organic",
+          "probability": 0.011606026440858841
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "residual-03.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.90987628698349
+        },
+        {
+          "className": "organic",
+          "probability": 0.04441893473267555
+        },
+        {
+          "className": "metal",
+          "probability": 0.016405479982495308
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "residual-04.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.742336630821228
+        },
+        {
+          "className": "textile",
+          "probability": 0.16084201633930206
+        },
+        {
+          "className": "paper",
+          "probability": 0.028324993327260017
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "residual-05.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.7852621674537659
+        },
+        {
+          "className": "organic",
+          "probability": 0.14091798663139343
+        },
+        {
+          "className": "glass",
+          "probability": 0.019503813236951828
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "residual-06.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.8819332718849182
+        },
+        {
+          "className": "textile",
+          "probability": 0.045318156480789185
+        },
+        {
+          "className": "paper",
+          "probability": 0.028306614607572556
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "residual-07.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.46380868554115295
+        },
+        {
+          "className": "textile",
+          "probability": 0.2991180121898651
+        },
+        {
+          "className": "metal",
+          "probability": 0.18462194502353668
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "residual-08.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.9050825238227844
+        },
+        {
+          "className": "residual",
+          "probability": 0.06663649529218674
+        },
+        {
+          "className": "organic",
+          "probability": 0.009403862990438938
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "residual-09.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.6857452988624573
+        },
+        {
+          "className": "glass",
+          "probability": 0.10356351733207703
+        },
+        {
+          "className": "plastic",
+          "probability": 0.09217148274183273
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "residual-10.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.5850668549537659
+        },
+        {
+          "className": "paper",
+          "probability": 0.2315283715724945
+        },
+        {
+          "className": "textile",
+          "probability": 0.058171238750219345
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "residual-11.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "paper",
+          "probability": 0.526119589805603
+        },
+        {
+          "className": "residual",
+          "probability": 0.41622331738471985
+        },
+        {
+          "className": "glass",
+          "probability": 0.03459735959768295
+        }
+      ],
+      "predictedCategory": "paper"
+    },
+    {
+      "testImage": "residual-12.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.6206757426261902
+        },
+        {
+          "className": "metal",
+          "probability": 0.2794150114059448
+        },
+        {
+          "className": "glass",
+          "probability": 0.03063097782433033
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "residual-13.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.9799813628196716
+        },
+        {
+          "className": "paper",
+          "probability": 0.0072449250146746635
+        },
+        {
+          "className": "organic",
+          "probability": 0.006625467911362648
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "residual-14.jpg",
+      "expectedCategory": "residual",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.8229196667671204
+        },
+        {
+          "className": "paper",
+          "probability": 0.11140546947717667
+        },
+        {
+          "className": "plastic",
+          "probability": 0.03878597170114517
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "textile-01.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.9972518086433411
+        },
+        {
+          "className": "residual",
+          "probability": 0.0017751267878338695
+        },
+        {
+          "className": "paper",
+          "probability": 0.0008906353614293039
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "textile-02.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "residual",
+          "probability": 0.350015789270401
+        },
+        {
+          "className": "metal",
+          "probability": 0.30423152446746826
+        },
+        {
+          "className": "textile",
+          "probability": 0.14505234360694885
+        }
+      ],
+      "predictedCategory": "residual"
+    },
+    {
+      "testImage": "textile-03.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.9061253666877747
+        },
+        {
+          "className": "paper",
+          "probability": 0.04251984506845474
+        },
+        {
+          "className": "residual",
+          "probability": 0.020511126145720482
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "textile-04.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.9680604934692383
+        },
+        {
+          "className": "paper",
+          "probability": 0.02305208519101143
+        },
+        {
+          "className": "residual",
+          "probability": 0.008563634939491749
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "textile-05.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.9854725003242493
+        },
+        {
+          "className": "residual",
+          "probability": 0.013533218763768673
+        },
+        {
+          "className": "paper",
+          "probability": 0.0004839753091800958
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "textile-06.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.9257080554962158
+        },
+        {
+          "className": "paper",
+          "probability": 0.045997459441423416
+        },
+        {
+          "className": "residual",
+          "probability": 0.026873711496591568
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "textile-07.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.9891296625137329
+        },
+        {
+          "className": "residual",
+          "probability": 0.007110463920980692
+        },
+        {
+          "className": "paper",
+          "probability": 0.0024166724178940058
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "textile-08.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.9597479701042175
+        },
+        {
+          "className": "paper",
+          "probability": 0.034506864845752716
+        },
+        {
+          "className": "residual",
+          "probability": 0.003203206229954958
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "textile-09.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.992355227470398
+        },
+        {
+          "className": "residual",
+          "probability": 0.0063271839171648026
+        },
+        {
+          "className": "organic",
+          "probability": 0.0006483168108388782
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "textile-10.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.93464195728302
+        },
+        {
+          "className": "residual",
+          "probability": 0.03942638263106346
+        },
+        {
+          "className": "ewaste",
+          "probability": 0.01848292350769043
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "textile-11.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.9957289099693298
+        },
+        {
+          "className": "metal",
+          "probability": 0.0016526730032637715
+        },
+        {
+          "className": "plastic",
+          "probability": 0.0006779374671168625
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "textile-12.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.7283658385276794
+        },
+        {
+          "className": "residual",
+          "probability": 0.23931944370269775
+        },
+        {
+          "className": "paper",
+          "probability": 0.017414288595318794
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "textile-13.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.9981718063354492
+        },
+        {
+          "className": "residual",
+          "probability": 0.0013968724524602294
+        },
+        {
+          "className": "paper",
+          "probability": 0.00029318680753931403
+        }
+      ],
+      "predictedCategory": "textile"
+    },
+    {
+      "testImage": "textile-14.jpg",
+      "expectedCategory": "textile",
+      "predictions": [
+        {
+          "className": "textile",
+          "probability": 0.7793208360671997
+        },
+        {
+          "className": "paper",
+          "probability": 0.1367325633764267
+        },
+        {
+          "className": "residual",
+          "probability": 0.05736630782485008
+        }
+      ],
+      "predictedCategory": "textile"
+    }
+  ],
+  "modelVersion": "waste-v1",
+  "baseWeightsSha256": "9dbf187ba6a6b5eaf37f7932fc513f281fa6ac277f0bfa3c7df288e687cc3644",
+  "headWeightsSha256": "56216882e986f18b5c4051291c5327866af64d25127469796e39929cb214c952",
+  "measuredAt": "2026-10-25T06:11:08.064905+00:00"
+}

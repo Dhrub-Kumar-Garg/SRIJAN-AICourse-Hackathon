@@ -1,4 +1,8 @@
 import assert from "node:assert/strict";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import ModelEvaluation from "../src/components/ModelEvaluation";
+import ImageCropper from "../src/components/ImageCropper";
 import { catalog } from "../src/data/catalog";
 import { centers } from "../src/data/centers";
 import { seedActivities, seedListings } from "../src/data/seed";
@@ -9,6 +13,11 @@ import type { Activity } from "../src/data/types";
 import { evalResults } from "../src/data/evalResults";
 import { evaluationSummary, overrideSummary } from "../src/lib/evaluation";
 import { assessPredictions } from "../src/lib/predictionPolicy";
+import {
+  assessWastePredictions,
+  MATERIAL_THRESHOLD,
+} from "../src/lib/wastePolicy";
+import trainingReport from "../src/data/trainingReport.json";
 import manifest from "../src/data/evaluationManifest.json";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
@@ -275,7 +284,7 @@ for (const row of evalResults) {
   );
   assert.equal(row.expectedCategory, photo.expectedCategory);
   assert.equal(
-    assessPredictions(row.predictions).category,
+    assessWastePredictions(row.predictions).category,
     row.predictedCategory,
   );
   assert.ok(
@@ -288,6 +297,118 @@ for (const row of evalResults) {
 const evaluation = evaluationSummary(evalResults);
 assert.equal(evaluation.accuracy, evaluation.correct / 99);
 assert.equal(evaluation.suggested + evaluation.manualReview, 99);
+assert.equal(new Set(trainingReport.metadata.categories).size, 9);
+assert.equal(
+  trainingReport.test.perCategory.reduce((sum, row) => sum + row.total, 0),
+  trainingReport.test.total,
+);
+assert.ok(trainingReport.test.perCategory.every((row) => row.total > 0));
+assert.equal(
+  trainingReport.test.top1Correct / trainingReport.test.total,
+  trainingReport.test.top1Accuracy,
+);
+const splitManifest = JSON.parse(
+  readFileSync("public/models/waste-v1/split-manifest.json", "utf8"),
+) as {
+  rows: {
+    sha256: string;
+    split: string;
+    group: string;
+    sourceGroup: string | null;
+  }[];
+};
+const active = splitManifest.rows.filter(
+  (row) => !row.split.startsWith("excluded"),
+);
+for (const photo of manifest) {
+  const matching = active.filter((row) => row.sha256 === photo.sha256);
+  assert.ok(
+    matching.length && matching.every((row) => row.split === "benchmark"),
+  );
+}
+for (const field of ["group", "sourceGroup"] as const) {
+  const partitions = new Map<string, Set<string>>();
+  for (const row of active)
+    if (row[field]) {
+      const key = row[field]!,
+        set = partitions.get(key) ?? new Set<string>();
+      set.add(row.split);
+      partitions.set(key, set);
+    }
+  assert.ok(
+    [...partitions.values()].every((set) => set.size === 1),
+    `${field} crosses data splits`,
+  );
+}
+for (const [key, file] of [
+  ["baseWeightsSha256", "base/weights.bin"],
+  ["headWeightsSha256", "head.bin"],
+] as const)
+  assert.equal(
+    createHash("sha256")
+      .update(readFileSync(`public/models/waste-v1/${file}`))
+      .digest("hex"),
+    trainingReport.metadata[key],
+  );
+assert.equal(
+  assessWastePredictions([
+    { className: "plastic", probability: MATERIAL_THRESHOLD - 0.0001 },
+  ]).category,
+  null,
+);
+assert.equal(
+  assessWastePredictions([{ className: "ewaste", probability: 1 }]).category,
+  "ewaste",
+);
+assert.equal(
+  assessWastePredictions([{ className: "hazardous", probability: 1 }]).category,
+  "hazardous",
+);
+assert.equal(
+  assessWastePredictions([{ className: "pelican", probability: 1 }]).category,
+  null,
+);
+assert.equal(
+  assessWastePredictions([{ className: "glass", probability: NaN }]).category,
+  null,
+);
+assert.equal(assessWastePredictions([]).category, null);
+// Render the changed UI without a browser: verify data/links and accessible crop controls.
+const evidenceMarkup = renderToStaticMarkup(createElement(ModelEvaluation));
+assert.ok(evidenceMarkup.includes("held-out top-1 material accuracy"));
+assert.ok(
+  !evidenceMarkup.includes("NaN") && !evidenceMarkup.includes("Infinity"),
+);
+for (const [, href] of evidenceMarkup.matchAll(
+  /href="(\/(?:models|evaluation)\/[^"#]+)"/g,
+))
+  assert.ok(
+    readFileSync(`public${href}`).length,
+    `Missing evidence artifact ${href}`,
+  );
+const cropMarkup = renderToStaticMarkup(
+  createElement(ImageCropper, {
+    source: "blob:test-photo",
+    onClose: () => {},
+    onApply: () => {},
+  }),
+);
+assert.ok(
+  cropMarkup.includes('role="dialog"') &&
+    cropMarkup.includes('aria-modal="true"'),
+);
+assert.equal((cropMarkup.match(/type="range"/g) ?? []).length, 3);
+assert.ok(
+  cropMarkup.includes("Horizontal position") &&
+    cropMarkup.includes("Vertical position") &&
+    cropMarkup.includes("Use this crop"),
+);
+assert.equal(
+  trainingReport.test.confusionMatrix
+    .flat()
+    .reduce((sum, value) => sum + value, 0),
+  trainingReport.test.total,
+);
 assert.ok(evaluation.failures.every((r) => r.failureReason));
 assert.equal(
   evaluation.perCategory.find((c) => c.category === "ewaste")?.accuracy,
