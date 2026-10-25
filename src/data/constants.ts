@@ -71,5 +71,5 @@ export const CO2E_PER_KG: Record<Category, number> = {
   hazardous: 0,
   residual: 0,
 };
-// [OUR CITY] placeholder: Bengaluru. All center names and addresses are fictional demo data.
+// Default directory area: Bengaluru. Facilities have dated provenance in centerDirectory.json.
 export const CITY_CENTER: [number, number] = [12.9716, 77.5946];

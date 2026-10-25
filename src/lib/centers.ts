@@ -7,6 +7,7 @@ import {
   ArrowLeftRight,
 } from "lucide-react";
 import type { Center, Route } from "../data/types";
+import { centerDetails } from "../data/centers";
 
 export const CENTER_TYPE_META = {
   recycling: {
@@ -58,7 +59,7 @@ export function isOpenAt(openHours: Center["openHours"], hour: number) {
     : hour >= start || hour < end;
 }
 
-/** Fictional centers are in Bengaluru; opening hours follow Asia/Kolkata. */
+/** The directory covers Bengaluru; opening hours follow Asia/Kolkata. */
 export function centerLocalHour(date: Date) {
   const parts = new Intl.DateTimeFormat("en-GB", {
     timeZone: "Asia/Kolkata",
@@ -74,3 +75,41 @@ export function centerLocalHour(date: Date) {
 export function directionsUrl(center: Pick<Center, "lat" | "lng">) {
   return `https://www.google.com/maps/dir/?api=1&destination=${center.lat},${center.lng}`;
 }
+
+export function sourceIsStale(checkedAt: string, date = new Date()) {
+  const age = date.getTime() - Date.parse(`${checkedAt}T00:00:00Z`);
+  return !Number.isFinite(age) || age > 90 * 86400000 || age < -86400000;
+}
+
+/** Unknown or stale hours must never be interpreted as 24-hour opening. */
+export function centerOpeningStatus(
+  center: Center,
+  date = new Date(),
+): "open" | "closed" | "unknown" {
+  const details = centerDetails[center.id];
+  if (!details?.schedule.length || sourceIsStale(details.checkedAt, date))
+    return "unknown";
+  const weekday = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Kolkata",
+    weekday: "short",
+  }).format(date);
+  const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(
+    weekday,
+  );
+  const hour = centerLocalHour(date);
+  const today = details.schedule.filter((row) => row.day === day);
+  const previous = details.schedule.filter((row) => row.day === (day + 6) % 7);
+  const open =
+    today.some(
+      ({ start, end }) =>
+        start === end ||
+        (start < end ? hour >= start && hour < end : hour >= start),
+    ) || previous.some(({ start, end }) => start > end && hour < end);
+  return open ? "open" : "closed";
+}
+
+export const openingStatusLabel = {
+  open: "Open per schedule",
+  closed: "Closed per schedule",
+  unknown: "Hours unknown",
+};

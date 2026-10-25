@@ -4,7 +4,8 @@ import { renderToStaticMarkup } from "react-dom/server";
 import ModelEvaluation from "../src/components/ModelEvaluation";
 import ImageCropper from "../src/components/ImageCropper";
 import { catalog } from "../src/data/catalog";
-import { centers } from "../src/data/centers";
+import { centers, centerDetails } from "../src/data/centers";
+import CenterEvidence from "../src/components/CenterEvidence";
 import { seedActivities, seedListings } from "../src/data/seed";
 import { CATEGORY_META, ROUTE_META, CO2E_PER_KG } from "../src/data/constants";
 import { mapImageNetLabel, IMAGENET_RULES } from "../src/lib/imagenetMap";
@@ -36,6 +37,8 @@ import {
   isOpenAt,
   centerLocalHour,
   directionsUrl,
+  centerOpeningStatus,
+  sourceIsStale,
 } from "../src/lib/centers";
 import { groupActivitiesByWeek } from "../src/lib/activity";
 const memory = new Map<string, string>();
@@ -55,7 +58,30 @@ const { useStore } = await import("../src/store/useStore");
 const { logClassification, readClassificationLog } =
   await import("../src/lib/classificationLog");
 assert.equal(catalog.length, 42);
-assert.equal(centers.length, 14);
+assert.ok(centers.length >= 6);
+assert.equal(new Set(centers.map((center) => center.id)).size, centers.length);
+for (const center of centers) {
+  assert.ok(
+    !center.id.startsWith("center-") && !center.address.includes("Demo"),
+  );
+  assert.ok(
+    center.lat > 12.8 &&
+      center.lat < 13.2 &&
+      center.lng > 77.4 &&
+      center.lng < 77.85,
+  );
+  assert.ok(
+    center.accepts.length &&
+      center.accepts.every((category) =>
+        Object.hasOwn(CATEGORY_META, category),
+      ),
+  );
+  const evidence = centerDetails[center.id];
+  assert.ok(evidence && evidence.note && evidence.coordinateNote);
+  assert.equal(new URL(evidence.sourceUrl).protocol, "https:");
+  assert.equal(new URL(evidence.materialsSourceUrl).protocol, "https:");
+  assert.ok(Number.isFinite(Date.parse(evidence.checkedAt)));
+}
 const seed = seedActivities();
 assert.equal(seed.length, 35);
 assert.equal(new Set(seed.map((a) => a.route)).size, 6);
@@ -217,6 +243,82 @@ assert.equal(isOpenAt({ start: 22, end: 6 }, 5.5), true);
 assert.equal(isOpenAt({ start: 22, end: 6 }, 12), false);
 assert.equal(isOpenAt({ start: 0, end: 0 }, 12), true);
 assert.equal(centerLocalHour(new Date("2026-10-24T03:30:00Z")), 9);
+// Unknown and stale source hours cannot produce an "open" result from the legacy 0–0 sentinel.
+const sourcedDate = new Date(
+  `${centerDetails[centers[0].id].checkedAt}T06:00:00Z`,
+);
+const storeCenter = centers.find((center) => center.type === "ewaste")!;
+const mappedCenter = centers.find((center) => center.type === "recycling")!;
+assert.equal(centerOpeningStatus(mappedCenter, sourcedDate), "unknown");
+assert.equal(centerOpeningStatus(storeCenter, sourcedDate), "open");
+const atLocal = (hour: number) =>
+  new Date(
+    Date.UTC(
+      sourcedDate.getUTCFullYear(),
+      sourcedDate.getUTCMonth(),
+      sourcedDate.getUTCDate(),
+      0,
+      hour * 60 - 330,
+    ),
+  );
+assert.equal(
+  centerOpeningStatus(storeCenter, atLocal(storeCenter.openHours.start)),
+  "open",
+);
+assert.equal(
+  centerOpeningStatus(storeCenter, atLocal(storeCenter.openHours.end)),
+  "closed",
+);
+assert.equal(
+  centerOpeningStatus(
+    storeCenter,
+    new Date(sourcedDate.getTime() + 91 * 86400000),
+  ),
+  "unknown",
+);
+assert.equal(sourceIsStale("invalid", sourcedDate), true);
+assert.equal(sourceIsStale("2020-01-01", sourcedDate), true);
+assert.equal(
+  centerOpeningStatus({ ...storeCenter, id: "missing-source" }, sourcedDate),
+  "unknown",
+);
+const originalSchedule = centerDetails[storeCenter.id].schedule;
+const sunday = new Date(sourcedDate);
+sunday.setUTCDate(sunday.getUTCDate() + ((7 - sunday.getUTCDay()) % 7));
+sunday.setUTCHours(17, 30, 0, 0); // Sunday 23:00 IST
+centerDetails[storeCenter.id].schedule = [{ day: 0, start: 22, end: 6 }];
+assert.equal(centerOpeningStatus(storeCenter, sunday), "open");
+assert.equal(
+  centerOpeningStatus(storeCenter, new Date(sunday.getTime() + 6.5 * 3600000)),
+  "open",
+); // Monday 05:30
+assert.equal(
+  centerOpeningStatus(storeCenter, new Date(sunday.getTime() + 7 * 3600000)),
+  "closed",
+);
+centerDetails[storeCenter.id].schedule = originalSchedule;
+const centerMarkup = renderToStaticMarkup(
+  createElement(CenterEvidence, { center: storeCenter, now: sourcedDate }),
+);
+assert.ok(
+  centerMarkup.includes("View source") &&
+    centerMarkup.includes("tel:") &&
+    centerMarkup.includes("Before you go"),
+);
+const mappedMarkup = renderToStaticMarkup(
+  createElement(CenterEvidence, { center: mappedCenter, now: sourcedDate }),
+);
+assert.ok(
+  mappedMarkup.includes("confirm site acceptance") &&
+    mappedMarkup.includes("not a verified entrance"),
+);
+const staleMarkup = renderToStaticMarkup(
+  createElement(CenterEvidence, {
+    center: storeCenter,
+    now: new Date(sourcedDate.getTime() + 91 * 86400000),
+  }),
+);
+assert.ok(staleMarkup.includes("Source needs rechecking"));
 assert.equal(
   directionsUrl({ lat: 12.5, lng: 77.5 }),
   "https://www.google.com/maps/dir/?api=1&destination=12.5,77.5",

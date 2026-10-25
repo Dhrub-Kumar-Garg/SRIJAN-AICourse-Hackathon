@@ -161,10 +161,10 @@ export function GuidedDemoBanner() {
       ? [
           "“old phone” is prefilled in the catalog. This tour uses manual selection; no photo inference is simulated.",
           "Old phone → E-waste → Special care. Read the handling tip before continuing.",
-          `${demoCenter.name} accepts E-waste. These are fictional demo centers.`,
+          `${demoCenter.name} is a real operator-listed e-waste collection location. Check the linked source and call before a real visit.`,
           records.dropoff
             ? "Drop-off saved as collected. Continue to see its impact."
-            : "Review the prefilled form, then choose Save drop-off. This creates one real local activity.",
+            : "For this tour, save the prefilled illustrative drop-off. It creates a local demo record, not a verified visit or booking.",
           `Diversion ${session.baseline.diversion.toFixed(2)}% → ${current.diversion.toFixed(2)}%. The E-waste → Special care flow now includes your drop-off.`,
         ]
       : [

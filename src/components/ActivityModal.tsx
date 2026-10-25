@@ -215,7 +215,7 @@ export default function ActivityModal({
           )}
           <p className="footnote">
             {center
-              ? "Use the actual weight if you know it. Demo centers are fictional."
+              ? "Log only a drop-off you have completed (or an illustrative guided-demo entry). Use the measured weight when known. This saves a local record; it does not book or verify a collection."
               : "Use an estimate if you do not know the exact weight."}
           </p>
           <Button type="submit" disabled={saved}>

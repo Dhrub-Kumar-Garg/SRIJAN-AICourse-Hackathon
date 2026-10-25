@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo, useState } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
@@ -9,6 +9,7 @@ import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import { CITY_CENTER } from "../data/constants";
 import { CENTER_TYPE_META, directionsUrl } from "../lib/centers";
 import type { Center } from "../data/types";
+import { centerDetails } from "../data/centers";
 
 // Asset URLs are bundled by Vite, including when served from a hashed production build.
 L.Icon.Default.mergeOptions({
@@ -33,7 +34,7 @@ function MapFocus({
       map.flyTo([selected.lat, selected.lng], 14, { duration: 0.45 });
   }, [map, selected?.id, selectionVersion]);
   useEffect(() => {
-    map.setView(origin, 12);
+    map.setView(origin, 11);
   }, [map, origin]);
   useEffect(() => {
     if (visible) requestAnimationFrame(() => map.invalidateSize());
@@ -91,9 +92,22 @@ function CenterMarker({
       <Popup>
         <strong>{center.name}</strong>
         <p>
-          {meta.label} · {center.hours} (IST)
+          {meta.label} · {center.hours}
         </p>
-        <p>Fictional demo center</p>
+        <p>
+          {centerDetails[center.id]?.evidence} · confirm acceptance before
+          visiting.
+        </p>
+        <p>{centerDetails[center.id]?.coordinateNote}</p>
+        <p>
+          <a
+            href={centerDetails[center.id]?.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            View location source
+          </a>
+        </p>
         <a href={directionsUrl(center)} target="_blank" rel="noreferrer">
           Directions on Google Maps
         </a>
@@ -117,32 +131,68 @@ export default function CenterMap({
   visible: boolean;
 }) {
   const selected = centers.find((c) => c.id === selectedId);
+  const [tileError, setTileError] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [attempt, setAttempt] = useState(0);
   return (
-    <MapContainer
-      center={CITY_CENTER}
-      zoom={12}
-      scrollWheelZoom={false}
-      className="center-leaflet-map"
-    >
-      <MapFocus
-        selected={selected}
-        origin={origin}
-        visible={visible}
-        selectionVersion={selectionVersion}
-      />
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      {centers.map((c) => (
-        <CenterMarker
-          key={c.id}
-          center={c}
-          selected={selectedId === c.id}
+    <>
+      <MapContainer
+        center={CITY_CENTER}
+        zoom={11}
+        scrollWheelZoom={false}
+        className="center-leaflet-map"
+      >
+        <MapFocus
+          selected={selected}
+          origin={origin}
+          visible={visible}
           selectionVersion={selectionVersion}
-          onSelect={() => onSelect(c.id)}
         />
-      ))}
-    </MapContainer>
+        <TileLayer
+          key={attempt}
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+          eventHandlers={{
+            loading: () => setLoading(true),
+            load: () => setLoading(false),
+            tileerror: () => {
+              setTileError(true);
+              setLoading(false);
+            },
+          }}
+        />
+        {centers.map((c) => (
+          <CenterMarker
+            key={c.id}
+            center={c}
+            selected={selectedId === c.id}
+            selectionVersion={selectionVersion}
+            onSelect={() => onSelect(c.id)}
+          />
+        ))}
+      </MapContainer>
+      {(tileError || loading) && (
+        <div className="map-network-status" role="status">
+          {tileError ? (
+            <>
+              Map tiles could not load. The center list and directions still
+              work.{" "}
+              <button
+                type="button"
+                onClick={() => {
+                  setTileError(false);
+                  setLoading(true);
+                  setAttempt((value) => value + 1);
+                }}
+              >
+                Retry map
+              </button>
+            </>
+          ) : (
+            "Loading map…"
+          )}
+        </div>
+      )}
+    </>
   );
 }

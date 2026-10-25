@@ -1,0 +1,327 @@
+{
+  "checkedAt": "2026-10-25",
+  "city": "Bengaluru",
+  "coverage": "Curated directory; not a complete city inventory or a live availability feed.",
+  "osmAttribution": "© OpenStreetMap contributors",
+  "osmLicense": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "records": [
+    {
+      "center": {
+        "id": "croma-263536",
+        "name": "Croma - Indiranagar",
+        "lat": 12.97058634,
+        "lng": 77.64103879,
+        "address": "No 767 & 767/1, Hal 2nd Stage, 100 Feet Road, Indiranagar, Bengaluru 560038",
+        "hours": "Daily, 10:30 AM – 10:00 PM (store hours)",
+        "openHours": {
+          "start": 10.5,
+          "end": 22
+        },
+        "type": "ewaste",
+        "accepts": ["ewaste"]
+      },
+      "details": {
+        "sourceLabel": "Croma official store",
+        "sourceUrl": "https://store.croma.com/croma-indiranagar-electronics-retail-and-repair-shop-indiranagar-bengaluru-263536/Home",
+        "materialsSourceUrl": "https://www.croma.com/lp-sustainable-living",
+        "materialsSourceLabel": "E-waste programme",
+        "checkedAt": "2026-10-25",
+        "schedule": [
+          {
+            "day": 1,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 2,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 3,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 4,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 5,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 6,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 0,
+            "start": 10.5,
+            "end": 22
+          }
+        ],
+        "phone": "+917795838017",
+        "evidence": "Operator listing",
+        "note": "Croma advertises in-store e-waste collection. Call to confirm your device and intake availability; store hours do not guarantee collection service. Do not leave items outside.",
+        "coordinateNote": "Coordinates published by the operator.",
+        "mapUpdatedAt": null
+      }
+    },
+    {
+      "center": {
+        "id": "croma-263570",
+        "name": "Croma - Nagarbhavi",
+        "lat": 12.960876,
+        "lng": 77.507039,
+        "address": "58, Udayagiri Elegance, Apoorva Layout, 2nd Stage, Yeshwantpur, Hobli, Nagarabhavi, Bengaluru 560072",
+        "hours": "Daily, 10:30 AM – 10:00 PM (store hours)",
+        "openHours": {
+          "start": 10.5,
+          "end": 22
+        },
+        "type": "ewaste",
+        "accepts": ["ewaste"]
+      },
+      "details": {
+        "sourceLabel": "Croma official store",
+        "sourceUrl": "https://store.croma.com/croma-nagarbhavi-electronics-retail-and-repair-shop-nagarabhavi-bengaluru-263570/Home",
+        "materialsSourceUrl": "https://www.croma.com/lp-sustainable-living",
+        "materialsSourceLabel": "E-waste programme",
+        "checkedAt": "2026-10-25",
+        "schedule": [
+          {
+            "day": 1,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 2,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 3,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 4,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 5,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 6,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 0,
+            "start": 10.5,
+            "end": 22
+          }
+        ],
+        "phone": "+919686332998",
+        "evidence": "Operator listing",
+        "note": "Croma advertises in-store e-waste collection. Call to confirm your device and intake availability; store hours do not guarantee collection service. Do not leave items outside.",
+        "coordinateNote": "Coordinates published by the operator.",
+        "mapUpdatedAt": null
+      }
+    },
+    {
+      "center": {
+        "id": "croma-263735",
+        "name": "Croma - Jayanagar",
+        "lat": 12.93976731,
+        "lng": 77.5849479,
+        "address": "PN 31, Shravanees Krishna Mansion, 2nd Blk, Outer 100 Ft Ring Rd, Jayanagar, Bengaluru 560011",
+        "hours": "Daily, 10:30 AM – 10:00 PM (store hours)",
+        "openHours": {
+          "start": 10.5,
+          "end": 22
+        },
+        "type": "ewaste",
+        "accepts": ["ewaste"]
+      },
+      "details": {
+        "sourceLabel": "Croma official store",
+        "sourceUrl": "https://store.croma.com/croma-jayanagar-electronics-retail-and-repair-shop-jayanagar-bengaluru-263735/Home",
+        "materialsSourceUrl": "https://www.croma.com/lp-sustainable-living",
+        "materialsSourceLabel": "E-waste programme",
+        "checkedAt": "2026-10-25",
+        "schedule": [
+          {
+            "day": 1,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 2,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 3,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 4,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 5,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 6,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 0,
+            "start": 10.5,
+            "end": 22
+          }
+        ],
+        "phone": "+919606040828",
+        "evidence": "Operator listing",
+        "note": "Croma advertises in-store e-waste collection. Call to confirm your device and intake availability; store hours do not guarantee collection service. Do not leave items outside.",
+        "coordinateNote": "Coordinates published by the operator.",
+        "mapUpdatedAt": null
+      }
+    },
+    {
+      "center": {
+        "id": "croma-316932",
+        "name": "Croma - Carmelaram",
+        "lat": 12.90385282,
+        "lng": 77.70372473,
+        "address": "Unit No 19/11, Sarjapur Main Road, Carmelaram, Doddakanahalli, Bengaluru 560035",
+        "hours": "Daily, 10:30 AM – 10:00 PM (store hours)",
+        "openHours": {
+          "start": 10.5,
+          "end": 22
+        },
+        "type": "ewaste",
+        "accepts": ["ewaste"]
+      },
+      "details": {
+        "sourceLabel": "Croma official store",
+        "sourceUrl": "https://store.croma.com/croma-carmelaram-electronics-retail-and-repair-shop-doddakanahalli-bengaluru-316932/Home",
+        "materialsSourceUrl": "https://www.croma.com/lp-sustainable-living",
+        "materialsSourceLabel": "E-waste programme",
+        "checkedAt": "2026-10-25",
+        "schedule": [
+          {
+            "day": 1,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 2,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 3,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 4,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 5,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 6,
+            "start": 10.5,
+            "end": 22
+          },
+          {
+            "day": 0,
+            "start": 10.5,
+            "end": 22
+          }
+        ],
+        "phone": "+919035054502",
+        "evidence": "Operator listing",
+        "note": "Croma advertises in-store e-waste collection. Call to confirm your device and intake availability; store hours do not guarantee collection service. Do not leave items outside.",
+        "coordinateNote": "Coordinates published by the operator.",
+        "mapUpdatedAt": null
+      }
+    },
+    {
+      "center": {
+        "id": "osm-way-1119896626",
+        "name": "BBMP Dry Waste Collection Center · Austin Town",
+        "lat": 12.9646526,
+        "lng": 77.6145508,
+        "address": "Austin Town, Bengaluru · mapped site; street address not listed",
+        "hours": "Hours not published",
+        "openHours": {
+          "start": 0,
+          "end": 0
+        },
+        "type": "recycling",
+        "accepts": ["plastic", "paper", "glass", "metal"]
+      },
+      "details": {
+        "sourceLabel": "OpenStreetMap record",
+        "sourceUrl": "https://www.openstreetmap.org/way/1119896626",
+        "materialsSourceUrl": "https://apps.bbmpgov.in/SWM/Home/Forms/Publicwastestream.aspx?Page=dry",
+        "materialsSourceLabel": "BBMP dry-waste guidance",
+        "checkedAt": "2026-10-25",
+        "schedule": [],
+        "phone": null,
+        "evidence": "Community mapped",
+        "note": "Materials shown are the general BBMP dry-waste stream, not verified acceptance at this site. Confirm ward access, exact items and hours with the local operator before visiting. No e-waste or hazardous-waste acceptance is assumed.",
+        "coordinateNote": "Pin is the centre of the mapped building, not a verified entrance.",
+        "mapUpdatedAt": "2025-09-09"
+      }
+    },
+    {
+      "center": {
+        "id": "osm-way-530598182",
+        "name": "BBMP Dry Waste Collection Deposit · Hennur",
+        "lat": 13.0425048,
+        "lng": 77.6418278,
+        "address": "Hennur, Bengaluru · mapped site; street address not listed",
+        "hours": "Hours not published",
+        "openHours": {
+          "start": 0,
+          "end": 0
+        },
+        "type": "recycling",
+        "accepts": ["plastic", "paper", "glass", "metal"]
+      },
+      "details": {
+        "sourceLabel": "OpenStreetMap record",
+        "sourceUrl": "https://www.openstreetmap.org/way/530598182",
+        "materialsSourceUrl": "https://apps.bbmpgov.in/SWM/Home/Forms/Publicwastestream.aspx?Page=dry",
+        "materialsSourceLabel": "BBMP dry-waste guidance",
+        "checkedAt": "2026-10-25",
+        "schedule": [],
+        "phone": null,
+        "evidence": "Community mapped",
+        "note": "Materials shown are the general BBMP dry-waste stream, not verified acceptance at this site. Confirm ward access, exact items and hours with the local operator before visiting. No e-waste or hazardous-waste acceptance is assumed.",
+        "coordinateNote": "Pin is the centre of the mapped building, not a verified entrance.",
+        "mapUpdatedAt": "2024-05-16"
+      }
+    }
+  ]
+}

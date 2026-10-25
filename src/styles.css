@@ -3328,6 +3328,112 @@ td .text-link {
   font-size: 8px;
   color: #7a8c6d;
 }
+.directory-notice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+.directory-notice span {
+  flex: 1 1 380px;
+}
+.directory-notice a,
+.center-source-links a,
+.center-evidence details a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.center-evidence {
+  margin: 14px 0;
+  padding: 12px 0;
+  border-top: 1px solid #e5e7eb;
+  font-size: 11px;
+  line-height: 1.65;
+  color: #426337;
+  overflow-wrap: anywhere;
+}
+.center-source-row,
+.center-source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+}
+.center-evidence-badge {
+  background: #edf5e9;
+  color: #12372a;
+  border-radius: 5px;
+  padding: 3px 7px;
+  font-weight: 600;
+}
+.center-card .center-evidence p {
+  color: #426337;
+  font-size: 11px;
+  margin: 7px 0;
+}
+.center-evidence summary {
+  cursor: pointer;
+  margin-top: 9px;
+  font-weight: 600;
+}
+.center-card .row {
+  flex-wrap: wrap;
+}
+.center-open {
+  white-space: normal;
+}
+.directory-sources {
+  margin-top: 26px;
+  scroll-margin-top: 20px;
+}
+.directory-sources h2 {
+  font-size: 27px;
+  margin-bottom: 12px;
+}
+.directory-sources p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.directory-source-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+  margin: 20px 0;
+}
+.directory-source-options a {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #166534;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.directory-sources .footnote {
+  font-size: 11px;
+}
+.map-network-status {
+  position: absolute;
+  z-index: 500;
+  top: 12px;
+  left: 55px;
+  right: 12px;
+  background: #fff8e7;
+  color: #754600;
+  border: 1px solid #e9d6a6;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.map-network-status button {
+  text-decoration: underline;
+  font-weight: 600;
+  margin-left: 6px;
+}
 .center-empty {
   text-align: center;
   padding-bottom: 25px;

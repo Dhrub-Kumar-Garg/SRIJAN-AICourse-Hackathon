@@ -57,7 +57,7 @@ const responsibilities = [
   {
     icon: TriangleAlert,
     title: "Limitations",
-    text: "A photo cannot prove material composition or safe handling. Centers are fictional and carbon factors are approximate. Impact includes pending intentions, so these are logged estimates, not verified outcomes.",
+    text: "A photo cannot prove material composition or safe handling. The center directory uses dated operator and community-map sources; access and acceptance need confirmation. Carbon factors and logged impact remain estimates, including pending intentions.",
   },
   {
     icon: UserCheck,
@@ -142,8 +142,10 @@ export default function About() {
               We trained a new material classification head using published
               RealWaste and Bangladeshi E-Waste labels. MobileNet’s pretrained
               image features remain frozen; no carbon-estimation model was
-              trained. The catalog, facilities and starter records remain
-              synthetic. Public-source evaluation does not establish local
+              trained. The catalog and starter activities/listings remain
+              synthetic. Facilities now come from sourced Bengaluru operator
+              listings and OpenStreetMap, with source dates and limitations on
+              each card. Public-source evaluation does not establish local
               real-world performance.
             </p>
           </Card>

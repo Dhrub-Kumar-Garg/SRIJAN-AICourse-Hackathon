@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "format": "prettier --write .",
     "test": "node scripts/test.mjs",
+    "centers:refresh": "node scripts/refresh-centers.mjs",
     "evaluate": "node scripts/evaluate-trained.mjs",
     "evaluate:legacy": "node scripts/evaluate.mjs",
     "train:prepare-model": "node scripts/prepare-feature-model.mjs"

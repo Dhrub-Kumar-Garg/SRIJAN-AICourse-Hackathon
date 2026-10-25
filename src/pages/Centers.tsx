@@ -12,14 +12,14 @@ import {
   LoaderCircle,
   ArrowUpRight,
 } from "lucide-react";
-import { centers } from "../data/centers";
+import { centers, directoryCheckedAt } from "../data/centers";
 import { catalog } from "../data/catalog";
 import { CATEGORY_META, CITY_CENTER } from "../data/constants";
 import {
   CENTER_TYPE_META,
   haversineDistance,
-  isOpenAt,
-  centerLocalHour,
+  centerOpeningStatus,
+  openingStatusLabel,
   directionsUrl,
 } from "../lib/centers";
 import {
@@ -31,6 +31,7 @@ import {
 } from "../components/ui";
 import ActivityModal from "../components/ActivityModal";
 import CenterMap from "../components/CenterMap";
+import CenterEvidence from "../components/CenterEvidence";
 import type { Category, Center } from "../data/types";
 import { useGuidedDemo } from "../components/GuidedDemo";
 
@@ -49,7 +50,7 @@ export default function Centers() {
   const [origin, setOrigin] = useState<[number, number]>(CITY_CENTER);
   const [locating, setLocating] = useState(false);
   const [locationMessage, setLocationMessage] = useState(
-    "Distances from the Bengaluru city center.",
+    "Straight-line distances from Bengaluru city center; not travel distances.",
   );
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectionVersion, setSelectionVersion] = useState(0);
@@ -72,13 +73,12 @@ export default function Centers() {
           navigationState.weightKg > 0
         ? navigationState.weightKg
         : undefined;
-  const hour = centerLocalHour(now);
   const filtered = centers
     .filter(
       (c) =>
         (!category || c.accepts.includes(category)) &&
         (type === "all" || c.type === type) &&
-        (!openOnly || isOpenAt(c.openHours, hour)),
+        (!openOnly || centerOpeningStatus(c, now) === "open"),
     )
     .map((c) => ({ ...c, distance: haversineDistance(origin, [c.lat, c.lng]) }))
     .sort((a, b) => a.distance - b.distance);
@@ -133,7 +133,9 @@ export default function Centers() {
       (p) => {
         setOrigin([p.coords.latitude, p.coords.longitude]);
         setLocating(false);
-        setLocationMessage("Distances now use your location.");
+        setLocationMessage(
+          "Straight-line distances now use your location. Location is not stored; the map provider receives tile requests for the viewed area.",
+        );
       },
       fallback,
       { timeout: 10000, maximumAge: 60000 },
@@ -148,7 +150,7 @@ export default function Centers() {
             Find a <Highlight>better destination.</Highlight>
           </>
         }
-        description="The right place for your item’s next chapter. Find it, drop it off, keep the good going."
+        description="Real Bengaluru locations for your item’s next chapter. Check the source, confirm acceptance, then plan your visit."
         action={
           <Button variant="secondary" disabled={locating} onClick={locate}>
             {locating ? (
@@ -160,15 +162,22 @@ export default function Centers() {
           </Button>
         }
       />
-      <div className="notice">
-        Demo locations only: all 14 centers and addresses are fictional, around
-        Bengaluru. Verify real local facilities before travelling.
+      <div className="notice directory-notice">
+        <strong>Real places. Check before you travel.</strong>
+        <span>
+          {centers.length} sourced locations · Bengaluru · source snapshot{" "}
+          {directoryCheckedAt}. This is a curated directory, not live
+          availability. Materials, access and collection hours can change.
+        </span>
+        <a href="#directory-sources">
+          Sources & more options <ArrowUpRight size={14} />
+        </a>
       </div>
       {category && (
         <div className="category-banner">
           <MapPin size={18} />
           <span>
-            Showing centers that accept{" "}
+            Showing directory matches for{" "}
             <strong>{CATEGORY_META[category].label}</strong>
           </span>
         </div>
@@ -228,7 +237,7 @@ export default function Centers() {
               }}
             />
             <span />
-            Open now <small>(IST)</small>
+            Open per schedule <small>(IST)</small>
           </label>
           <span className="center-result-count">
             {filtered.length} {filtered.length === 1 ? "center" : "centers"} ·
@@ -236,6 +245,13 @@ export default function Centers() {
           </span>
         </div>
       </section>
+      {openOnly && (
+        <p className="footnote" role="status">
+          Only recently sourced opening schedules are included. Unpublished
+          hours are excluded; holidays and collection availability are not
+          live-checked.
+        </p>
+      )}
       <div className="center-location-row">
         <p role="status">{locationMessage}</p>
         <Button
@@ -254,7 +270,7 @@ export default function Centers() {
         <div className="center-list" aria-label="Matching centers">
           {filtered.map((c) => {
             const meta = CENTER_TYPE_META[c.type];
-            const open = isOpenAt(c.openHours, hour);
+            const status = centerOpeningStatus(c, now);
             return (
               <article
                 key={c.id}
@@ -301,11 +317,16 @@ export default function Centers() {
                   <p className="row">
                     <Clock size={14} />
                     {c.hours} (IST){" "}
-                    <span className={`center-open ${open ? "is-open" : ""}`}>
-                      {open ? "Open" : "Closed"}
+                    <span
+                      className={`center-open ${status === "open" ? "is-open" : ""}`}
+                    >
+                      {openingStatusLabel[status]}
                     </span>
                   </p>
-                  <div className="center-tags" aria-label="Accepted materials">
+                  <div
+                    className="center-tags"
+                    aria-label="Listed material categories; confirm exact acceptance"
+                  >
                     {c.accepts.map((k) => {
                       const Icon = CATEGORY_META[k].icon;
                       return (
@@ -316,6 +337,7 @@ export default function Centers() {
                       );
                     })}
                   </div>
+                  <CenterEvidence center={c} now={now} />
                   <div className="center-card-actions">
                     <a
                       href={directionsUrl(c)}
@@ -346,8 +368,8 @@ export default function Centers() {
           {!filtered.length && (
             <div className="center-empty">
               <EmptyState
-                title="Nothing nearby accepts this - try the Reuse Exchange"
-                description="Try another category, center type, or opening-hours filter."
+                title="No sourced matches in this directory yet"
+                description="Coverage is limited to selected Bengaluru sites. Try clearing filters or consult the official directories below. A missing match does not mean no local service exists."
               />
               <Link className="button button-secondary" to="/exchange">
                 Explore Reuse Exchange <ArrowUpRight size={15} />
@@ -371,10 +393,67 @@ export default function Centers() {
           />
           <div className="map-caption">
             Select a marker to find its center{" "}
-            <span>Fictional demo locations</span>
+            <span>Sourced locations · check access</span>
           </div>
         </div>
       </div>
+      <section
+        id="directory-sources"
+        aria-label="Directory sources and other programmes"
+      >
+        <Card className="directory-sources">
+          <h2>A little more local knowledge.</h2>
+          <p>
+            For other materials or neighbourhoods, start with these published
+            programmes. Confirm current acceptance directly before visiting.
+          </p>
+          <div className="directory-source-options">
+            <a
+              href="https://apps.bbmpgov.in/SWM/Home/Forms/swmplan.aspx?Page=Dry"
+              target="_blank"
+              rel="noreferrer"
+            >
+              BBMP ward dry-waste directory <ArrowUpRight size={15} />
+            </a>
+            <a
+              href="https://goonj.org/dropping-centres/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Goonj · clothing & household donations <ArrowUpRight size={15} />
+            </a>
+            <a
+              href="https://www.croma.com/lp-sustainable-living"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Croma · e-waste collection programme <ArrowUpRight size={15} />
+            </a>
+          </div>
+          <p className="footnote">
+            Location data: ©{" "}
+            <a
+              href="https://www.openstreetmap.org/copyright"
+              target="_blank"
+              rel="noreferrer"
+            >
+              OpenStreetMap contributors
+            </a>{" "}
+            (
+            <a
+              href="https://opendatacommons.org/licenses/odbl/1-0/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              ODbL
+            </a>
+            ) and operator listings linked on each card. Community map records
+            do not establish municipal authorisation or public access. Your
+            activity and exchange starter records remain synthetic; logging a
+            visit does not book a service.
+          </p>
+        </Card>
+      </section>
       {dropOff && (
         <ActivityModal
           center={dropOff}

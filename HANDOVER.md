@@ -2,6 +2,19 @@
 
 Srijan is the current name. Earlier prompts used “ReRoute”; keep **Srijan** in product copy, metadata, package naming, and future changes.
 
+## Real facilities and map continuation — 25 October 2026
+
+- Replaced all 14 invented centers with a curated snapshot of **six real Bengaluru locations**: four official Croma stores with e-waste programme evidence (Indiranagar, Nagarbhavi, Jayanagar, Carmelaram) and two OpenStreetMap BBMP dry-waste building records (Austin Town, Hennur). Sources, dates, intake limitations and coordinate precision appear on cards and in map popups. See `src/data/CENTERS.md` for exact sources/licensing.
+- The map already had real OSM tiles; pins now use published operator coordinates or the centre of actual OSM geometry. Canonical OSM tile URL and visible attribution are retained, with loading/error feedback and a retry button. Optional geolocation still requires the user action, is not persisted, and sorts straight-line distances. Viewed-area tile requests go to OSM; directions open externally.
+- `src/data/types.ts`, theme primitives, store and selectors are unchanged. `centers.ts` adapts `centerDirectory.json` into the existing Center shape; provenance and weekday schedules are parallel metadata. No API key/backend/runtime geocoder is required.
+- Community-map records do **not** establish current operation, public access or regulatory authorisation. BBMP material chips describe the general dry-waste stream, explicitly not site-verified acceptance. No hazardous, organic or textile facility is invented to fill gaps. Empty states explain incomplete coverage and link to official BBMP, Croma and Goonj directories.
+- Unknown hours and schedules older than 90 days return `unknown`; they cannot become 24-hour venues through the legacy `{start:0,end:0}` placeholder. Opening filters use source-aware IST weekday schedules and decimal-hour boundaries, with overnight handling. Published store hours do not prove collection-desk availability or holiday operation.
+- The guided phone tour now selects a real operator-listed e-waste location and describes its saved drop-off as an illustrative local demo entry. Drop-off helpers clarify that a saved activity does not book or independently verify a physical collection. Starter activities/listings, estimated impacts and exchange identities remain synthetic/local. Old persisted fictional center IDs are not reused for real operators.
+- Added `npm run centers:refresh` to retrieve the curated source records and validate coordinates/schedules/geometry before replacing the snapshot. It is an explicit maintenance task, not a build hook or browser request. Review changed records and operator policies before publishing. README and AI & Ethics disclosures now distinguish real directory facts from synthetic starter activity.
+- Verification: `npm test` and `npm run build` pass. Tests cover source/coordinate integrity, source rendering, unknown/stale schedules, IST opening/closing boundaries, weekday overnight rollover, plus existing drop-off persistence and guided-demo action gates. Build retains the existing lazy TensorFlow bundle-size advisory. The running dev app responded at `/centers` via HTTP. Browser access was denied in the previous continuation; no new visual/mobile browser validation is claimed here.
+
+This section supersedes historical descriptions of fictional directory data below.
+
 ## Current photo model — 25 October 2026
 
 - Photo classification now uses **waste-v1**, a trained 9-material head over the unchanged frozen MobileNet v2 1.0/224 feature checkpoint. The legacy ImageNet keyword mapper is retained for historical evaluation only. Domain types, store and selectors remain unchanged.
@@ -54,7 +67,8 @@ src/
     types.ts                 Fixed domain contract (unchanged by this continuation)
     constants.ts             Category/route metadata, indicative CO₂e factors, city
     catalog.ts               42 synthetic catalog entries
-    centers.ts               14 fictional Bengaluru-area facilities
+    centers.ts               Sourced Center adapter; six curated Bengaluru facilities
+    centerDirectory.json     Source snapshot, provenance and weekly schedules
     seed.ts                  35 activities and 8 exchange listings
     evalResults.ts           99 measured real-photo benchmark results
   lib/
@@ -212,7 +226,7 @@ Automated tests cover distance/opening-hour boundaries (including overnight), IS
 
 ## Known limitations / TODOs
 
-- All facilities, addresses, starter activities, and listings are fictional. Replace and verify city data before real use. No availability, holidays, capacity, or facility verification service exists.
+- Starter activities and listings remain fictional. The facility directory now uses dated operator/OSM sources as described above; no live availability, holidays, capacity or independent facility-verification service exists.
 - Directions intentionally open Google Maps coordinates. Distances are straight-line haversine distances, not driving distances or travel times.
 - The `openHours` contract describes a daily interval only; weekly closures and holiday exceptions cannot be represented without an explicitly approved future contract change.
 - Route suggestions and category acceptance are educational guidance. A center's acceptance of a material does not establish that every item or every processing route is supported.

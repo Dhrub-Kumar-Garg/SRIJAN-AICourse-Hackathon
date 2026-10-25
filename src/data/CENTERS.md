@@ -1,0 +1,28 @@
+# Bengaluru facility source notes
+
+`centerDirectory.json` is a curated public-source snapshot, checked 2026-10-25. It replaces the 14 invented locations. It is not a live municipal inventory, an audit of operations, a list of currently authorised recyclers, or a confirmation of walk-in access. Do not fill missing categories with invented sites.
+
+| Record                           | Location/address evidence                                                                                                          | Material evidence                                                                                                                     |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Croma Indiranagar                | [Official store](https://store.croma.com/croma-indiranagar-electronics-retail-and-repair-shop-indiranagar-bengaluru-263536/Home)   | [Croma collection programme](https://www.croma.com/lp-sustainable-living)                                                             |
+| Croma Nagarbhavi                 | [Official store](https://store.croma.com/croma-nagarbhavi-electronics-retail-and-repair-shop-nagarabhavi-bengaluru-263570/Home)    | Same Croma programme                                                                                                                  |
+| Croma Jayanagar                  | [Official store](https://store.croma.com/croma-jayanagar-electronics-retail-and-repair-shop-jayanagar-bengaluru-263735/Home)       | Same Croma programme                                                                                                                  |
+| Croma Carmelaram                 | [Official store](https://store.croma.com/croma-carmelaram-electronics-retail-and-repair-shop-doddakanahalli-bengaluru-316932/Home) | Same Croma programme                                                                                                                  |
+| BBMP dry-waste site, Austin Town | [OSM way 1119896626](https://www.openstreetmap.org/way/1119896626), last edited 2025-09-09                                         | [General BBMP dry-waste guidance](https://apps.bbmpgov.in/SWM/Home/Forms/Publicwastestream.aspx?Page=dry); site acceptance unverified |
+| BBMP dry-waste site, Hennur      | [OSM way 530598182](https://www.openstreetmap.org/way/530598182), last edited 2024-05-16                                           | Same general BBMP guidance; site acceptance unverified                                                                                |
+
+Croma coordinates, addresses, business telephone numbers and seven-day schedules come from each official page's JSON-LD. Search-engine snippets can have older hours; the snapshot uses directly retrieved metadata. These are **published store hours**, not independently verified collection-desk hours. Call before visiting, especially for bulky devices or batteries; no separate hazardous-waste acceptance is inferred.
+
+OSM coordinates are the mean of distinct building vertices returned by `/api/0.6/way/{id}/full.json`. They identify buildings, not verified entrances. The source lacks street addresses, hours and individual material tags; area labels are descriptive, hours are unknown, and materials are explicitly marked as typical BBMP dry waste. A second building at Hennur (way 1510600884) is omitted to avoid presenting adjacent structures as distinct facilities. Old Saahas bE-Responsible/Change Matters programme pages are marked closed and are not used as active collection points. Goonj's current official directory is linked as another option without inventing a pin for an unlocated address.
+
+## Refresh and maintenance
+
+Run `npm run centers:refresh` deliberately. It refreshes the curated IDs, validates all source records before writing, and fails without replacing the snapshot if a request/parser/geometry check fails. Review changes, check current programme policies manually, and rerun tests/build before publishing. Do not call public source services on every page load. Add a new location only with coordinate and material provenance, clear public-access limitations, and a source date. `src/data/types.ts` remains unchanged; provenance and schedules are parallel metadata.
+
+Unknown and over-90-day-old schedules return `unknown` in `centerOpeningStatus`; the legacy `openHours: {start:0,end:0}` placeholder for unknown sites must never be passed directly to `isOpenAt` in directory UI. Opening status considers venue weekdays in Asia/Kolkata, fractional hours and overnight intervals. Holidays and exceptional closure are not available.
+
+## Attribution
+
+OSM-derived records and geometry are © OpenStreetMap contributors, under [Open Database License 1.0](https://opendatacommons.org/licenses/odbl/1-0/). See [OpenStreetMap copyright](https://www.openstreetmap.org/copyright). These directory data terms are separate from application code. Operator listing facts and programme links are attributed individually; no logos, photographs or full page content are copied, and inclusion does not imply operator endorsement.
+
+Live tiles use the [OSMF tile usage policy](https://operations.osmfoundation.org/policies/tiles/): HTTPS canonical tile URL, visible attribution, normal browser caching/referer, no prefetch/offline bulk download. Runtime facility browsing requires no API key; source refresh needs public network access. The map retry does not bypass caches.

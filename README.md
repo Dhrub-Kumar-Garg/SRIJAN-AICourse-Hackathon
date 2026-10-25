@@ -2,7 +2,7 @@
 
 Every item gets a second route.
 
-Srijan (called ReRoute in earlier briefs) is a responsive, browser-local circular-living demo built with Vite, React, and TypeScript. It helps people identify an item, confirm its material, choose a route, find an illustrative center, and track or share it.
+Srijan (called ReRoute in earlier briefs) is a responsive, browser-local circular-living demo built with Vite, React, and TypeScript. It helps people identify an item, confirm its material, choose a route, find a sourced Bengaluru facility, and track or share it.
 
 ## Run locally
 
@@ -28,7 +28,7 @@ The first photo classification downloads the static model artifacts from the app
 
 - Photo upload/camera with a trained nine-material head on frozen MobileNet v2 features, optional crop/zoom/position controls, validation-selected review thresholds, mandatory confirmation, and manual overrides. Inference stays in the browser.
 - Manual search and category selection across a 42-item catalog, with Route Cards explaining the route, reason, handling tip, and estimated weight.
-- A map and directory of 14 fictional Bengaluru-area centers, accepted-material/type/opening filters, distance sorting, optional geolocation, and validated collected drop-off logging.
+- A real OpenStreetMap map and six sourced Bengaluru facilities, material/type/published-schedule filters, straight-line distance sorting, optional geolocation, source links, freshness indicators, map retry, and local drop-off logging.
 - Persistent local activity tracking, status progression, and weekly timelines.
 - Reuse Exchange with combined material/condition/availability/search filters, local listings and requests, confirmed handovers, and privacy-focused forms.
 - Impact dashboard with count-up statistics, colored category-to-route Sankey, weekly stacked bars, category share donut, diversion goal, reuse counts, recent wins, and demo reset.
@@ -40,8 +40,8 @@ The first photo classification downloads the static model artifacts from the app
 
 1. Choose **Start demo** on Home. Classify opens with **old phone** prefilled in manual catalog search.
 2. Choose **Next** to reveal its **E-waste / Special care** Route Card. This is a catalog example, not simulated photo inference.
-3. Choose **Next** to select an illustrative center accepting e-waste.
-4. Choose **Next** to open a prefilled 0.18 kg drop-off. Review the form and choose **Save drop-off**. Next is disabled until a matching collected activity exists.
+3. Choose **Next** to select a real operator-listed e-waste location. Check its linked source and call before any real visit.
+4. Choose **Next** to open a prefilled 0.18 kg drop-off. For the tour, save an illustrative entry with **Save drop-off**; this is a local demo record, not a verified physical visit or booking. Next is disabled until a matching collected activity exists.
 5. Continue to Impact. The updated diversion percentage uses two decimals during the tour, the Sankey includes the new Special care flow, and changed metric cards pulse in lime.
 6. Choose **Try reuse branch**, add a neighbourhood to the prefilled **working study lamp** listing, and publish it locally. Continue, request the highlighted lamp with a nickname, then confirm its handover. **See impact** returns to the updated reuse flow.
 
@@ -64,7 +64,7 @@ User confirmation -> exact catalog item -> Route Card
 ```
 
 - `src/data/types.ts`: fixed domain contract; unchanged by this continuation.
-- `src/data/catalog.ts`, `centers.ts`, `seed.ts`: synthetic demo content.
+- `src/data/catalog.ts`, `seed.ts`: synthetic starter content. `centers.ts` adapts the sourced `centerDirectory.json` snapshot into the unchanged `Center` contract, with provenance and weekday schedules alongside it.
 - `src/pages/Classify.tsx`, `src/lib/wasteClassifier.ts`, `src/lib/wastePolicy.ts`: lazy trained inference and validation-selected review policy. The old ImageNet mapper remains for historical comparisons.
 - `src/store/useStore.ts`: existing activity/listing actions, persisted under `srijan-store-v1`. A handover creates exactly one completed reuse activity.
 - `src/store/selectors.ts`: pure totals, diversion, carbon estimates, weekly series, and chart transformations. All logged statuses contribute to impact estimates.
@@ -119,8 +119,8 @@ On macOS/Linux, use Python 3.12's `venv` and substitute `.evaluation-cache/train
 | Implemented locally                            | Planned / not implemented                                     |
 | ---------------------------------------------- | ------------------------------------------------------------- |
 | Browser classification and manual confirmation | Broader local training and independent field validation       |
-| Catalog lookup and Route Cards                 | Verified municipal/facility data                              |
-| Illustrative center directory and map          | Real pickup scheduling                                        |
+| Catalog lookup and Route Cards                 | Operator-verified municipal integration and live availability |
+| Sourced Bengaluru directory and real OSM map   | Real pickup scheduling                                        |
 | Activity and collected drop-off tracking       | User accounts, authentication, moderation, and shared records |
 | Live Impact dashboard and local Reuse Exchange | Multilingual UI and broader accessibility validation          |
 | Guided phone/drop-off and lamp/handover demo   | Production analytics and verified lifecycle/carbon accounting |
@@ -129,6 +129,18 @@ On macOS/Linux, use Python 3.12's `venv` and substitute `.evaluation-cache/train
 
 Photos never leave the device and are never persisted. Model artifacts load from the app’s own host; fonts and map tiles make separate third-party requests. Local activity, listing, and confirmation data can be cleared with browser storage; there is no backup or multi-device sync. Exchange forms have no photo upload, phone, or email fields. Requests and handovers do not contact other people.
 
-All starter activities, listings, names, addresses and center locations are synthetic. Benchmark photos are real source-labelled images. Center distances are straight-line estimates; opening hours use Asia/Kolkata. Verify real facilities before travelling. Carbon factors are approximate educational values, not verified offsets; pending intentions count toward logged estimates. Reuse weights use the first catalog entry in the category times quantity, so the demo lamp's estimated handover weight is 0.18 kg.
+Starter activities, exchange listings and their names are synthetic. Facility names, addresses and coordinates now use the sources documented below. Benchmark photos are real source-labelled images. Center distances are straight-line estimates; published opening hours use Asia/Kolkata and do not establish intake availability. Carbon factors are approximate educational values, not verified offsets; pending intentions count toward logged estimates. Reuse weights use the first catalog entry in the category times quantity, so the demo lamp's estimated handover weight is 0.18 kg.
+
+## Real facility data and maps
+
+The **25 October 2026 source snapshot** contains four Croma stores (Indiranagar, Nagarbhavi, Jayanagar, Carmelaram), using each official store's published coordinates/address/structured weekly schedule, and two OpenStreetMap BBMP dry-waste records (Austin Town and Hennur). Croma's [official programme](https://www.croma.com/lp-sustainable-living) advertises in-store e-waste collection; call the listed store to confirm your specific device and intake service. Published store hours are not a collection appointment or holiday feed.
+
+BBMP map records establish mapped locations only. Their material filters use the [general BBMP dry-waste stream](https://apps.bbmpgov.in/SWM/Home/Forms/Publicwastestream.aspx?Page=dry), not site-verified acceptance. Unknown hours stay unknown and are excluded from the opening filter. Source schedules older than 90 days also become unknown. Building-centre pins locate buildings, not verified entrances; full addresses are not fabricated when absent. Community mapping does not establish regulatory authorisation, public access, capacity, or active operation. Missing categories have an honest empty state and links to the BBMP, Goonj and Croma directories. No fictional hazardous/compost/textile sites remain.
+
+No API key, backend, geocoder, or live facility API is needed at runtime. The source snapshot ships with the app; live map tiles come from `https://tile.openstreetmap.org`. Leaflet retains visible OpenStreetMap attribution and browser caching; tile errors leave the list/directions available and offer retry. Map providers receive requests for the viewed area; location is used only after the user requests it and is not persisted. Follow the [OSM tile usage policy](https://operations.osmfoundation.org/policies/tiles/); select a suitable hosted tile service if traffic outgrows the community service.
+
+To refresh the **curated six records**, run `npm run centers:refresh`, then review the data diff and operator acceptance policies, run `npm test` and `npm run build`, and commit the result. The script retrieves public operator metadata and OSM geometry without user coordinates, validates the complete snapshot before overwriting it, and does not run in the browser or during builds. It does not discover every facility or automatically verify a visit. Existing saved activities keep their original IDs; old fictional center IDs are not reassigned to real operators.
+
+See [facility data notes](src/data/CENTERS.md) for source URLs and licensing. OpenStreetMap-derived directory data is © OpenStreetMap contributors, available under [ODbL 1.0](https://opendatacommons.org/licenses/odbl/1-0/), independently of the application code.
 
 SDG 11, 12, and 13 describe the project's intended alignment, not measured outcomes or UN endorsement. See `HANDOVER.md` for detailed contracts, acceptance checks, and remaining limitations.
